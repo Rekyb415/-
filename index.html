@@ -843,556 +843,598 @@ const RAW_DATA = [
 // Characters without an entry here still work in the app —
 // they just show pinyin only with no meaning/example text.
 const ENRICHED = {
-  // ── 一级 ──────────────────────────────────────────────────────
   "得": { readings: {
-    "dé":  { meaning_zh:"得到，获得",   meaning_en:"to get, to obtain",       example_zh:"得奖",    example_en:"to win an award",    frequency:"high"   },
-    "de":  { meaning_zh:"结构助词",     meaning_en:"structural particle",     example_zh:"跑得快",  example_en:"runs fast",          frequency:"high"   },
-    "děi": { meaning_zh:"必须，需要",   meaning_en:"must, need to",           example_zh:"得去",    example_en:"must go",            frequency:"medium" },
+    "dé":  { meaning_zh:"得到，获得", meaning_en:"to get, to obtain",      example_zh:"得奖", example_en:"to win an award", frequency:"high" },
+    "de":  { meaning_zh:"结构助词",   meaning_en:"structural particle",    example_zh:"跑得快", example_en:"runs fast",     frequency:"high" },
+    "děi": { meaning_zh:"必须，需要", meaning_en:"must, need to",           example_zh:"得去",  example_en:"must go",       frequency:"medium" },
   }},
   "地": { readings: {
-    "dì":  { meaning_zh:"土地，地点",   meaning_en:"earth, place",            example_zh:"地球",    example_en:"the Earth",          frequency:"high"   },
-    "de":  { meaning_zh:"结构助词",     meaning_en:"structural particle",     example_zh:"慢慢地",  example_en:"slowly",             frequency:"high"   },
-  }},
-  "着": { readings: {
-    "zhe": { meaning_zh:"动作持续助词", meaning_en:"ongoing action particle", example_zh:"穿着",    example_en:"wearing",            frequency:"high"   },
-    "zháo":{ meaning_zh:"接触到，达到", meaning_en:"to touch, to reach",      example_zh:"着凉",    example_en:"to catch a cold",    frequency:"high"   },
-    "zhuó":{ meaning_zh:"穿戴，附着",   meaning_en:"to wear, to attach",      example_zh:"着装",    example_en:"attire",             frequency:"medium" },
-  }},
-  "了": { readings: {
-    "le":   { meaning_zh:"完成助词",    meaning_en:"completion particle",     example_zh:"吃了饭",  example_en:"finished eating",    frequency:"high"   },
-    "liǎo": { meaning_zh:"完毕，结束",  meaning_en:"to finish, to complete",  example_zh:"了解",    example_en:"to understand",      frequency:"high"   },
+    "dì": { meaning_zh:"土地，地点", meaning_en:"earth, place",            example_zh:"地球",  example_en:"Earth",         frequency:"high" },
+    "de": { meaning_zh:"结构助词",   meaning_en:"structural particle",    example_zh:"慢慢地", example_en:"slowly",        frequency:"high" },
   }},
   "好": { readings: {
-    "hǎo": { meaning_zh:"好的，良好",   meaning_en:"good, well",              example_zh:"好人",    example_en:"good person",        frequency:"high"   },
-    "hào": { meaning_zh:"喜好，爱好",   meaning_en:"to be fond of",           example_zh:"好学",    example_en:"eager to learn",     frequency:"medium" },
+    "hǎo": { meaning_zh:"好的，良好", meaning_en:"good, well",             example_zh:"好人",  example_en:"good person",   frequency:"high" },
+    "hào": { meaning_zh:"喜好，爱好", meaning_en:"to be fond of",          example_zh:"好学",  example_en:"eager to learn",frequency:"medium" },
   }},
   "和": { readings: {
-    "hé":  { meaning_zh:"和平，与",     meaning_en:"and, peace",              example_zh:"和平",    example_en:"peace",              frequency:"high"   },
-    "hè":  { meaning_zh:"应和，唱和",   meaning_en:"to echo, to respond",     example_zh:"附和",    example_en:"to echo sb.",        frequency:"low"    },
-    "huó": { meaning_zh:"和面，搅拌",   meaning_en:"to knead (dough)",        example_zh:"和面",    example_en:"to knead dough",     frequency:"medium" },
-    "huò": { meaning_zh:"掺和，混合",   meaning_en:"to mix together",         example_zh:"和药",    example_en:"to mix medicine",    frequency:"low"    },
-    "hú":  { meaning_zh:"麻将和牌",     meaning_en:"to win (mahjong)",        example_zh:"和牌",    example_en:"to win at mahjong",  frequency:"low"    },
-  }},
-  "干": { readings: {
-    "gān": { meaning_zh:"干燥，干净",   meaning_en:"dry, clean",              example_zh:"干净",    example_en:"clean",              frequency:"high"   },
-    "gàn": { meaning_zh:"做，干活",     meaning_en:"to do, to work",          example_zh:"干活",    example_en:"to do work",         frequency:"high"   },
-  }},
-  "还": { readings: {
-    "hái": { meaning_zh:"还是，仍然",   meaning_en:"still, also",             example_zh:"还有",    example_en:"there is also",      frequency:"high"   },
-    "huán":{ meaning_zh:"归还，返还",   meaning_en:"to return, to give back", example_zh:"还书",    example_en:"to return a book",   frequency:"high"   },
-  }},
-  "几": { readings: {
-    "jī":  { meaning_zh:"茶几，几案",   meaning_en:"small table",             example_zh:"茶几",    example_en:"tea table",          frequency:"medium" },
-    "jǐ":  { meaning_zh:"几个，多少",   meaning_en:"how many, a few",         example_zh:"几个",    example_en:"a few",              frequency:"high"   },
+    "hé":  { meaning_zh:"和平，和睦", meaning_en:"peace, harmony",         example_zh:"和平",  example_en:"peace",         frequency:"high" },
+    "hè":  { meaning_zh:"应和，唱和", meaning_en:"to echo, to respond",    example_zh:"和诗",  example_en:"to respond in verse", frequency:"low" },
+    "huó": { meaning_zh:"和面，搅拌", meaning_en:"to knead (dough)",       example_zh:"和面",  example_en:"to knead dough",frequency:"medium" },
+    "huò": { meaning_zh:"掺和，混合", meaning_en:"to mix together",        example_zh:"和药",  example_en:"to mix medicine",frequency:"low" },
+    "hú":  { meaning_zh:"麻将和牌",   meaning_en:"to win (mahjong)",       example_zh:"和了",  example_en:"to win mahjong",frequency:"low" },
   }},
   "教": { readings: {
-    "jiāo":{ meaning_zh:"教导，教授",   meaning_en:"to teach",                example_zh:"教书",    example_en:"to teach",           frequency:"high"   },
-    "jiào":{ meaning_zh:"教育，宗教",   meaning_en:"education, religion",     example_zh:"教育",    example_en:"education",          frequency:"high"   },
+    "jiāo": { meaning_zh:"教导，教授", meaning_en:"to teach",              example_zh:"教书",  example_en:"to teach",      frequency:"high" },
+    "jiào": { meaning_zh:"教育，宗教", meaning_en:"education, religion",   example_zh:"教育",  example_en:"education",     frequency:"high" },
   }},
   "觉": { readings: {
-    "jué": { meaning_zh:"感觉，觉得",   meaning_en:"to feel, to sense",       example_zh:"觉得",    example_en:"to feel",            frequency:"high"   },
-    "jiào":{ meaning_zh:"睡觉，午觉",   meaning_en:"sleep, nap",              example_zh:"睡觉",    example_en:"to sleep",           frequency:"high"   },
+    "jué":  { meaning_zh:"感觉，觉得", meaning_en:"to feel, to sense",     example_zh:"觉得",  example_en:"to feel",       frequency:"high" },
+    "jiào": { meaning_zh:"睡觉，午觉", meaning_en:"sleep, nap",            example_zh:"睡觉",  example_en:"to sleep",      frequency:"high" },
   }},
   "少": { readings: {
-    "shǎo":{ meaning_zh:"少量，稀少",   meaning_en:"few, little",             example_zh:"很少",    example_en:"rarely",             frequency:"high"   },
-    "shào":{ meaning_zh:"年少，少年",   meaning_en:"young, youth",            example_zh:"少年",    example_en:"youth",              frequency:"medium" },
+    "shǎo": { meaning_zh:"少量，稀少", meaning_en:"few, little",           example_zh:"很少",  example_en:"rarely",        frequency:"high" },
+    "shào": { meaning_zh:"年少，少年", meaning_en:"young, youth",          example_zh:"少年",  example_en:"youth",         frequency:"medium" },
   }},
   "行": { readings: {
-    "xíng":{ meaning_zh:"行走，行动",   meaning_en:"to walk, to act",         example_zh:"行走",    example_en:"to walk",            frequency:"high"   },
-    "háng":{ meaning_zh:"行业，排列",   meaning_en:"profession, row",         example_zh:"银行",    example_en:"bank",               frequency:"high"   },
+    "xíng": { meaning_zh:"行走，行动", meaning_en:"to walk, to act",       example_zh:"行走",  example_en:"to walk",       frequency:"high" },
+    "háng": { meaning_zh:"行业，排列", meaning_en:"profession, row",       example_zh:"银行",  example_en:"bank",          frequency:"high" },
   }},
   "兴": { readings: {
-    "xīng":{ meaning_zh:"兴起，复兴",   meaning_en:"to rise, to revive",      example_zh:"兴起",    example_en:"to rise",            frequency:"high"   },
-    "xìng":{ meaning_zh:"兴趣，兴奋",   meaning_en:"interest, excitement",    example_zh:"兴趣",    example_en:"interest",           frequency:"high"   },
+    "xīng": { meaning_zh:"兴起，复兴", meaning_en:"to rise, to revive",    example_zh:"兴起",  example_en:"to rise",       frequency:"high" },
+    "xìng": { meaning_zh:"兴趣，兴奋", meaning_en:"interest, excitement",  example_zh:"兴趣",  example_en:"interest",      frequency:"high" },
   }},
   "中": { readings: {
-    "zhōng":{ meaning_zh:"中间，中心",  meaning_en:"middle, center",          example_zh:"中国",    example_en:"China",              frequency:"high"   },
-    "zhòng":{ meaning_zh:"命中，击中",  meaning_en:"to hit, to be hit",       example_zh:"中奖",    example_en:"to win a prize",     frequency:"medium" },
+    "zhōng": { meaning_zh:"中间，中心", meaning_en:"middle, center",       example_zh:"中国",  example_en:"China",         frequency:"high" },
+    "zhòng": { meaning_zh:"命中，击中", meaning_en:"to hit, to be hit",    example_zh:"中奖",  example_en:"to win a prize",frequency:"medium" },
   }},
   "重": { readings: {
-    "zhòng":{ meaning_zh:"重量，沉重",  meaning_en:"heavy, weight",           example_zh:"体重",    example_en:"body weight",        frequency:"high"   },
-    "chóng":{ meaning_zh:"重复，重新",  meaning_en:"again, to repeat",        example_zh:"重来",    example_en:"to redo",            frequency:"high"   },
-  }},
-  "都": { readings: {
-    "dōu": { meaning_zh:"全部，都是",   meaning_en:"all, both",               example_zh:"都是",    example_en:"all are",            frequency:"high"   },
-    "dū":  { meaning_zh:"首都，都市",   meaning_en:"capital city",            example_zh:"首都",    example_en:"capital city",       frequency:"high"   },
-  }},
-  "要": { readings: {
-    "yào": { meaning_zh:"需要，想要",   meaning_en:"to want, to need",        example_zh:"要求",    example_en:"requirement",        frequency:"high"   },
-    "yāo": { meaning_zh:"要求，要挟",   meaning_en:"to demand, to coerce",    example_zh:"要挟",    example_en:"to coerce",          frequency:"low"    },
-  }},
-  "没": { readings: {
-    "méi": { meaning_zh:"没有，未",     meaning_en:"don't have, not yet",     example_zh:"没有",    example_en:"don't have",         frequency:"high"   },
-    "mò":  { meaning_zh:"沉没，淹没",   meaning_en:"to sink, to submerge",    example_zh:"淹没",    example_en:"to submerge",        frequency:"medium" },
-  }},
-  "难": { readings: {
-    "nán": { meaning_zh:"困难，难题",   meaning_en:"difficult, hard",         example_zh:"困难",    example_en:"difficulty",         frequency:"high"   },
-    "nàn": { meaning_zh:"灾难，难民",   meaning_en:"disaster, refugee",       example_zh:"灾难",    example_en:"disaster",           frequency:"medium" },
-  }},
-  "什": { readings: {
-    "shí": { meaning_zh:"什么（古）",   meaning_en:"what (archaic)",          example_zh:"什物",    example_en:"sundry items",       frequency:"low"    },
-    "shén":{ meaning_zh:"什么",         meaning_en:"what",                    example_zh:"什么",    example_en:"what",               frequency:"high"   },
-  }},
-  "说": { readings: {
-    "shuō":{ meaning_zh:"说话，告诉",   meaning_en:"to speak, to say",        example_zh:"说话",    example_en:"to talk",            frequency:"high"   },
-    "shuì":{ meaning_zh:"游说，劝说",   meaning_en:"to persuade",             example_zh:"游说",    example_en:"to lobby",           frequency:"low"    },
-    "yuè": { meaning_zh:"喜悦（古）",   meaning_en:"joy (classical)",         example_zh:"不亦说乎",example_en:"isn't that joyful?", frequency:"low"    },
+    "zhòng": { meaning_zh:"重量，沉重", meaning_en:"heavy, weight",        example_zh:"体重",  example_en:"body weight",   frequency:"high" },
+    "chóng": { meaning_zh:"重复，重新", meaning_en:"again, to repeat",     example_zh:"重来",  example_en:"to redo",       frequency:"high" },
   }},
   "长": { readings: {
-    "cháng":{ meaning_zh:"长度，长短",  meaning_en:"long, length",            example_zh:"长城",    example_en:"Great Wall",         frequency:"high"   },
-    "zhǎng":{ meaning_zh:"成长，增长",  meaning_en:"to grow, to increase",    example_zh:"成长",    example_en:"to grow up",         frequency:"high"   },
-  }},
-  "场": { readings: {
-    "chǎng":{ meaning_zh:"场地，广场",  meaning_en:"field, place",            example_zh:"广场",    example_en:"plaza",              frequency:"high"   },
-    "cháng":{ meaning_zh:"场院（农）",  meaning_en:"threshing ground",        example_zh:"打场",    example_en:"to thresh grain",    frequency:"low"    },
+    "cháng": { meaning_zh:"长度，长短", meaning_en:"long, length",         example_zh:"长城",  example_en:"Great Wall",    frequency:"high" },
+    "zhǎng": { meaning_zh:"成长，增长", meaning_en:"to grow, to increase", example_zh:"成长",  example_en:"to grow up",    frequency:"high" },
   }},
   "差": { readings: {
-    "chā": { meaning_zh:"差别，差异",   meaning_en:"difference, gap",         example_zh:"差别",    example_en:"difference",         frequency:"high"   },
-    "chà": { meaning_zh:"差劲，欠佳",   meaning_en:"poor, inferior",          example_zh:"差劲",    example_en:"poor quality",       frequency:"medium" },
-    "chāi":{ meaning_zh:"出差，差事",   meaning_en:"business trip, errand",   example_zh:"出差",    example_en:"business trip",      frequency:"medium" },
-    "cī":  { meaning_zh:"参差不齐",     meaning_en:"uneven, irregular",       example_zh:"参差",    example_en:"uneven",             frequency:"low"    },
+    "chā":  { meaning_zh:"差别，差异", meaning_en:"difference, gap",       example_zh:"差别",  example_en:"difference",    frequency:"high" },
+    "chà":  { meaning_zh:"差劲，欠佳", meaning_en:"poor, inferior",        example_zh:"差劲",  example_en:"poor quality",  frequency:"medium" },
+    "chāi": { meaning_zh:"出差，差事", meaning_en:"business trip, errand", example_zh:"出差",  example_en:"business trip", frequency:"medium" },
+    "cī":   { meaning_zh:"参差不齐",   meaning_en:"uneven, irregular",     example_zh:"参差",  example_en:"uneven",        frequency:"low" },
   }},
-  // ── 二级 ──────────────────────────────────────────────────────
   "发": { readings: {
-    "fā":  { meaning_zh:"发出，发生",   meaning_en:"to send out, to happen",  example_zh:"发现",    example_en:"to discover",        frequency:"high"   },
-    "fà":  { meaning_zh:"头发",         meaning_en:"hair",                    example_zh:"头发",    example_en:"hair",               frequency:"high"   },
-  }},
-  "当": { readings: {
-    "dāng":{ meaning_zh:"当作，担当",   meaning_en:"to serve as, to take on", example_zh:"当然",    example_en:"of course",          frequency:"high"   },
-    "dàng":{ meaning_zh:"合适，恰当",   meaning_en:"proper, suitable",        example_zh:"当天",    example_en:"that very day",      frequency:"medium" },
-  }},
-  "倒": { readings: {
-    "dǎo": { meaning_zh:"倒下，摔倒",   meaning_en:"to fall, to topple",      example_zh:"倒下",    example_en:"to fall down",       frequency:"high"   },
-    "dào": { meaning_zh:"倒水，颠倒",   meaning_en:"to pour, upside-down",    example_zh:"倒水",    example_en:"to pour water",      frequency:"high"   },
-  }},
-  "相": { readings: {
-    "xiāng":{ meaning_zh:"互相，相同",  meaning_en:"mutually, each other",    example_zh:"相同",    example_en:"the same",           frequency:"high"   },
-    "xiàng":{ meaning_zh:"相貌，宰相",  meaning_en:"appearance, chancellor",  example_zh:"相貌",    example_en:"appearance",         frequency:"high"   },
+    "fā": { meaning_zh:"发出，发生", meaning_en:"to send out, to happen",  example_zh:"发现",  example_en:"to discover",   frequency:"high" },
+    "fà": { meaning_zh:"头发",       meaning_en:"hair",                    example_zh:"头发",  example_en:"hair",          frequency:"high" },
   }},
   "应": { readings: {
-    "yīng":{ meaning_zh:"应该，应当",   meaning_en:"should, ought to",        example_zh:"应该",    example_en:"should",             frequency:"high"   },
-    "yìng":{ meaning_zh:"回应，响应",   meaning_en:"to respond, to answer",   example_zh:"回应",    example_en:"to respond",         frequency:"medium" },
-  }},
-  "称": { readings: {
-    "chēng":{ meaning_zh:"称呼，称赞",  meaning_en:"to call, to praise",      example_zh:"称赞",    example_en:"to praise",          frequency:"high"   },
-    "chèn": { meaning_zh:"相称，匀称",  meaning_en:"to match, proportionate", example_zh:"匀称",    example_en:"well-proportioned",  frequency:"medium" },
-    "chèng":{ meaning_zh:"秤，称量",    meaning_en:"scale, to weigh",         example_zh:"称重",    example_en:"to weigh",           frequency:"medium" },
-  }},
-  "处": { readings: {
-    "chǔ": { meaning_zh:"处理，相处",   meaning_en:"to handle, to get along", example_zh:"处理",    example_en:"to handle",          frequency:"high"   },
-    "chù": { meaning_zh:"地处，处所",   meaning_en:"place, location",         example_zh:"到处",    example_en:"everywhere",         frequency:"high"   },
+    "yīng": { meaning_zh:"应该，应当", meaning_en:"should, ought to",      example_zh:"应该",  example_en:"should",        frequency:"high" },
+    "yìng": { meaning_zh:"回应，响应", meaning_en:"to respond, to answer", example_zh:"回应",  example_en:"to respond",    frequency:"medium" },
   }},
   "乐": { readings: {
-    "lè":  { meaning_zh:"快乐，欢乐",   meaning_en:"happy, joyful",           example_zh:"快乐",    example_en:"happiness",          frequency:"high"   },
-    "yuè": { meaning_zh:"音乐",         meaning_en:"music",                   example_zh:"音乐",    example_en:"music",              frequency:"high"   },
+    "lè":  { meaning_zh:"快乐，欢乐", meaning_en:"happy, joyful",          example_zh:"快乐",  example_en:"happiness",     frequency:"high" },
+    "yuè": { meaning_zh:"音乐",       meaning_en:"music",                  example_zh:"音乐",  example_en:"music",         frequency:"high" },
   }},
   "数": { readings: {
-    "shù": { meaning_zh:"数字，数量",   meaning_en:"number, quantity",        example_zh:"数学",    example_en:"mathematics",        frequency:"high"   },
-    "shǔ": { meaning_zh:"计数，数数",   meaning_en:"to count",                example_zh:"数钱",    example_en:"to count money",     frequency:"medium" },
-    "shuò":{ meaning_zh:"多次，屡次",   meaning_en:"frequently, repeatedly",  example_zh:"数见不鲜",example_en:"not uncommon",       frequency:"low"    },
-  }},
-  "熟": { readings: {
-    "shú": { meaning_zh:"成熟，熟悉",   meaning_en:"ripe, familiar",          example_zh:"熟悉",    example_en:"familiar with",      frequency:"high"   },
-    "shóu":{ meaning_zh:"煮熟了",       meaning_en:"cooked through (spoken)", example_zh:"饭熟了",  example_en:"rice is cooked",     frequency:"medium" },
-  }},
-  "便": { readings: {
-    "biàn":{ meaning_zh:"方便，便利",   meaning_en:"convenient",              example_zh:"方便",    example_en:"convenient",         frequency:"high"   },
-    "pián":{ meaning_zh:"便宜",         meaning_en:"cheap, inexpensive",      example_zh:"便宜",    example_en:"cheap",              frequency:"high"   },
-  }},
-  "卷": { readings: {
-    "juǎn":{ meaning_zh:"卷起，卷曲",   meaning_en:"to roll up, to curl",     example_zh:"卷起",    example_en:"to roll up",         frequency:"high"   },
-    "juàn":{ meaning_zh:"试卷，卷子",   meaning_en:"exam paper, scroll",      example_zh:"试卷",    example_en:"exam paper",         frequency:"high"   },
+    "shù":  { meaning_zh:"数字，数量", meaning_en:"number, quantity",      example_zh:"数学",  example_en:"mathematics",   frequency:"high" },
+    "shǔ":  { meaning_zh:"计数，数数", meaning_en:"to count",              example_zh:"数钱",  example_en:"to count money",frequency:"medium" },
+    "shuò": { meaning_zh:"多次，屡次", meaning_en:"frequently, repeatedly", example_zh:"数见不鲜",example_en:"not uncommon",frequency:"low" },
   }},
   "藏": { readings: {
-    "cáng":{ meaning_zh:"藏匿，储藏",   meaning_en:"to hide, to store",       example_zh:"藏宝",    example_en:"hidden treasure",    frequency:"medium" },
-    "zàng":{ meaning_zh:"西藏，宝藏",   meaning_en:"Tibet, treasure",         example_zh:"西藏",    example_en:"Tibet",              frequency:"medium" },
-  }},
-  "舍": { readings: {
-    "shě": { meaning_zh:"舍弃，放弃",   meaning_en:"to give up, to abandon",  example_zh:"舍弃",    example_en:"to give up",         frequency:"high"   },
-    "shè": { meaning_zh:"宿舍，舍堂",   meaning_en:"dormitory, residence",    example_zh:"宿舍",    example_en:"dormitory",          frequency:"high"   },
-  }},
-  // ── 三级 ──────────────────────────────────────────────────────
-  "调": { readings: {
-    "tiáo":{ meaning_zh:"调节，调整",   meaning_en:"to adjust, to regulate",  example_zh:"调整",    example_en:"to adjust",          frequency:"high"   },
-    "diào":{ meaning_zh:"音调，曲调",   meaning_en:"tone, melody",            example_zh:"音调",    example_en:"tone",               frequency:"high"   },
-  }},
-  "曾": { readings: {
-    "céng":{ meaning_zh:"曾经，曾经",   meaning_en:"once, previously",        example_zh:"曾经",    example_en:"once upon a time",   frequency:"high"   },
-    "zēng":{ meaning_zh:"曾祖，曾孙",   meaning_en:"great-grandparent/child", example_zh:"曾祖父",  example_en:"great-grandfather",  frequency:"medium" },
+    "cáng": { meaning_zh:"藏匿，储藏", meaning_en:"to hide, to store",     example_zh:"藏宝",  example_en:"hidden treasure",frequency:"medium" },
+    "zàng": { meaning_zh:"西藏，宝藏", meaning_en:"Tibet, treasure",       example_zh:"西藏",  example_en:"Tibet",         frequency:"medium" },
   }},
   "朝": { readings: {
-    "cháo":{ meaning_zh:"朝代，朝廷",   meaning_en:"dynasty, imperial court", example_zh:"明朝",    example_en:"Ming Dynasty",       frequency:"medium" },
-    "zhāo":{ meaning_zh:"早晨，朝阳",   meaning_en:"morning, morning sun",    example_zh:"朝阳",    example_en:"morning sun",        frequency:"low"    },
-  }},
-  "强": { readings: {
-    "qiáng":{ meaning_zh:"强大，坚强",  meaning_en:"strong, powerful",        example_zh:"强大",    example_en:"powerful",           frequency:"high"   },
-    "qiǎng":{ meaning_zh:"强迫，勉强",  meaning_en:"to force, reluctantly",   example_zh:"强迫",    example_en:"to force",           frequency:"medium" },
-    "jiàng":{ meaning_zh:"倔强，强硬",  meaning_en:"stubborn, unyielding",    example_zh:"倔强",    example_en:"stubborn",           frequency:"medium" },
-  }},
-  "切": { readings: {
-    "qiē": { meaning_zh:"切割，切断",   meaning_en:"to cut, to slice",        example_zh:"切菜",    example_en:"to chop vegetables", frequency:"high"   },
-    "qiè": { meaning_zh:"恳切，切实",   meaning_en:"sincere, practical",      example_zh:"切实",    example_en:"practical",          frequency:"medium" },
-  }},
-  "散": { readings: {
-    "sàn": { meaning_zh:"散开，分散",   meaning_en:"to scatter, to disperse", example_zh:"散步",    example_en:"to take a walk",     frequency:"high"   },
-    "sǎn": { meaning_zh:"散漫，散文",   meaning_en:"loose, prose",            example_zh:"散文",    example_en:"prose",              frequency:"medium" },
-  }},
-  "血": { readings: {
-    "xuè": { meaning_zh:"血液，鲜血",   meaning_en:"blood",                   example_zh:"血液",    example_en:"blood",              frequency:"high"   },
-    "xiě": { meaning_zh:"流血（口语）", meaning_en:"blood (colloquial)",      example_zh:"流血",    example_en:"to bleed",           frequency:"medium" },
+    "cháo": { meaning_zh:"朝代，朝廷", meaning_en:"dynasty, imperial court",example_zh:"明朝", example_en:"Ming Dynasty",  frequency:"medium" },
+    "zhāo": { meaning_zh:"早晨，朝阳", meaning_en:"morning, morning sun",  example_zh:"朝阳",  example_en:"morning sun",   frequency:"low" },
   }},
   "传": { readings: {
-    "chuán":{ meaning_zh:"传递，传播",  meaning_en:"to pass, to spread",      example_zh:"传说",    example_en:"legend",             frequency:"high"   },
-    "zhuàn":{ meaning_zh:"传记，自传",  meaning_en:"biography",               example_zh:"自传",    example_en:"autobiography",      frequency:"medium" },
-  }},
-  "度": { readings: {
-    "dù":  { meaning_zh:"程度，度过",   meaning_en:"degree, to spend time",   example_zh:"温度",    example_en:"temperature",        frequency:"high"   },
-    "duó": { meaning_zh:"揣度，忖度",   meaning_en:"to estimate, to conjecture",example_zh:"揣度",  example_en:"to speculate",       frequency:"low"    },
-  }},
-  "恶": { readings: {
-    "è":   { meaning_zh:"邪恶，罪恶",   meaning_en:"evil, wicked",            example_zh:"恶意",    example_en:"malice",             frequency:"high"   },
-    "wù":  { meaning_zh:"厌恶，憎恶",   meaning_en:"to detest, to hate",      example_zh:"厌恶",    example_en:"to detest",          frequency:"high"   },
-    "ě":   { meaning_zh:"恶心，作呕",   meaning_en:"nausea, disgusting",      example_zh:"恶心",    example_en:"nauseous",           frequency:"medium" },
-  }},
-  // ── 四级 ──────────────────────────────────────────────────────
-  "薄": { readings: {
-    "báo": { meaning_zh:"薄片，薄弱",   meaning_en:"thin (colloquial)",       example_zh:"薄饼",    example_en:"thin pancake",       frequency:"high"   },
-    "bó":  { meaning_zh:"淡薄，轻薄",   meaning_en:"meager, frivolous",       example_zh:"单薄",    example_en:"thin & weak",        frequency:"medium" },
-    "bò":  { meaning_zh:"薄荷",         meaning_en:"mint (in 薄荷)",          example_zh:"薄荷",    example_en:"mint",               frequency:"medium" },
-  }},
-  "折": { readings: {
-    "zhē": { meaning_zh:"折腾，翻转",   meaning_en:"to toss about",           example_zh:"折腾",    example_en:"to toss about",      frequency:"medium" },
-    "zhé": { meaning_zh:"折断，折扣",   meaning_en:"to break, discount",      example_zh:"折扣",    example_en:"discount",           frequency:"high"   },
-    "shé": { meaning_zh:"折本，断折",   meaning_en:"to snap, to lose money",  example_zh:"折本",    example_en:"to lose money",      frequency:"medium" },
-  }},
-  "冲": { readings: {
-    "chōng":{ meaning_zh:"冲洗，冲击",  meaning_en:"to rinse, to rush",       example_zh:"冲洗",    example_en:"to rinse",           frequency:"high"   },
-    "chòng":{ meaning_zh:"冲劲，直冲",  meaning_en:"forceful, aimed at",      example_zh:"冲劲",    example_en:"drive, enthusiasm",  frequency:"medium" },
-  }},
-  "单": { readings: {
-    "dān": { meaning_zh:"单独，简单",   meaning_en:"single, simple",          example_zh:"单独",    example_en:"alone",              frequency:"high"   },
-    "shàn":{ meaning_zh:"单于（匈奴）", meaning_en:"Chanyu (Xiongnu chief)",  example_zh:"单于",    example_en:"Chanyu",             frequency:"low"    },
-    "chán":{ meaning_zh:"禅（佛教）",   meaning_en:"Chan/Zen Buddhism",       example_zh:"禅宗",    example_en:"Zen Buddhism",       frequency:"low"    },
-  }},
-  "担": { readings: {
-    "dān": { meaning_zh:"担心，承担",   meaning_en:"to worry, to bear",       example_zh:"担心",    example_en:"to worry",           frequency:"high"   },
-    "dàn": { meaning_zh:"担子，扁担",   meaning_en:"carrying pole, burden",   example_zh:"扁担",    example_en:"carrying pole",      frequency:"medium" },
+    "chuán": { meaning_zh:"传递，传播", meaning_en:"to pass, to spread",   example_zh:"传说",  example_en:"legend",        frequency:"high" },
+    "zhuàn": { meaning_zh:"传记，自传", meaning_en:"biography",            example_zh:"自传",  example_en:"autobiography", frequency:"medium" },
   }},
   "降": { readings: {
-    "jiàng":{ meaning_zh:"下降，降低",  meaning_en:"to descend, to lower",    example_zh:"降温",    example_en:"temperature drop",   frequency:"high"   },
-    "xiáng":{ meaning_zh:"投降，降服",  meaning_en:"to surrender",            example_zh:"投降",    example_en:"to surrender",       frequency:"medium" },
-  }},
-  "系": { readings: {
-    "xì":  { meaning_zh:"系统，联系",   meaning_en:"system, to connect",      example_zh:"系统",    example_en:"system",             frequency:"high"   },
-    "jì":  { meaning_zh:"系鞋带，绑",   meaning_en:"to tie, to fasten",       example_zh:"系鞋带",  example_en:"to tie shoelaces",   frequency:"medium" },
-  }},
-  "磨": { readings: {
-    "mó":  { meaning_zh:"磨损，研磨",   meaning_en:"to grind, to wear down",  example_zh:"磨损",    example_en:"wear and tear",      frequency:"high"   },
-    "mò":  { meaning_zh:"磨坊，石磨",   meaning_en:"mill, millstone",         example_zh:"磨坊",    example_en:"mill",               frequency:"medium" },
-  }},
-  "宁": { readings: {
-    "níng":{ meaning_zh:"宁静，安宁",   meaning_en:"peaceful, tranquil",      example_zh:"宁静",    example_en:"peaceful",           frequency:"high"   },
-    "nìng":{ meaning_zh:"宁愿，宁可",   meaning_en:"would rather, prefer",    example_zh:"宁愿",    example_en:"would rather",       frequency:"high"   },
-  }},
-  "铺": { readings: {
-    "pū":  { meaning_zh:"铺开，铺设",   meaning_en:"to spread, to lay",       example_zh:"铺路",    example_en:"to pave a road",     frequency:"high"   },
-    "pù":  { meaning_zh:"店铺，床铺",   meaning_en:"shop, bunk",              example_zh:"店铺",    example_en:"shop",               frequency:"high"   },
-  }},
-  "曲": { readings: {
-    "qū":  { meaning_zh:"弯曲，曲折",   meaning_en:"curved, winding",         example_zh:"弯曲",    example_en:"curved",             frequency:"high"   },
-    "qǔ":  { meaning_zh:"歌曲，曲子",   meaning_en:"song, tune",              example_zh:"歌曲",    example_en:"song",               frequency:"high"   },
-  }},
-  "塞": { readings: {
-    "sāi": { meaning_zh:"塞满，堵塞",   meaning_en:"to stuff, to block",      example_zh:"塞车",    example_en:"traffic jam",        frequency:"high"   },
-    "sài": { meaning_zh:"边塞，关塞",   meaning_en:"frontier, border pass",   example_zh:"边塞",    example_en:"frontier",           frequency:"medium" },
-    "sè":  { meaning_zh:"闭塞，阻塞",   meaning_en:"blocked, obstructed",     example_zh:"阻塞",    example_en:"obstruction",        frequency:"medium" },
-  }},
-  "省": { readings: {
-    "shěng":{ meaning_zh:"省钱，节省",  meaning_en:"to save, province",       example_zh:"省钱",    example_en:"to save money",      frequency:"high"   },
-    "xǐng": { meaning_zh:"反省，省悟",  meaning_en:"to reflect, to realize",  example_zh:"反省",    example_en:"to self-reflect",    frequency:"medium" },
-  }},
-  // ── 五级 ──────────────────────────────────────────────────────
-  "泊": { readings: {
-    "bó":  { meaning_zh:"停泊，漂泊",   meaning_en:"to moor, to drift",       example_zh:"停泊",    example_en:"to moor",            frequency:"medium" },
-    "pō":  { meaning_zh:"湖泊，水泊",   meaning_en:"lake, pool",              example_zh:"湖泊",    example_en:"lake",               frequency:"medium" },
-  }},
-  "参": { readings: {
-    "cān": { meaning_zh:"参加，参与",   meaning_en:"to participate",          example_zh:"参加",    example_en:"to join",            frequency:"high"   },
-    "shēn":{ meaning_zh:"人参",         meaning_en:"ginseng",                 example_zh:"人参",    example_en:"ginseng",            frequency:"low"    },
-    "cēn": { meaning_zh:"参差不齐",     meaning_en:"uneven, irregular",       example_zh:"参差",    example_en:"uneven",             frequency:"low"    },
-  }},
-  "盛": { readings: {
-    "shèng":{ meaning_zh:"盛大，兴盛",  meaning_en:"grand, flourishing",      example_zh:"盛大",    example_en:"grand",              frequency:"high"   },
-    "chéng":{ meaning_zh:"盛饭，盛水",  meaning_en:"to hold, to fill a bowl", example_zh:"盛饭",    example_en:"to serve rice",      frequency:"high"   },
-  }},
-  "乘": { readings: {
-    "chéng":{ meaning_zh:"乘车，乘坐",  meaning_en:"to ride, to take",        example_zh:"乘车",    example_en:"to take a bus",      frequency:"high"   },
-    "shèng":{ meaning_zh:"史乘，千乘",  meaning_en:"historical record (classical)",example_zh:"史乘",example_en:"historical record", frequency:"low"    },
-  }},
-  "斗": { readings: {
-    "dǒu": { meaning_zh:"北斗，斗形",   meaning_en:"dipper, cup-shaped",      example_zh:"北斗星",  example_en:"Big Dipper",         frequency:"medium" },
-    "dòu": { meaning_zh:"战斗，斗争",   meaning_en:"to fight, to struggle",   example_zh:"战斗",    example_en:"battle",             frequency:"high"   },
-  }},
-  "杆": { readings: {
-    "gān": { meaning_zh:"旗杆，杆子",   meaning_en:"pole, rod",               example_zh:"旗杆",    example_en:"flagpole",           frequency:"medium" },
-    "gǎn": { meaning_zh:"笔杆，枪杆",   meaning_en:"pen/gun barrel, handle",  example_zh:"笔杆",    example_en:"pen barrel",         frequency:"medium" },
-  }},
-  "冠": { readings: {
-    "guān":{ meaning_zh:"皇冠，冠军",   meaning_en:"crown, champion",         example_zh:"冠军",    example_en:"champion",           frequency:"high"   },
-    "guàn":{ meaning_zh:"冠以，戴冠",   meaning_en:"to top with, to cap",     example_zh:"冠名",    example_en:"to name/sponsor",    frequency:"medium" },
-  }},
-  "划": { readings: {
-    "huá": { meaning_zh:"划船，划分",   meaning_en:"to row, to stroke",       example_zh:"划船",    example_en:"to row a boat",      frequency:"high"   },
-    "huà": { meaning_zh:"计划，规划",   meaning_en:"to plan",                 example_zh:"计划",    example_en:"plan",               frequency:"high"   },
+    "jiàng": { meaning_zh:"下降，降低", meaning_en:"to descend, to lower", example_zh:"降温",  example_en:"temperature drop",frequency:"high" },
+    "xiáng": { meaning_zh:"投降，降服", meaning_en:"to surrender",         example_zh:"投降",  example_en:"to surrender",  frequency:"medium" },
   }},
   "假": { readings: {
-    "jiǎ": { meaning_zh:"虚假，假冒",   meaning_en:"fake, false",             example_zh:"假装",    example_en:"to pretend",         frequency:"high"   },
-    "jià": { meaning_zh:"假期，休假",   meaning_en:"holiday, vacation",       example_zh:"放假",    example_en:"to have a holiday",  frequency:"high"   },
+    "jiǎ": { meaning_zh:"虚假，假冒", meaning_en:"fake, false",            example_zh:"假装",  example_en:"to pretend",    frequency:"high" },
+    "jià": { meaning_zh:"假期，休假", meaning_en:"holiday, vacation",      example_zh:"放假",  example_en:"to have a holiday",frequency:"high" },
   }},
-  "壳": { readings: {
-    "ké":  { meaning_zh:"蛋壳，贝壳",   meaning_en:"shell, husk (colloq.)",   example_zh:"蛋壳",    example_en:"eggshell",           frequency:"high"   },
-    "qiào":{ meaning_zh:"地壳，外壳",   meaning_en:"crust, outer shell",      example_zh:"地壳",    example_en:"Earth's crust",      frequency:"medium" },
-  }},
-  "露": { readings: {
-    "lù":  { meaning_zh:"露出，暴露",   meaning_en:"to reveal, to expose",    example_zh:"露出",    example_en:"to reveal",          frequency:"high"   },
-    "lòu": { meaning_zh:"露馅，漏出",   meaning_en:"to leak, to show (colloq.)",example_zh:"露馅", example_en:"to let the cat out", frequency:"medium" },
-  }},
-  "模": { readings: {
-    "mó":  { meaning_zh:"模型，模仿",   meaning_en:"model, to imitate",       example_zh:"模型",    example_en:"model",              frequency:"high"   },
-    "mú":  { meaning_zh:"模样，模具",   meaning_en:"appearance, mold",        example_zh:"模具",    example_en:"mold",               frequency:"medium" },
-  }},
-  "喷": { readings: {
-    "pēn": { meaning_zh:"喷水，喷射",   meaning_en:"to spray, to spurt",      example_zh:"喷水",    example_en:"to spray water",     frequency:"high"   },
-    "pèn": { meaning_zh:"喷香，喷鼻",   meaning_en:"fragrant (colloq.)",      example_zh:"喷香",    example_en:"delicious smell",    frequency:"medium" },
-  }},
-  "屏": { readings: {
-    "píng":{ meaning_zh:"屏幕，屏风",   meaning_en:"screen, partition",       example_zh:"屏幕",    example_en:"screen",             frequency:"high"   },
-    "bǐng":{ meaning_zh:"屏气，屏息",   meaning_en:"to hold one's breath",    example_zh:"屏息",    example_en:"to hold breath",     frequency:"medium" },
-  }},
-  "悄": { readings: {
-    "qiāo":{ meaning_zh:"悄悄，轻声",   meaning_en:"quietly, stealthily",     example_zh:"悄悄话",  example_en:"whisper",            frequency:"high"   },
-    "qiǎo":{ meaning_zh:"悄然，忧愁",   meaning_en:"sorrowful, silent",       example_zh:"悄然",    example_en:"quietly, silently",  frequency:"medium" },
-  }},
-  "宿": { readings: {
-    "sù":  { meaning_zh:"住宿，宿舍",   meaning_en:"to stay overnight, dorm", example_zh:"宿舍",    example_en:"dormitory",          frequency:"high"   },
-    "xiǔ": { meaning_zh:"一宿，整夜",   meaning_en:"one night",               example_zh:"一宿",    example_en:"one night",          frequency:"medium" },
-    "xiù": { meaning_zh:"星宿，二十八宿",meaning_en:"constellation",          example_zh:"星宿",    example_en:"constellation",      frequency:"low"    },
-  }},
-  "挑": { readings: {
-    "tiāo":{ meaning_zh:"挑担，挑选",   meaning_en:"to carry on shoulder, to pick",example_zh:"挑选",example_en:"to select",        frequency:"high"   },
-    "tiǎo":{ meaning_zh:"挑衅，挑战",   meaning_en:"to provoke, to challenge",example_zh:"挑战",    example_en:"challenge",          frequency:"high"   },
-  }},
-  "吐": { readings: {
-    "tǔ":  { meaning_zh:"吐出，吐露",   meaning_en:"to spit out, to reveal",  example_zh:"吐露",    example_en:"to reveal",          frequency:"high"   },
-    "tù":  { meaning_zh:"呕吐，吐血",   meaning_en:"to vomit",                example_zh:"呕吐",    example_en:"to vomit",           frequency:"high"   },
-  }},
-  // ── 六级 ──────────────────────────────────────────────────────
-  "挨": { readings: {
-    "āi":  { meaning_zh:"挨近，挨着",   meaning_en:"close to, next to",       example_zh:"挨着",    example_en:"right next to",      frequency:"high"   },
-    "ái":  { meaning_zh:"挨打，受苦",   meaning_en:"to suffer, to endure",    example_zh:"挨打",    example_en:"to get beaten",      frequency:"high"   },
-  }},
-  "暴": { readings: {
-    "bào": { meaning_zh:"暴力，暴雨",   meaning_en:"violent, torrential",     example_zh:"暴雨",    example_en:"heavy rain",         frequency:"high"   },
-    "pù":  { meaning_zh:"暴露，曝晒",   meaning_en:"to expose to sun",        example_zh:"一暴十寒",example_en:"hot and cold",       frequency:"low"    },
-  }},
-  "奔": { readings: {
-    "bēn": { meaning_zh:"奔跑，奔波",   meaning_en:"to run, to rush about",   example_zh:"奔跑",    example_en:"to run",             frequency:"high"   },
-    "bèn": { meaning_zh:"直奔，投奔",   meaning_en:"to head straight for",    example_zh:"投奔",    example_en:"to go to for refuge",frequency:"medium" },
-  }},
-  "扁": { readings: {
-    "biǎn":{ meaning_zh:"扁平，压扁",   meaning_en:"flat, flattened",         example_zh:"扁平",    example_en:"flat",               frequency:"high"   },
-    "piān":{ meaning_zh:"扁舟，小船",   meaning_en:"small boat (literary)",   example_zh:"扁舟",    example_en:"small boat",         frequency:"low"    },
-  }},
-  "卜": { readings: {
-    "bǔ":  { meaning_zh:"占卜，预测",   meaning_en:"to divine, to predict",   example_zh:"占卜",    example_en:"to divine",          frequency:"medium" },
-    "bo":  { meaning_zh:"萝卜",         meaning_en:"radish (in 萝卜)",        example_zh:"萝卜",    example_en:"radish",             frequency:"high"   },
-  }},
-  "臭": { readings: {
-    "chòu":{ meaning_zh:"臭味，臭气",   meaning_en:"stinky, foul smell",      example_zh:"臭气",    example_en:"foul smell",         frequency:"high"   },
-    "xiù": { meaning_zh:"嗅觉，气味",   meaning_en:"smell, odor (literary)",  example_zh:"无色无臭",example_en:"colorless & odorless",frequency:"low"   },
-  }},
-  "答": { readings: {
-    "dā":  { meaning_zh:"答应，答话",   meaning_en:"to respond, to agree",    example_zh:"答应",    example_en:"to agree",           frequency:"high"   },
-    "dá":  { meaning_zh:"回答，答案",   meaning_en:"to answer, answer",       example_zh:"回答",    example_en:"to answer",          frequency:"high"   },
-  }},
-  "弹": { readings: {
-    "tán": { meaning_zh:"弹琴，弹奏",   meaning_en:"to play (instrument)",    example_zh:"弹琴",    example_en:"to play piano",      frequency:"high"   },
-    "dàn": { meaning_zh:"子弹，炸弹",   meaning_en:"bullet, bomb",            example_zh:"子弹",    example_en:"bullet",             frequency:"high"   },
-  }},
-  "钉": { readings: {
-    "dīng":{ meaning_zh:"钉子，铁钉",   meaning_en:"nail",                    example_zh:"钉子",    example_en:"nail",               frequency:"high"   },
-    "dìng":{ meaning_zh:"钉牢，钉住",   meaning_en:"to nail, to fasten",      example_zh:"钉牢",    example_en:"to nail down",       frequency:"medium" },
-  }},
-  "缝": { readings: {
-    "féng":{ meaning_zh:"缝制，缝合",   meaning_en:"to sew, to stitch",       example_zh:"缝衣服",  example_en:"to sew clothes",     frequency:"high"   },
-    "fèng":{ meaning_zh:"缝隙，裂缝",   meaning_en:"crack, seam",             example_zh:"裂缝",    example_en:"crack",              frequency:"high"   },
-  }},
-  "横": { readings: {
-    "héng":{ meaning_zh:"横向，横线",   meaning_en:"horizontal",              example_zh:"横线",    example_en:"horizontal line",    frequency:"high"   },
-    "hèng":{ meaning_zh:"蛮横，横行",   meaning_en:"overbearing, reckless",   example_zh:"蛮横",    example_en:"overbearing",        frequency:"medium" },
-  }},
-  "哄": { readings: {
-    "hōng":{ meaning_zh:"哄堂大笑",     meaning_en:"uproar of laughter",      example_zh:"哄堂",    example_en:"whole room laughing",frequency:"medium" },
-    "hǒng":{ meaning_zh:"哄骗，哄人",   meaning_en:"to coax, to deceive",     example_zh:"哄骗",    example_en:"to coax/deceive",    frequency:"high"   },
-    "hòng":{ meaning_zh:"起哄，闹哄",   meaning_en:"to make a commotion",     example_zh:"起哄",    example_en:"to stir up trouble", frequency:"medium" },
-  }},
-  "华": { readings: {
-    "huá": { meaning_zh:"华丽，繁华",   meaning_en:"splendid, prosperous",    example_zh:"繁华",    example_en:"prosperous",         frequency:"high"   },
-    "huà": { meaning_zh:"华山",         meaning_en:"Mount Hua (proper noun)", example_zh:"华山",    example_en:"Mount Hua",          frequency:"medium" },
-  }},
-  "晃": { readings: {
-    "huǎng":{ meaning_zh:"明晃晃，耀眼",meaning_en:"dazzling, glittering",    example_zh:"明晃晃",  example_en:"dazzlingly bright",  frequency:"medium" },
-    "huàng":{ meaning_zh:"摇晃，晃动",  meaning_en:"to sway, to shake",       example_zh:"摇晃",    example_en:"to sway",            frequency:"high"   },
-  }},
-  "夹": { readings: {
-    "jiā": { meaning_zh:"夹住，夹子",   meaning_en:"to clamp, clip",          example_zh:"夹子",    example_en:"clip",               frequency:"high"   },
-    "jiá": { meaning_zh:"夹克，夹层",   meaning_en:"jacket, double-layered",  example_zh:"夹层",    example_en:"double layer",       frequency:"medium" },
-    "ga":  { meaning_zh:"夹肢窝（口）", meaning_en:"armpit (colloq.)",        example_zh:"夹肢窝",  example_en:"armpit",             frequency:"low"    },
-  }},
-  "监": { readings: {
-    "jiān":{ meaning_zh:"监督，监控",   meaning_en:"to supervise, to monitor",example_zh:"监控",    example_en:"surveillance",       frequency:"high"   },
-    "jiàn":{ meaning_zh:"国子监，太监", meaning_en:"imperial academy, eunuch",example_zh:"太监",    example_en:"eunuch",             frequency:"low"    },
-  }},
-  "角": { readings: {
-    "jiǎo":{ meaning_zh:"角落，角度",   meaning_en:"corner, angle",           example_zh:"角落",    example_en:"corner",             frequency:"high"   },
-    "jué": { meaning_zh:"角色，主角",   meaning_en:"role, character",         example_zh:"角色",    example_en:"role",               frequency:"high"   },
-  }},
-  "结": { readings: {
-    "jiē": { meaning_zh:"结果，结实",   meaning_en:"to bear fruit, solid",    example_zh:"结果",    example_en:"result / fruit",     frequency:"high"   },
-    "jié": { meaning_zh:"结束，结构",   meaning_en:"to end, structure",       example_zh:"结束",    example_en:"to end",             frequency:"high"   },
-  }},
-  "解": { readings: {
-    "jiě": { meaning_zh:"解决，了解",   meaning_en:"to solve, to understand", example_zh:"解决",    example_en:"to solve",           frequency:"high"   },
-    "jiè": { meaning_zh:"押解，解送",   meaning_en:"to escort (prisoner)",    example_zh:"押解",    example_en:"to escort",          frequency:"low"    },
-    "xiè": { meaning_zh:"解数，浑身解数",meaning_en:"skill, tricks",          example_zh:"解数",    example_en:"one's skills",       frequency:"low"    },
-  }},
-  "禁": { readings: {
-    "jīn": { meaning_zh:"禁受，不禁",   meaning_en:"to withstand, can't help",example_zh:"不禁",    example_en:"can't help but",     frequency:"medium" },
-    "jìn": { meaning_zh:"禁止，禁令",   meaning_en:"to forbid, prohibition",  example_zh:"禁止",    example_en:"forbidden",          frequency:"high"   },
+  "参": { readings: {
+    "cān":  { meaning_zh:"参加，参与", meaning_en:"to participate",        example_zh:"参加",  example_en:"to join",       frequency:"high" },
+    "shēn": { meaning_zh:"人参",       meaning_en:"ginseng",               example_zh:"人参",  example_en:"ginseng",       frequency:"low" },
+    "cēn":  { meaning_zh:"参差不齐",   meaning_en:"uneven, irregular",     example_zh:"参差",  example_en:"uneven",        frequency:"low" },
   }},
   "看": { readings: {
-    "kàn": { meaning_zh:"看见，观看",   meaning_en:"to see, to watch",        example_zh:"看书",    example_en:"to read",            frequency:"high"   },
-    "kān": { meaning_zh:"看守，照看",   meaning_en:"to watch over, to guard", example_zh:"看门",    example_en:"to guard the gate",  frequency:"medium" },
+    "kàn": { meaning_zh:"看见，观看", meaning_en:"to see, to watch",       example_zh:"看书",  example_en:"to read",       frequency:"high" },
+    "kān": { meaning_zh:"看守，照看", meaning_en:"to watch over, to guard",example_zh:"看门",  example_en:"to guard the door",frequency:"medium" },
   }},
-  "空": { readings: {
-    "kōng":{ meaning_zh:"空气，空间",   meaning_en:"air, space, empty",       example_zh:"空气",    example_en:"air",                frequency:"high"   },
-    "kòng":{ meaning_zh:"空闲，有空",   meaning_en:"free time, vacancy",      example_zh:"有空",    example_en:"to have free time",  frequency:"high"   },
+  "弹": { readings: {
+    "tán": { meaning_zh:"弹琴，弹奏", meaning_en:"to play (instrument)",   example_zh:"弹琴",  example_en:"to play piano", frequency:"high" },
+    "dàn": { meaning_zh:"子弹，炸弹", meaning_en:"bullet; bomb",           example_zh:"子弹",  example_en:"bullet",        frequency:"high" },
   }},
-  "累": { readings: {
-    "léi": { meaning_zh:"累赘，积累",   meaning_en:"to accumulate, burden",   example_zh:"累赘",    example_en:"burden",             frequency:"medium" },
-    "lěi": { meaning_zh:"积累，累积",   meaning_en:"to pile up, to accumulate",example_zh:"积累",   example_en:"to accumulate",      frequency:"high"   },
-    "lèi": { meaning_zh:"疲劳，劳累",   meaning_en:"tired, fatigued",         example_zh:"疲惫",    example_en:"exhausted",          frequency:"high"   },
-  }},
-  "量": { readings: {
-    "liáng":{ meaning_zh:"测量，量体",  meaning_en:"to measure",              example_zh:"测量",    example_en:"to measure",         frequency:"high"   },
-    "liàng":{ meaning_zh:"数量，大量",  meaning_en:"quantity, amount",        example_zh:"数量",    example_en:"quantity",           frequency:"high"   },
-  }},
-  "笼": { readings: {
-    "lóng":{ meaning_zh:"笼子，鸟笼",   meaning_en:"cage",                    example_zh:"鸟笼",    example_en:"birdcage",           frequency:"high"   },
-    "lǒng":{ meaning_zh:"笼罩，笼络",   meaning_en:"to envelop, to win over", example_zh:"笼罩",    example_en:"to envelop",         frequency:"medium" },
-  }},
-  "绿": { readings: {
-    "lǜ":  { meaning_zh:"绿色，翠绿",   meaning_en:"green",                   example_zh:"绿色",    example_en:"green color",        frequency:"high"   },
-    "lù":  { meaning_zh:"鸭绿江",       meaning_en:"Yalu River (proper noun)",example_zh:"鸭绿江",  example_en:"Yalu River",         frequency:"low"    },
-  }},
-  "论": { readings: {
-    "lùn": { meaning_zh:"讨论，理论",   meaning_en:"to discuss, theory",      example_zh:"讨论",    example_en:"discussion",         frequency:"high"   },
-    "lún": { meaning_zh:"论语，伦理",   meaning_en:"Analects, ethics",        example_zh:"论语",    example_en:"Analects",           frequency:"low"    },
-  }},
-  "落": { readings: {
-    "luò": { meaning_zh:"落下，降落",   meaning_en:"to fall, to land",        example_zh:"落下",    example_en:"to fall",            frequency:"high"   },
-    "lào": { meaning_zh:"落价，落色",   meaning_en:"to drop in price/color",  example_zh:"落色",    example_en:"to fade",            frequency:"medium" },
-    "là":  { meaning_zh:"落后，遗落",   meaning_en:"to fall behind, to omit", example_zh:"落后",    example_en:"to lag behind",      frequency:"high"   },
-  }},
-  "脉": { readings: {
-    "mài": { meaning_zh:"脉搏，血脉",   meaning_en:"pulse, blood vessel",     example_zh:"脉搏",    example_en:"pulse",              frequency:"high"   },
-    "mò":  { meaning_zh:"脉脉（含情）", meaning_en:"tenderly (literary)",     example_zh:"脉脉含情",example_en:"tender look",        frequency:"low"    },
-  }},
-  "泡": { readings: {
-    "pào": { meaning_zh:"泡沫，气泡",   meaning_en:"bubble, foam",            example_zh:"泡沫",    example_en:"foam",               frequency:"high"   },
-    "pāo": { meaning_zh:"泡汤，虚胖",   meaning_en:"puffy, to fizzle out",    example_zh:"泡汤",    example_en:"to fall through",    frequency:"medium" },
-  }},
-  "炮": { readings: {
-    "pào": { meaning_zh:"大炮，炮火",   meaning_en:"cannon, artillery",       example_zh:"大炮",    example_en:"cannon",             frequency:"high"   },
-    "páo": { meaning_zh:"炮制，炮烙",   meaning_en:"to roast, to prepare",    example_zh:"炮制",    example_en:"to concoct",         frequency:"medium" },
-    "bāo": { meaning_zh:"炮羊肉（爆）", meaning_en:"to quick-fry (meat)",     example_zh:"炮羊肉",  example_en:"quick-fried mutton", frequency:"low"    },
-  }},
-  "漂": { readings: {
-    "piāo":{ meaning_zh:"漂浮，飘荡",   meaning_en:"to float, to drift",      example_zh:"漂浮",    example_en:"to float",           frequency:"high"   },
-    "piǎo":{ meaning_zh:"漂白，漂洗",   meaning_en:"to bleach, to rinse",     example_zh:"漂白",    example_en:"to bleach",          frequency:"medium" },
-    "piào":{ meaning_zh:"漂亮，好看",   meaning_en:"beautiful, pretty",       example_zh:"漂亮",    example_en:"beautiful",          frequency:"high"   },
-  }},
-  "奇": { readings: {
-    "qí":  { meaning_zh:"奇怪，奇特",   meaning_en:"strange, unusual",        example_zh:"奇怪",    example_en:"strange",            frequency:"high"   },
-    "jī":  { meaning_zh:"奇数，单数",   meaning_en:"odd number",              example_zh:"奇数",    example_en:"odd number",         frequency:"medium" },
-  }},
-  "丧": { readings: {
-    "sāng":{ meaning_zh:"丧事，奔丧",   meaning_en:"funeral, mourning rites", example_zh:"丧事",    example_en:"funeral",            frequency:"medium" },
-    "sàng":{ meaning_zh:"丧失，沮丧",   meaning_en:"to lose, dejected",       example_zh:"沮丧",    example_en:"dejected",           frequency:"high"   },
-  }},
-  "扇": { readings: {
-    "shān":{ meaning_zh:"扇风，扇动",   meaning_en:"to fan, to flap",         example_zh:"扇风",    example_en:"to fan",             frequency:"medium" },
-    "shàn":{ meaning_zh:"扇子，电扇",   meaning_en:"fan (object)",            example_zh:"扇子",    example_en:"hand fan",           frequency:"high"   },
-  }},
-  "石": { readings: {
-    "shí": { meaning_zh:"石头，岩石",   meaning_en:"stone, rock",             example_zh:"石头",    example_en:"stone",              frequency:"high"   },
-    "dàn": { meaning_zh:"一石（容量）", meaning_en:"dan, unit of volume",     example_zh:"一石粮",  example_en:"one dan of grain",   frequency:"low"    },
-  }},
-  "识": { readings: {
-    "shí": { meaning_zh:"认识，知识",   meaning_en:"to know, knowledge",      example_zh:"认识",    example_en:"to know",            frequency:"high"   },
-    "zhì": { meaning_zh:"标识，博闻强识",meaning_en:"to mark, great memory",  example_zh:"标识",    example_en:"logo / mark",        frequency:"low"    },
-  }},
-  "似": { readings: {
-    "sì":  { meaning_zh:"似乎，类似",   meaning_en:"seemingly, similar",      example_zh:"似乎",    example_en:"it seems",           frequency:"high"   },
-    "shì": { meaning_zh:"似的，好似",   meaning_en:"like, as if (colloq.)",   example_zh:"好似",    example_en:"as if",              frequency:"high"   },
-  }},
-  "踏": { readings: {
-    "tā":  { meaning_zh:"踏实，踏踏实实",meaning_en:"down-to-earth, steady",  example_zh:"踏实",    example_en:"down-to-earth",      frequency:"high"   },
-    "tà":  { meaning_zh:"踩踏，步踏",   meaning_en:"to tread, to step on",    example_zh:"踩踏",    example_en:"to step on",         frequency:"high"   },
-  }},
-  "帖": { readings: {
-    "tiē": { meaning_zh:"妥帖，贴切",   meaning_en:"fitting, appropriate",    example_zh:"妥帖",    example_en:"appropriate",        frequency:"medium" },
-    "tiě": { meaning_zh:"请帖，帖子",   meaning_en:"invitation, notice",      example_zh:"请帖",    example_en:"invitation",         frequency:"high"   },
-    "tiè": { meaning_zh:"字帖，碑帖",   meaning_en:"copybook, rubbing",       example_zh:"字帖",    example_en:"copybook",           frequency:"medium" },
-  }},
-  "校": { readings: {
-    "xiào":{ meaning_zh:"学校，校园",   meaning_en:"school, campus",          example_zh:"学校",    example_en:"school",             frequency:"high"   },
-    "jiào":{ meaning_zh:"校对，校正",   meaning_en:"to proofread, to correct",example_zh:"校对",    example_en:"to proofread",       frequency:"medium" },
-  }},
-  "咽": { readings: {
-    "yān": { meaning_zh:"咽喉，喉咙",   meaning_en:"throat, pharynx",         example_zh:"咽喉",    example_en:"throat",             frequency:"high"   },
-    "yàn": { meaning_zh:"吞咽，咽下",   meaning_en:"to swallow",              example_zh:"吞咽",    example_en:"to swallow",         frequency:"high"   },
-    "yè":  { meaning_zh:"哽咽，呜咽",   meaning_en:"to sob, to choke up",     example_zh:"哽咽",    example_en:"to choke up",        frequency:"medium" },
-  }},
-  "饮": { readings: {
-    "yǐn": { meaning_zh:"饮水，饮料",   meaning_en:"to drink, beverage",      example_zh:"饮料",    example_en:"beverage",           frequency:"high"   },
-    "yìn": { meaning_zh:"饮马，给牲畜喝水",meaning_en:"to water animals",     example_zh:"饮马",    example_en:"to water a horse",   frequency:"low"    },
-  }},
-  "载": { readings: {
-    "zǎi": { meaning_zh:"记载，刊载",   meaning_en:"to record, to publish",   example_zh:"记载",    example_en:"to record",          frequency:"medium" },
-    "zài": { meaning_zh:"载重，运载",   meaning_en:"to carry, to load",       example_zh:"载重",    example_en:"load capacity",      frequency:"high"   },
-  }},
-  "扎": { readings: {
-    "zhā": { meaning_zh:"扎针，刺扎",   meaning_en:"to prick, to stab",       example_zh:"扎针",    example_en:"to give an injection",frequency:"high"  },
-    "zā":  { meaning_zh:"捆扎，包扎",   meaning_en:"to bind, to wrap",        example_zh:"包扎",    example_en:"to bandage",         frequency:"high"   },
-    "zhá": { meaning_zh:"挣扎，扑腾",   meaning_en:"to struggle",             example_zh:"挣扎",    example_en:"to struggle",        frequency:"high"   },
-  }},
-  "占": { readings: {
-    "zhān":{ meaning_zh:"占卜，卜占",   meaning_en:"to divine, to foretell",  example_zh:"占卜",    example_en:"to divine",          frequency:"medium" },
-    "zhàn":{ meaning_zh:"占领，占有",   meaning_en:"to occupy, to possess",   example_zh:"占领",    example_en:"to occupy",          frequency:"high"   },
-  }},
-  "涨": { readings: {
-    "zhǎng":{ meaning_zh:"涨价，上涨",  meaning_en:"to rise (price/water)",   example_zh:"涨价",    example_en:"price increase",     frequency:"high"   },
-    "zhàng":{ meaning_zh:"头涨，肿胀",  meaning_en:"to swell, bloated",       example_zh:"头涨",    example_en:"head feels swollen", frequency:"medium" },
-  }},
-  "钻": { readings: {
-    "zuān":{ meaning_zh:"钻研，钻进",   meaning_en:"to drill, to delve into", example_zh:"钻研",    example_en:"to study diligently",frequency:"high"   },
-    "zuàn":{ meaning_zh:"钻石，钻头",   meaning_en:"diamond, drill bit",      example_zh:"钻石",    example_en:"diamond",            frequency:"high"   },
-  }},
-  // ── 为 (appears in both 七-九级 and with enriched entry) ──────
   "为": { readings: {
-    "wéi": { meaning_zh:"作为，成为",   meaning_en:"to be, to act as",        example_zh:"成为",    example_en:"to become",          frequency:"high"   },
-    "wèi": { meaning_zh:"为了，因为",   meaning_en:"for the sake of",         example_zh:"为什么",  example_en:"why",                frequency:"high"   },
+    "wéi": { meaning_zh:"作为，成为", meaning_en:"to be, to act as",       example_zh:"成为",  example_en:"to become",     frequency:"high" },
+    "wèi": { meaning_zh:"为了，因为", meaning_en:"for the sake of",        example_zh:"为什么",example_en:"why",           frequency:"high" },
+  }},
+  // ── 七-九级 ──────────────────────────────────────────────────
+  "扒": { readings: {
+    "bā":  { meaning_zh:"扒开，抓住",   meaning_en:"to scratch, to cling",    example_zh:"扒开",   example_en:"to pry open",        frequency:"medium" },
+    "pá":  { meaning_zh:"扒手，扒窃",   meaning_en:"pickpocket",              example_zh:"扒手",   example_en:"pickpocket",         frequency:"medium" },
+  }},
+  "柏": { readings: {
+    "bǎi": { meaning_zh:"柏树，侧柏",   meaning_en:"cypress tree",            example_zh:"柏树",   example_en:"cypress tree",       frequency:"medium" },
+    "bó":  { meaning_zh:"柏林（地名）", meaning_en:"Berlin (place name)",     example_zh:"柏林",   example_en:"Berlin",             frequency:"medium" },
+    "bò":  { meaning_zh:"黄柏（中药）", meaning_en:"cork tree bark (medicine)",example_zh:"黄柏",  example_en:"Phellodendron bark", frequency:"low"    },
+  }},
+  "膀": { readings: {
+    "bǎng":{ meaning_zh:"肩膀，翅膀",   meaning_en:"shoulder, wing",          example_zh:"肩膀",   example_en:"shoulder",           frequency:"high"   },
+    "páng":{ meaning_zh:"膀胱",         meaning_en:"bladder (in 膀胱)",       example_zh:"膀胱",   example_en:"bladder",            frequency:"medium" },
+    "pāng":{ meaning_zh:"滂沱（象声）", meaning_en:"splashing sound",         example_zh:"膀然",   example_en:"spreading wide",     frequency:"low"    },
+  }},
+  "堡": { readings: {
+    "bǎo": { meaning_zh:"堡垒，城堡",   meaning_en:"fort, castle",            example_zh:"城堡",   example_en:"castle",             frequency:"high"   },
+    "pù":  { meaning_zh:"十里堡（地名）",meaning_en:"Pu (in place names)",    example_zh:"十里堡", example_en:"Shilipu",            frequency:"low"    },
+    "bǔ":  { meaning_zh:"瓦窑堡（地名）",meaning_en:"Bu (in place names)",    example_zh:"瓦窑堡", example_en:"Wayaobu",            frequency:"low"    },
+  }},
+  "背": { readings: {
+    "bēi": { meaning_zh:"背负，背包",   meaning_en:"to carry on back",        example_zh:"背包",   example_en:"backpack",           frequency:"high"   },
+    "bèi": { meaning_zh:"背面，背后",   meaning_en:"back (of body/object)",   example_zh:"背后",   example_en:"behind",             frequency:"high"   },
+  }},
+  "辟": { readings: {
+    "bì":  { meaning_zh:"复辟，辟谣",   meaning_en:"to refute, to restore",   example_zh:"辟谣",   example_en:"to refute a rumor",  frequency:"medium" },
+    "pì":  { meaning_zh:"开辟，辟地",   meaning_en:"to open up, to develop",  example_zh:"开辟",   example_en:"to open up",         frequency:"medium" },
+  }},
+  "朴": { readings: {
+    "pǔ":  { meaning_zh:"朴素，朴实",   meaning_en:"plain, simple",           example_zh:"朴素",   example_en:"simple and plain",   frequency:"high"   },
+    "piáo":{ meaning_zh:"朴刀（古兵器）",meaning_en:"Piao (surname/archaic)", example_zh:"朴刀",   example_en:"broad-bladed sword", frequency:"low"    },
+    "pò":  { meaning_zh:"朴树（植物）", meaning_en:"hackberry tree",          example_zh:"朴树",   example_en:"hackberry tree",     frequency:"low"    },
+    "pō":  { meaning_zh:"朴硝（矿物）", meaning_en:"mirabilite (mineral)",    example_zh:"朴硝",   example_en:"mirabilite",         frequency:"low"    },
+  }},
+  "戚": { readings: {
+    "qī":  { meaning_zh:"戚戚，悲戚",   meaning_en:"sorrowful, grieved",      example_zh:"悲戚",   example_en:"sorrowful",          frequency:"medium" },
+    "qì":  { meaning_zh:"亲戚，外戚",   meaning_en:"relative, kin",           example_zh:"亲戚",   example_en:"relatives",          frequency:"high"   },
+  }},
+  "纤": { readings: {
+    "xiān":{ meaning_zh:"纤维，纤细",   meaning_en:"fiber, slender",          example_zh:"纤维",   example_en:"fiber",              frequency:"high"   },
+    "qiàn":{ meaning_zh:"纤夫，拉纤",   meaning_en:"tow rope, boat tracker",  example_zh:"纤夫",   example_en:"boat tracker",       frequency:"low"    },
+  }},
+  "翘": { readings: {
+    "qiáo":{ meaning_zh:"翘首，翘望",   meaning_en:"to raise head, to long for",example_zh:"翘首", example_en:"to eagerly await",   frequency:"medium" },
+    "qiào":{ meaning_zh:"翘起，翘尾巴", meaning_en:"to stick up, to tilt",    example_zh:"翘起",   example_en:"to stick up",        frequency:"high"   },
+  }},
+  "亲": { readings: {
+    "qīn": { meaning_zh:"亲人，亲爱",   meaning_en:"dear, close, kin",        example_zh:"亲人",   example_en:"loved ones",         frequency:"high"   },
+    "qìng":{ meaning_zh:"亲家，姻亲",   meaning_en:"in-laws, relatives by marriage",example_zh:"亲家",example_en:"in-laws",        frequency:"medium" },
+  }},
+  "嚷": { readings: {
+    "rǎng":{ meaning_zh:"叫嚷，嚷嚷",   meaning_en:"to shout, to yell",       example_zh:"叫嚷",   example_en:"to shout",           frequency:"high"   },
+    "rāng":{ meaning_zh:"嚷嚷（口语）", meaning_en:"to make noise (colloq.)", example_zh:"嚷嚷",   example_en:"to make a fuss",     frequency:"medium" },
+  }},
+  "任": { readings: {
+    "rén": { meaning_zh:"任命，担任",   meaning_en:"to appoint, to serve as", example_zh:"任务",   example_en:"task, mission",      frequency:"high"   },
+    "rèn": { meaning_zh:"任意，任何",   meaning_en:"any, arbitrary",          example_zh:"任何",   example_en:"any",                frequency:"high"   },
+  }},
+  "刹": { readings: {
+    "chà": { meaning_zh:"古刹，刹那",   meaning_en:"temple; instant",         example_zh:"刹那",   example_en:"an instant",         frequency:"medium" },
+    "shā": { meaning_zh:"刹车，刹住",   meaning_en:"to brake, to stop",       example_zh:"刹车",   example_en:"to brake",           frequency:"high"   },
+  }},
+  "禅": { readings: {
+    "chán":{ meaning_zh:"禅宗，禅定",   meaning_en:"Zen Buddhism, meditation",example_zh:"禅宗",   example_en:"Zen Buddhism",       frequency:"medium" },
+    "shàn":{ meaning_zh:"禅让，封禅",   meaning_en:"abdication, imperial rite",example_zh:"禅让",  example_en:"abdication",         frequency:"low"    },
+  }},
+  "匙": { readings: {
+    "chí": { meaning_zh:"汤匙，钥匙",   meaning_en:"spoon, key",              example_zh:"钥匙",   example_en:"key",                frequency:"high"   },
+    "shi": { meaning_zh:"钥匙（口语）", meaning_en:"key (colloq., unstressed)",example_zh:"钥匙",  example_en:"key",                frequency:"high"   },
+  }},
+  "畜": { readings: {
+    "chù": { meaning_zh:"牲畜，家畜",   meaning_en:"livestock, domestic animal",example_zh:"牲畜", example_en:"livestock",          frequency:"high"   },
+    "xù":  { meaning_zh:"畜牧，饲养",   meaning_en:"to raise (animals)",      example_zh:"畜牧",   example_en:"animal husbandry",   frequency:"medium" },
+  }},
+  "揣": { readings: {
+    "chuāi":{ meaning_zh:"揣在怀里",    meaning_en:"to tuck into (pocket)",   example_zh:"揣手",   example_en:"hands in pockets",   frequency:"medium" },
+    "chuǎi":{ meaning_zh:"揣测，揣摩",  meaning_en:"to guess, to speculate",  example_zh:"揣测",   example_en:"to speculate",       frequency:"medium" },
+    "chuài":{ meaning_zh:"挣揣，挣扎",  meaning_en:"to kick, to struggle",    example_zh:"乱揣",   example_en:"to kick wildly",     frequency:"low"    },
+  }},
+  "创": { readings: {
+    "chuàng":{ meaning_zh:"创造，创建", meaning_en:"to create, to found",     example_zh:"创造",   example_en:"to create",          frequency:"high"   },
+    "chuāng":{ meaning_zh:"创伤，创口", meaning_en:"wound, injury",           example_zh:"创伤",   example_en:"wound",              frequency:"medium" },
+  }},
+  "撮": { readings: {
+    "cuō": { meaning_zh:"撮合，撮要",   meaning_en:"to bring together, summary",example_zh:"撮合", example_en:"to matchmake",       frequency:"medium" },
+    "zuǒ": { meaning_zh:"一撮盐",       meaning_en:"a pinch of (measure word)",example_zh:"一撮盐",example_en:"a pinch of salt",    frequency:"medium" },
+  }},
+  "坊": { readings: {
+    "fāng":{ meaning_zh:"牌坊，街坊",   meaning_en:"memorial arch, neighborhood",example_zh:"牌坊",example_en:"memorial archway",  frequency:"medium" },
+    "fáng":{ meaning_zh:"作坊，磨坊",   meaning_en:"workshop, mill",          example_zh:"作坊",   example_en:"workshop",           frequency:"medium" },
+  }},
+  "分": { readings: {
+    "fēn": { meaning_zh:"分开，分配",   meaning_en:"to divide, to distribute",example_zh:"分开",   example_en:"to separate",        frequency:"high"   },
+    "fèn": { meaning_zh:"成分，身份",   meaning_en:"component, identity",     example_zh:"成分",   example_en:"component",          frequency:"high"   },
+  }},
+  "否": { readings: {
+    "fǒu": { meaning_zh:"否定，是否",   meaning_en:"to deny, whether",        example_zh:"是否",   example_en:"whether or not",     frequency:"high"   },
+    "pǐ":  { meaning_zh:"否极泰来",     meaning_en:"misfortune turns to fortune",example_zh:"否极泰来",example_en:"after misfortune comes fortune",frequency:"low"},
+  }},
+  "服": { readings: {
+    "fú":  { meaning_zh:"衣服，服从",   meaning_en:"clothes, to obey",        example_zh:"衣服",   example_en:"clothing",           frequency:"high"   },
+    "fù":  { meaning_zh:"服药（量词）", meaning_en:"dose of medicine",        example_zh:"一服药", example_en:"a dose of medicine", frequency:"medium" },
+  }},
+  "杠": { readings: {
+    "gàng":{ meaning_zh:"杠铃，单杠",   meaning_en:"barbell, horizontal bar", example_zh:"单杠",   example_en:"horizontal bar",     frequency:"medium" },
+    "gāng":{ meaning_zh:"杠夫，抬杠",   meaning_en:"to argue (colloq.)",      example_zh:"抬杠",   example_en:"to argue pointlessly",frequency:"medium"},
+  }},
+  "膏": { readings: {
+    "gāo": { meaning_zh:"膏药，牙膏",   meaning_en:"paste, ointment",         example_zh:"牙膏",   example_en:"toothpaste",         frequency:"high"   },
+    "gào": { meaning_zh:"膏土，沃土",   meaning_en:"fertile soil",            example_zh:"膏腴",   example_en:"fertile land",       frequency:"low"    },
+  }},
+  "搁": { readings: {
+    "gē":  { meaning_zh:"搁置，搁下",   meaning_en:"to put down, to shelve",  example_zh:"搁置",   example_en:"to shelve",          frequency:"high"   },
+    "gé":  { meaning_zh:"搁不住，受不住",meaning_en:"can't bear / withstand", example_zh:"搁不住", example_en:"can't withstand",    frequency:"medium" },
+  }},
+  "给": { readings: {
+    "gěi": { meaning_zh:"给予，送给",   meaning_en:"to give, for",            example_zh:"给你",   example_en:"here you go",        frequency:"high"   },
+    "jǐ":  { meaning_zh:"供给，补给",   meaning_en:"to supply, to provide",   example_zh:"供给",   example_en:"to supply",          frequency:"medium" },
+  }},
+  "更": { readings: {
+    "gēng":{ meaning_zh:"更换，更新",   meaning_en:"to change, to update",    example_zh:"更新",   example_en:"to update",          frequency:"high"   },
+    "gèng":{ meaning_zh:"更加，更好",   meaning_en:"even more, even better",  example_zh:"更加",   example_en:"even more",          frequency:"high"   },
+  }},
+  "勾": { readings: {
+    "gōu": { meaning_zh:"勾画，勾勒",   meaning_en:"to sketch, to tick off",  example_zh:"勾画",   example_en:"to sketch",          frequency:"high"   },
+    "gòu": { meaning_zh:"勾当，勾结",   meaning_en:"shady dealings, to collude",example_zh:"勾结", example_en:"to collude",         frequency:"medium" },
+  }},
+  "估": { readings: {
+    "gū":  { meaning_zh:"估计，估价",   meaning_en:"to estimate",             example_zh:"估计",   example_en:"to estimate",        frequency:"high"   },
+    "gù":  { meaning_zh:"估衣（旧衣）", meaning_en:"secondhand clothes",      example_zh:"估衣",   example_en:"secondhand clothes", frequency:"low"    },
+  }},
+  "骨": { readings: {
+    "gǔ":  { meaning_zh:"骨头，骨骼",   meaning_en:"bone, skeleton",          example_zh:"骨头",   example_en:"bone",               frequency:"high"   },
+    "gū":  { meaning_zh:"骨朵，花骨朵", meaning_en:"flower bud",              example_zh:"花骨朵", example_en:"flower bud",         frequency:"medium" },
+  }},
+  "广": { readings: {
+    "guǎng":{ meaning_zh:"广大，广泛",  meaning_en:"vast, wide, broad",       example_zh:"广泛",   example_en:"widespread",         frequency:"high"   },
+    "ān":  { meaning_zh:"广州（古称）", meaning_en:"archaic form in place names",example_zh:"广州", example_en:"Guangzhou",          frequency:"low"    },
+  }},
+  "龟": { readings: {
+    "guī": { meaning_zh:"乌龟，龟甲",   meaning_en:"turtle, tortoise",        example_zh:"乌龟",   example_en:"turtle",             frequency:"high"   },
+    "jūn": { meaning_zh:"龟裂，皲裂",   meaning_en:"to crack (skin/earth)",   example_zh:"龟裂",   example_en:"cracked skin",       frequency:"medium" },
+    "qiū": { meaning_zh:"龟兹（古国）", meaning_en:"Kucha (ancient kingdom)", example_zh:"龟兹",   example_en:"Kucha",              frequency:"low"    },
+  }},
+  "过": { readings: {
+    "guò": { meaning_zh:"经过，过去",   meaning_en:"to pass, past",           example_zh:"经过",   example_en:"to pass by",         frequency:"high"   },
+    "guō": { meaning_zh:"姓氏（过）",   meaning_en:"Guo (surname)",           example_zh:"过姓",   example_en:"surname Guo",        frequency:"low"    },
+  }},
+  "哈": { readings: {
+    "hā":  { meaning_zh:"哈哈，哈气",   meaning_en:"ha-ha, to breathe out",   example_zh:"哈哈",   example_en:"ha ha",              frequency:"high"   },
+    "hǎ":  { meaning_zh:"哈巴狗",       meaning_en:"Pekingese dog",           example_zh:"哈巴狗", example_en:"Pekingese",          frequency:"medium" },
+    "hà":  { meaning_zh:"哈（方言惊叹）",meaning_en:"wow (dialect exclamation)",example_zh:"哈，真的",example_en:"wow, really?",    frequency:"low"    },
+  }},
+  "汗": { readings: {
+    "hàn": { meaning_zh:"汗水，出汗",   meaning_en:"sweat, perspiration",     example_zh:"出汗",   example_en:"to sweat",           frequency:"high"   },
+    "hán": { meaning_zh:"可汗，大汗",   meaning_en:"Khan (ruler title)",      example_zh:"可汗",   example_en:"Khan",               frequency:"low"    },
+  }},
+  "号": { readings: {
+    "hào": { meaning_zh:"号码，号令",   meaning_en:"number, order",           example_zh:"号码",   example_en:"number",             frequency:"high"   },
+    "háo": { meaning_zh:"号叫，嚎啕",   meaning_en:"to howl, to wail",        example_zh:"号叫",   example_en:"to howl",            frequency:"medium" },
+  }},
+  "喝": { readings: {
+    "hē":  { meaning_zh:"喝水，饮用",   meaning_en:"to drink",                example_zh:"喝水",   example_en:"to drink water",     frequency:"high"   },
+    "hè":  { meaning_zh:"喝彩，喝止",   meaning_en:"to cheer, to shout at",   example_zh:"喝彩",   example_en:"to cheer",           frequency:"medium" },
+  }},
+  "荷": { readings: {
+    "hé":  { meaning_zh:"荷花，荷叶",   meaning_en:"lotus flower",            example_zh:"荷花",   example_en:"lotus flower",       frequency:"high"   },
+    "hè":  { meaning_zh:"负荷，荷载",   meaning_en:"load, to bear a load",    example_zh:"负荷",   example_en:"load",               frequency:"medium" },
+  }},
+  "会": { readings: {
+    "huì": { meaning_zh:"会议，学会",   meaning_en:"meeting, to be able to",  example_zh:"会议",   example_en:"meeting",            frequency:"high"   },
+    "kuài":{ meaning_zh:"会计",         meaning_en:"accounting (in 会计)",    example_zh:"会计",   example_en:"accounting",         frequency:"high"   },
+  }},
+  "混": { readings: {
+    "hùn": { meaning_zh:"混合，混乱",   meaning_en:"to mix, chaos",           example_zh:"混合",   example_en:"to mix",             frequency:"high"   },
+    "hún": { meaning_zh:"混沌，浑浊",   meaning_en:"murky, muddy (variant)",  example_zh:"混沌",   example_en:"chaos, murky",       frequency:"medium" },
+  }},
+  "霍": { readings: {
+    "huò": { meaning_zh:"霍然，姓霍",   meaning_en:"suddenly; surname Huo",   example_zh:"霍然",   example_en:"suddenly recovered", frequency:"medium" },
+    "huō": { meaning_zh:"霍地（方言）", meaning_en:"swiftly (dialect)",       example_zh:"霍地",   example_en:"swiftly",            frequency:"low"    },
+  }},
+  "缉": { readings: {
+    "jī":  { meaning_zh:"缉捕，通缉",   meaning_en:"to arrest, to pursue",    example_zh:"通缉",   example_en:"wanted notice",      frequency:"medium" },
+    "qī":  { meaning_zh:"缉鞋（缝制）", meaning_en:"to sew (shoes)",          example_zh:"缉鞋底", example_en:"to sew shoe soles",  frequency:"low"    },
+  }},
+  "稽": { readings: {
+    "jī":  { meaning_zh:"稽查，无稽",   meaning_en:"to check; unfounded",     example_zh:"无稽之谈",example_en:"groundless talk",   frequency:"medium" },
+    "qǐ":  { meaning_zh:"滑稽，可笑",   meaning_en:"funny, ridiculous",       example_zh:"滑稽",   example_en:"funny",              frequency:"high"   },
+  }},
+  "济": { readings: {
+    "jì":  { meaning_zh:"经济，救济",   meaning_en:"economy, to aid",         example_zh:"经济",   example_en:"economy",            frequency:"high"   },
+    "jǐ":  { meaning_zh:"人才济济",     meaning_en:"full of talent",          example_zh:"济济一堂",example_en:"a gathering of talents",frequency:"low" },
+  }},
+  "贾": { readings: {
+    "jiǎ": { meaning_zh:"姓贾（人名）", meaning_en:"Jia (surname)",           example_zh:"贾宝玉", example_en:"Jia Baoyu",          frequency:"medium" },
+    "gǔ":  { meaning_zh:"商贾，行贾",   meaning_en:"merchant, to trade",      example_zh:"商贾",   example_en:"merchants",          frequency:"low"    },
+  }},
+  "间": { readings: {
+    "jiān":{ meaning_zh:"中间，空间",   meaning_en:"between, space",          example_zh:"中间",   example_en:"in between",         frequency:"high"   },
+    "jiàn":{ meaning_zh:"间隔，间谍",   meaning_en:"interval, spy",           example_zh:"间谍",   example_en:"spy",                frequency:"high"   },
+  }},
+  "槛": { readings: {
+    "kǎn": { meaning_zh:"门槛，槛阈",   meaning_en:"threshold, doorstep",     example_zh:"门槛",   example_en:"threshold",          frequency:"high"   },
+    "jiàn":{ meaning_zh:"槛车，栅栏",   meaning_en:"cage cart, railing",      example_zh:"槛车",   example_en:"cage cart",          frequency:"low"    },
+  }},
+  "酵": { readings: {
+    "jiào":{ meaning_zh:"发酵，酵母",   meaning_en:"fermentation, yeast",     example_zh:"发酵",   example_en:"to ferment",         frequency:"high"   },
+    "xiào":{ meaning_zh:"酵（古音）",   meaning_en:"archaic reading of 酵",   example_zh:"酵素",   example_en:"enzyme",             frequency:"low"    },
+  }},
+  "藉": { readings: {
+    "jiè": { meaning_zh:"凭藉，慰藉",   meaning_en:"to rely on, to console",  example_zh:"慰藉",   example_en:"to console",         frequency:"medium" },
+    "jí":  { meaning_zh:"狼藉，杂乱",   meaning_en:"in disorder, scattered",  example_zh:"狼藉",   example_en:"in a mess",          frequency:"medium" },
+  }},
+  "经": { readings: {
+    "jīng":{ meaning_zh:"经过，经济",   meaning_en:"to pass through, classic",example_zh:"经验",   example_en:"experience",         frequency:"high"   },
+    "jìng":{ meaning_zh:"经典（古音）", meaning_en:"archaic reading; sutra",  example_zh:"经文",   example_en:"scripture",          frequency:"low"    },
+  }},
+  "颈": { readings: {
+    "jǐng":{ meaning_zh:"脖颈，颈部",   meaning_en:"neck",                    example_zh:"脖颈",   example_en:"neck",               frequency:"high"   },
+    "gěng":{ meaning_zh:"颈椎（口语）", meaning_en:"neck (in certain dialects)",example_zh:"项颈", example_en:"nape of the neck",   frequency:"low"    },
+  }},
+  "句": { readings: {
+    "jù":  { meaning_zh:"句子，语句",   meaning_en:"sentence, phrase",        example_zh:"句子",   example_en:"sentence",           frequency:"high"   },
+    "gōu": { meaning_zh:"句读，句芒",   meaning_en:"punctuation (archaic)",   example_zh:"句读",   example_en:"punctuation marks",  frequency:"low"    },
+  }},
+  "据": { readings: {
+    "jù":  { meaning_zh:"根据，证据",   meaning_en:"basis, evidence",         example_zh:"根据",   example_en:"basis",              frequency:"high"   },
+    "jū":  { meaning_zh:"拮据，窘迫",   meaning_en:"hard up, short of money", example_zh:"拮据",   example_en:"short of money",     frequency:"medium" },
+  }},
+  "倔": { readings: {
+    "jué": { meaning_zh:"倔强，固执",   meaning_en:"stubborn, tenacious",     example_zh:"倔强",   example_en:"stubborn",           frequency:"high"   },
+    "juè": { meaning_zh:"倔头倔脑",     meaning_en:"blunt and stubborn",      example_zh:"倔头倔脑",example_en:"bull-headed",       frequency:"medium" },
+  }},
+  "卡": { readings: {
+    "kǎ":  { meaning_zh:"卡片，信用卡", meaning_en:"card, to get stuck",      example_zh:"卡片",   example_en:"card",               frequency:"high"   },
+    "qiǎ": { meaning_zh:"卡住，关卡",   meaning_en:"checkpoint, to jam",      example_zh:"关卡",   example_en:"checkpoint",         frequency:"high"   },
+  }},
+  "扛": { readings: {
+    "káng":{ meaning_zh:"扛起，肩扛",   meaning_en:"to carry on shoulder",    example_zh:"扛起",   example_en:"to shoulder",        frequency:"high"   },
+    "gāng":{ meaning_zh:"力能扛鼎",     meaning_en:"to lift a tripod (idiom)",example_zh:"扛鼎",   example_en:"to lift a cauldron", frequency:"low"    },
+  }},
+  "溃": { readings: {
+    "kuì": { meaning_zh:"溃败，溃烂",   meaning_en:"to collapse, to fester",  example_zh:"溃败",   example_en:"to be defeated",     frequency:"high"   },
+    "huì": { meaning_zh:"溃（水名）",   meaning_en:"Hui (river name)",        example_zh:"溃水",   example_en:"Hui River",          frequency:"low"    },
+  }},
+  "拉": { readings: {
+    "lā":  { meaning_zh:"拉开，拉住",   meaning_en:"to pull, to drag",        example_zh:"拉开",   example_en:"to pull open",       frequency:"high"   },
+    "lá":  { meaning_zh:"拉口子，划破", meaning_en:"to cut, to slash (colloq.)",example_zh:"拉口子",example_en:"to make a cut",     frequency:"medium" },
+  }},
+  "腊": { readings: {
+    "là":  { meaning_zh:"腊月，腊肉",   meaning_en:"twelfth lunar month, cured meat",example_zh:"腊肉",example_en:"cured meat",      frequency:"high"   },
+    "xī":  { meaning_zh:"腊（古国名）", meaning_en:"Xi (ancient state name)", example_zh:"腊国",   example_en:"ancient state of Xi",frequency:"low"    },
+  }},
+  "烙": { readings: {
+    "lào": { meaning_zh:"烙印，烙饼",   meaning_en:"brand, to bake on griddle",example_zh:"烙印",  example_en:"brand mark",         frequency:"high"   },
+    "luò": { meaning_zh:"炮烙（酷刑）", meaning_en:"burning torture (archaic)",example_zh:"炮烙",  example_en:"burning punishment", frequency:"low"    },
+  }},
+  "勒": { readings: {
+    "lè":  { meaning_zh:"勒令，勒索",   meaning_en:"to compel, to extort",    example_zh:"勒索",   example_en:"to extort",          frequency:"high"   },
+    "lēi": { meaning_zh:"勒紧，捆绑",   meaning_en:"to tie tight, to strap",  example_zh:"勒紧",   example_en:"to tighten a strap", frequency:"medium" },
+  }},
+  "棱": { readings: {
+    "léng":{ meaning_zh:"棱角，棱形",   meaning_en:"edge, corner, ridge",     example_zh:"棱角",   example_en:"edges and corners",  frequency:"high"   },
+    "lēng":{ meaning_zh:"棱（方言）",   meaning_en:"dialect variant",         example_zh:"棱子",   example_en:"edge (dialect)",     frequency:"low"    },
+    "líng":{ meaning_zh:"棱（古地名）", meaning_en:"archaic place name",      example_zh:"发棱",   example_en:"archaic usage",      frequency:"low"    },
+  }},
+  "撩": { readings: {
+    "liāo":{ meaning_zh:"撩起，撩开",   meaning_en:"to lift up, to tease",    example_zh:"撩起",   example_en:"to lift up",         frequency:"high"   },
+    "liáo":{ meaning_zh:"撩拨，撩人",   meaning_en:"to provoke, to flirt",    example_zh:"撩拨",   example_en:"to tease",           frequency:"high"   },
+  }},
+  "裂": { readings: {
+    "liè": { meaning_zh:"裂开，分裂",   meaning_en:"to split, to crack",      example_zh:"分裂",   example_en:"to split",           frequency:"high"   },
+    "liě": { meaning_zh:"咧嘴（方言）", meaning_en:"to grin (dialect usage)", example_zh:"裂嘴",   example_en:"to grin wide",       frequency:"low"    },
+  }},
+  "淋": { readings: {
+    "lín": { meaning_zh:"淋雨，淋浴",   meaning_en:"to get rained on, shower",example_zh:"淋雨",   example_en:"to get rained on",   frequency:"high"   },
+    "lìn": { meaning_zh:"淋漓，淋病",   meaning_en:"dripping, gonorrhea",     example_zh:"淋漓",   example_en:"dripping wet",       frequency:"medium" },
+  }},
+  "溜": { readings: {
+    "liū": { meaning_zh:"溜走，溜冰",   meaning_en:"to sneak away, to skate", example_zh:"溜走",   example_en:"to sneak off",       frequency:"high"   },
+    "liù": { meaning_zh:"一溜儿，成排", meaning_en:"a row of (measure word)", example_zh:"一溜儿", example_en:"a row of",           frequency:"medium" },
+  }},
+  "搂": { readings: {
+    "lǒu": { meaning_zh:"搂抱，搂住",   meaning_en:"to hug, to embrace",      example_zh:"搂抱",   example_en:"to hug",             frequency:"high"   },
+    "lōu": { meaning_zh:"搂钱，搂取",   meaning_en:"to rake in (money)",      example_zh:"搂钱",   example_en:"to rake in money",   frequency:"medium" },
+  }},
+  "陆": { readings: {
+    "lù":  { meaning_zh:"陆地，大陆",   meaning_en:"land, continent",         example_zh:"大陆",   example_en:"mainland",           frequency:"high"   },
+    "liù": { meaning_zh:"陆（数字六）", meaning_en:"six (formal/legal form)", example_zh:"陆续",   example_en:"one after another",  frequency:"medium" },
+  }},
+  "抹": { readings: {
+    "mǒ":  { meaning_zh:"抹去，涂抹",   meaning_en:"to wipe, to spread",      example_zh:"抹去",   example_en:"to wipe away",       frequency:"high"   },
+    "mò":  { meaning_zh:"抹墙，粉刷",   meaning_en:"to plaster, to coat",     example_zh:"抹墙",   example_en:"to plaster a wall",  frequency:"medium" },
+    "mā":  { meaning_zh:"抹布，擦布",   meaning_en:"rag, cleaning cloth",     example_zh:"抹布",   example_en:"rag / cloth",        frequency:"high"   },
+  }},
+  "埋": { readings: {
+    "mái": { meaning_zh:"埋葬，埋藏",   meaning_en:"to bury, to hide",        example_zh:"埋葬",   example_en:"to bury",            frequency:"high"   },
+    "mán": { meaning_zh:"埋怨，抱怨",   meaning_en:"to complain, to blame",   example_zh:"埋怨",   example_en:"to complain",        frequency:"high"   },
+  }},
+  "蔓": { readings: {
+    "màn": { meaning_zh:"蔓延，蔓草",   meaning_en:"to spread, trailing plant",example_zh:"蔓延",  example_en:"to spread",          frequency:"high"   },
+    "wàn": { meaning_zh:"瓜蔓，藤蔓",   meaning_en:"vine, tendril",           example_zh:"藤蔓",   example_en:"vine",               frequency:"medium" },
+    "mán": { meaning_zh:"蔓菁（蔬菜）", meaning_en:"turnip",                  example_zh:"蔓菁",   example_en:"turnip",             frequency:"low"    },
+  }},
+  "闷": { readings: {
+    "mēn": { meaning_zh:"闷热，闷住",   meaning_en:"stuffy, to cover tightly",example_zh:"闷热",   example_en:"muggy",              frequency:"high"   },
+    "mèn": { meaning_zh:"烦闷，郁闷",   meaning_en:"bored, depressed",        example_zh:"郁闷",   example_en:"depressed",          frequency:"high"   },
+  }},
+  "沐": { readings: {
+    "mù":  { meaning_zh:"沐浴，沐恩",   meaning_en:"to bathe, to receive favor",example_zh:"沐浴",  example_en:"to bathe",           frequency:"medium" },
+    "mò":  { meaning_zh:"沐（古地名）", meaning_en:"Mo (ancient place name)", example_zh:"沐邑",   example_en:"ancient place name", frequency:"low"    },
+  }},
+  "泥": { readings: {
+    "ní":  { meaning_zh:"泥土，泥巴",   meaning_en:"mud, clay",               example_zh:"泥土",   example_en:"soil / mud",         frequency:"high"   },
+    "nì":  { meaning_zh:"拘泥，泥古",   meaning_en:"to be rigid, to cling to",example_zh:"拘泥",   example_en:"to be rigid",        frequency:"medium" },
+  }},
+  "弄": { readings: {
+    "nòng":{ meaning_zh:"弄清，摆弄",   meaning_en:"to handle, to figure out",example_zh:"弄清",   example_en:"to clarify",         frequency:"high"   },
+    "lòng":{ meaning_zh:"里弄，弄堂",   meaning_en:"alley, lane",             example_zh:"弄堂",   example_en:"alley (Shanghai)",   frequency:"medium" },
+  }},
+  "拍": { readings: {
+    "pāi": { meaning_zh:"拍手，拍照",   meaning_en:"to clap, to take photo",  example_zh:"拍照",   example_en:"to take a photo",    frequency:"high"   },
+    "pò":  { meaning_zh:"拍（古音）",   meaning_en:"archaic reading",         example_zh:"迫拍",   example_en:"archaic usage",      frequency:"low"    },
+  }},
+  "胖": { readings: {
+    "pàng":{ meaning_zh:"胖子，肥胖",   meaning_en:"fat, overweight",         example_zh:"胖子",   example_en:"fat person",         frequency:"high"   },
+    "pán": { meaning_zh:"心宽体胖",     meaning_en:"content and plump (idiom)",example_zh:"心宽体胖",example_en:"carefree and plump",frequency:"low"   },
+  }},
+  "刨": { readings: {
+    "páo": { meaning_zh:"刨坑，刨土",   meaning_en:"to dig, to scrape",       example_zh:"刨坑",   example_en:"to dig a hole",      frequency:"medium" },
+    "bào": { meaning_zh:"刨子，刨木",   meaning_en:"plane (tool), to plane",  example_zh:"刨子",   example_en:"woodworking plane",  frequency:"medium" },
+  }},
+  "片": { readings: {
+    "piàn":{ meaning_zh:"片子，照片",   meaning_en:"piece, photo",            example_zh:"照片",   example_en:"photo",              frequency:"high"   },
+    "piān":{ meaning_zh:"片（量词）",   meaning_en:"piece/slice (measure word)",example_zh:"一片地",example_en:"a piece of land",   frequency:"medium" },
+  }},
+  "撇": { readings: {
+    "piē": { meaning_zh:"撇开，撇嘴",   meaning_en:"to cast aside, to curl lip",example_zh:"撇嘴", example_en:"to curl one's lip",  frequency:"medium" },
+    "piě": { meaning_zh:"撇（笔画）",   meaning_en:"left-falling stroke",     example_zh:"一撇",   example_en:"a left-falling stroke",frequency:"medium"},
+  }},
+  "迫": { readings: {
+    "pò":  { meaning_zh:"迫切，被迫",   meaning_en:"urgent, to be forced",    example_zh:"被迫",   example_en:"to be forced",       frequency:"high"   },
+    "pǎi": { meaning_zh:"迫击炮",       meaning_en:"mortar (in 迫击炮)",      example_zh:"迫击炮", example_en:"mortar cannon",      frequency:"medium" },
+  }},
+  "栖": { readings: {
+    "qī":  { meaning_zh:"栖息，两栖",   meaning_en:"to roost, amphibious",    example_zh:"栖息",   example_en:"to roost",           frequency:"medium" },
+    "xī":  { meaning_zh:"栖（同息）",   meaning_en:"variant of 息 (rest)",    example_zh:"栖止",   example_en:"to rest/perch",      frequency:"low"    },
+  }},
+  "券": { readings: {
+    "quàn":{ meaning_zh:"票券，优惠券", meaning_en:"ticket, coupon",          example_zh:"优惠券", example_en:"coupon",             frequency:"high"   },
+    "xuàn":{ meaning_zh:"拱券，券洞",   meaning_en:"arch, vault (architecture)",example_zh:"拱券", example_en:"arch",               frequency:"low"    },
+  }},
+  "色": { readings: {
+    "sè":  { meaning_zh:"颜色，色彩",   meaning_en:"color, hue",              example_zh:"颜色",   example_en:"color",              frequency:"high"   },
+    "shǎi":{ meaning_zh:"掉色，褪色",   meaning_en:"to fade (colloq.)",       example_zh:"掉色",   example_en:"to fade",            frequency:"medium" },
+  }},
+  "厦": { readings: {
+    "shà": { meaning_zh:"高楼大厦",     meaning_en:"tall building",           example_zh:"大厦",   example_en:"mansion / tower",    frequency:"high"   },
+    "xià": { meaning_zh:"厦门",         meaning_en:"Xiamen (city name)",      example_zh:"厦门",   example_en:"Xiamen",             frequency:"high"   },
+  }},
+  "遂": { readings: {
+    "suì": { meaning_zh:"遂愿，顺遂",   meaning_en:"to fulfill, to succeed",  example_zh:"遂愿",   example_en:"to fulfill a wish",  frequency:"medium" },
+    "suí": { meaning_zh:"半身不遂",     meaning_en:"paralysis (in 半身不遂)", example_zh:"半身不遂",example_en:"hemiplegia",        frequency:"low"    },
+  }},
+  "塔": { readings: {
+    "tǎ":  { meaning_zh:"宝塔，铁塔",   meaning_en:"pagoda, tower",           example_zh:"宝塔",   example_en:"pagoda",             frequency:"high"   },
+    "dá":  { meaning_zh:"佛塔（梵音）", meaning_en:"stupa (Sanskrit origin)", example_zh:"刹那",   example_en:"stupa",              frequency:"low"    },
+  }},
+  "同": { readings: {
+    "tóng":{ meaning_zh:"相同，同学",   meaning_en:"same, classmate",         example_zh:"同学",   example_en:"classmate",          frequency:"high"   },
+    "tòng":{ meaning_zh:"胡同，巷道",   meaning_en:"hutong, alley",           example_zh:"胡同",   example_en:"hutong",             frequency:"medium" },
+  }},
+  "拓": { readings: {
+    "tuò": { meaning_zh:"开拓，拓展",   meaning_en:"to pioneer, to expand",   example_zh:"开拓",   example_en:"to pioneer",         frequency:"high"   },
+    "tà":  { meaning_zh:"拓印，拓片",   meaning_en:"rubbing, stone-print",    example_zh:"拓印",   example_en:"stone rubbing",      frequency:"medium" },
+  }},
+  "瓦": { readings: {
+    "wǎ":  { meaning_zh:"瓦片，砖瓦",   meaning_en:"tile, roof tile",         example_zh:"瓦片",   example_en:"roof tile",          frequency:"high"   },
+    "wà":  { meaning_zh:"瓦刀（瓦工）", meaning_en:"trowel (masonry tool)",   example_zh:"瓦刀",   example_en:"trowel",             frequency:"low"    },
+  }},
+  "委": { readings: {
+    "wěi": { meaning_zh:"委托，委员",   meaning_en:"to entrust, committee",   example_zh:"委托",   example_en:"to entrust",         frequency:"high"   },
+    "wēi": { meaning_zh:"委蛇，敷衍",   meaning_en:"to act perfunctorily",    example_zh:"虚与委蛇",example_en:"to go through the motions",frequency:"low"},
+  }},
+  "吓": { readings: {
+    "xià": { meaning_zh:"吓到，惊吓",   meaning_en:"to frighten, to scare",   example_zh:"吓到",   example_en:"to scare",           frequency:"high"   },
+    "hè":  { meaning_zh:"恐吓，威吓",   meaning_en:"to intimidate, to threaten",example_zh:"恐吓", example_en:"to threaten",        frequency:"medium" },
+  }},
+  "肖": { readings: {
+    "xiāo":{ meaning_zh:"不肖，无肖",   meaning_en:"unworthy, unlike parent", example_zh:"不肖",   example_en:"unworthy",           frequency:"low"    },
+    "xiào":{ meaning_zh:"肖像，相肖",   meaning_en:"portrait, to resemble",   example_zh:"肖像",   example_en:"portrait",           frequency:"medium" },
+  }},
+  "邪": { readings: {
+    "xié": { meaning_zh:"邪恶，邪气",   meaning_en:"evil, wicked",            example_zh:"邪恶",   example_en:"evil",               frequency:"high"   },
+    "yá":  { meaning_zh:"莫邪（古剑）", meaning_en:"Moye (famous sword)",     example_zh:"干将莫邪",example_en:"famous swords",     frequency:"low"    },
+  }},
+  "压": { readings: {
+    "yā":  { meaning_zh:"压力，压制",   meaning_en:"pressure, to suppress",   example_zh:"压力",   example_en:"pressure",           frequency:"high"   },
+    "yà":  { meaning_zh:"压根儿",       meaning_en:"at all, simply (colloq.)",example_zh:"压根儿", example_en:"not at all",         frequency:"medium" },
+  }},
+  "燕": { readings: {
+    "yàn": { meaning_zh:"燕子，家燕",   meaning_en:"swallow (bird)",          example_zh:"燕子",   example_en:"swallow (bird)",     frequency:"high"   },
+    "yān": { meaning_zh:"燕国，燕京",   meaning_en:"Yan state, old name for Beijing",example_zh:"燕京",example_en:"Yanjing (Beijing)", frequency:"medium"},
+  }},
+  "耶": { readings: {
+    "yē":  { meaning_zh:"耶稣，语气词", meaning_en:"Jesus; exclamation particle",example_zh:"耶稣", example_en:"Jesus",              frequency:"high"   },
+    "yé":  { meaning_zh:"耶耶（方言）", meaning_en:"dad (dialect)",           example_zh:"耶耶",   example_en:"dad (dialect)",      frequency:"low"    },
+  }},
+  "叶": { readings: {
+    "yè":  { meaning_zh:"叶子，树叶",   meaning_en:"leaf",                    example_zh:"树叶",   example_en:"leaf",               frequency:"high"   },
+    "xié": { meaning_zh:"叶韵，叶音",   meaning_en:"rhyme reading (classical)",example_zh:"叶韵",  example_en:"rhyme reading",      frequency:"low"    },
+  }},
+  "遗": { readings: {
+    "yí":  { meaning_zh:"遗留，遗产",   meaning_en:"to leave behind, heritage",example_zh:"遗产",  example_en:"heritage",           frequency:"high"   },
+    "wèi": { meaning_zh:"遗赠，馈赠",   meaning_en:"to give as gift (literary)",example_zh:"遗赠", example_en:"to bequeath",        frequency:"low"    },
+  }},
+  "已": { readings: {
+    "yǐ":  { meaning_zh:"已经，已然",   meaning_en:"already, past",           example_zh:"已经",   example_en:"already",            frequency:"high"   },
+    "yī":  { meaning_zh:"已（古音）",   meaning_en:"archaic reading of 已",   example_zh:"不得已", example_en:"have no choice",     frequency:"low"    },
+  }},
+  "佣": { readings: {
+    "yōng":{ meaning_zh:"雇佣，佣人",   meaning_en:"to hire, servant",        example_zh:"佣人",   example_en:"servant",            frequency:"high"   },
+    "yòng":{ meaning_zh:"佣金，回扣",   meaning_en:"commission, brokerage",   example_zh:"佣金",   example_en:"commission",         frequency:"medium" },
+  }},
+  "有": { readings: {
+    "yǒu": { meaning_zh:"有的，拥有",   meaning_en:"to have, there is",       example_zh:"有用",   example_en:"useful",             frequency:"high"   },
+    "yòu": { meaning_zh:"又（古通）",   meaning_en:"archaic variant of 又",   example_zh:"有若",   example_en:"archaic usage",      frequency:"low"    },
+  }},
+  "予": { readings: {
+    "yǔ":  { meaning_zh:"给予，赠予",   meaning_en:"to give, to bestow",      example_zh:"给予",   example_en:"to give",            frequency:"high"   },
+    "yú":  { meaning_zh:"我（文言）",   meaning_en:"I/me (classical Chinese)",example_zh:"予以",   example_en:"to give / grant",    frequency:"medium" },
+  }},
+  "语": { readings: {
+    "yǔ":  { meaning_zh:"语言，汉语",   meaning_en:"language, speech",        example_zh:"语言",   example_en:"language",           frequency:"high"   },
+    "yù":  { meaning_zh:"不语，默语",   meaning_en:"to speak to (literary)",  example_zh:"默默不语",example_en:"silent",            frequency:"low"    },
+  }},
+  "晕": { readings: {
+    "yūn": { meaning_zh:"头晕，晕倒",   meaning_en:"dizzy, to faint",         example_zh:"头晕",   example_en:"dizziness",          frequency:"high"   },
+    "yùn": { meaning_zh:"光晕，月晕",   meaning_en:"halo, aura",              example_zh:"月晕",   example_en:"moon halo",          frequency:"medium" },
+  }},
+  "脏": { readings: {
+    "zāng":{ meaning_zh:"脏乱，污脏",   meaning_en:"dirty, filthy",           example_zh:"脏乱",   example_en:"dirty and messy",    frequency:"high"   },
+    "zàng":{ meaning_zh:"五脏，内脏",   meaning_en:"internal organs",         example_zh:"内脏",   example_en:"internal organs",    frequency:"high"   },
+  }},
+  "凿": { readings: {
+    "záo": { meaning_zh:"凿子，凿洞",   meaning_en:"chisel, to chisel",       example_zh:"凿子",   example_en:"chisel",             frequency:"medium" },
+    "zuò": { meaning_zh:"凿（古音）",   meaning_en:"archaic reading",         example_zh:"凿凿",   example_en:"clearly evident",    frequency:"low"    },
+  }},
+  "择": { readings: {
+    "zé":  { meaning_zh:"选择，择优",   meaning_en:"to choose, to select",    example_zh:"选择",   example_en:"to choose",          frequency:"high"   },
+    "zhái":{ meaning_zh:"择菜，摘拣",   meaning_en:"to pick, to sort (food)", example_zh:"择菜",   example_en:"to pick vegetables", frequency:"medium" },
+  }},
+  "正": { readings: {
+    "zhèng":{ meaning_zh:"正确，正式",  meaning_en:"correct, formal",         example_zh:"正确",   example_en:"correct",            frequency:"high"   },
+    "zhēng":{ meaning_zh:"正月，正旦",  meaning_en:"first lunar month",       example_zh:"正月",   example_en:"first lunar month",  frequency:"medium" },
+  }},
+  "汁": { readings: {
+    "zhī": { meaning_zh:"果汁，汁液",   meaning_en:"juice, liquid",           example_zh:"果汁",   example_en:"fruit juice",        frequency:"high"   },
+    "zhí": { meaning_zh:"汁（古音）",   meaning_en:"archaic reading",         example_zh:"汁液",   example_en:"juice / sap",        frequency:"low"    },
+  }},
+  "轴": { readings: {
+    "zhóu":{ meaning_zh:"轴心，车轴",   meaning_en:"axis, axle",              example_zh:"轴心",   example_en:"axis",               frequency:"high"   },
+    "zhòu":{ meaning_zh:"画轴，装裱",   meaning_en:"scroll, mounted painting",example_zh:"画轴",   example_en:"scroll",             frequency:"medium" },
+  }},
+  "爪": { readings: {
+    "zhǎo":{ meaning_zh:"爪子，指爪",   meaning_en:"claw, talon",             example_zh:"爪子",   example_en:"claw",               frequency:"high"   },
+    "zhuǎ":{ meaning_zh:"爪（口语）",   meaning_en:"claw (colloquial)",       example_zh:"猫爪",   example_en:"cat's paw",          frequency:"high"   },
+  }},
+  "转": { readings: {
+    "zhuǎn":{ meaning_zh:"转变，旋转",  meaning_en:"to turn, to change",      example_zh:"转变",   example_en:"to transform",       frequency:"high"   },
+    "zhuàn":{ meaning_zh:"转圈，打转",  meaning_en:"to spin, to revolve",     example_zh:"打转",   example_en:"to spin around",     frequency:"high"   },
+  }},
+  "拽": { readings: {
+    "zhuài":{ meaning_zh:"拽住，拖拽",  meaning_en:"to drag, to pull",        example_zh:"拖拽",   example_en:"to drag",            frequency:"high"   },
+    "zhuāi":{ meaning_zh:"拽开（方言）",meaning_en:"to fling (dialect)",      example_zh:"拽出去", example_en:"to fling out",       frequency:"medium" },
+    "yè":  { meaning_zh:"拽（古字）",   meaning_en:"archaic variant",         example_zh:"拽拉",   example_en:"to drag/pull",       frequency:"low"    },
+  }},
+  "作": { readings: {
+    "zuò": { meaning_zh:"工作，制作",   meaning_en:"to work, to make",        example_zh:"工作",   example_en:"work",               frequency:"high"   },
+    "zuō": { meaning_zh:"作坊，小作",   meaning_en:"workshop (colloq.)",      example_zh:"作坊",   example_en:"workshop",           frequency:"medium" },
   }},
 };
 
