@@ -1,0 +1,1091 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>多音字练习 — Polyphonic Chinese Characters</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700;900&family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=Lato:wght@400;700;900&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --red:      #c0392b;
+  --dark-red: #7b0000;
+  --gold:     #f5c518;
+  --cream:    #fdf6e3;
+  --dark:     #1a1a2e;
+  --gray:     #6c757d;
+  --green:    #27ae60;
+  --orange:   #e67e22;
+  --white:    #ffffff;
+  --blue:     #2980b9;
+  --purple:   #8e44ad;
+  --shadow:   0 4px 20px rgba(0,0,0,0.10);
+  --font-pinyin: 'Lato', 'Noto Sans', Arial, sans-serif;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Crimson Pro', 'Noto Serif SC', serif;
+  background: var(--cream);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+#app {
+  width: 100%;
+  max-width: 520px;
+  min-height: 100vh;
+  background: var(--cream);
+  position: relative;
+  overflow: hidden;
+}
+
+/* ── Screens ── */
+.screen {
+  display: none;
+  flex-direction: column;
+  min-height: 100vh;
+  padding: 20px;
+  animation: fadeIn .25s ease;
+}
+.screen.active { display: flex; }
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Buttons ── */
+.btn {
+  border: none;
+  border-radius: 10px;
+  font-family: 'Noto Serif SC', serif;
+  font-weight: 700;
+  cursor: pointer;
+  transition: filter .15s, transform .1s;
+  letter-spacing: .03em;
+}
+.btn:hover  { filter: brightness(1.08); }
+.btn:active { transform: scale(.97); }
+
+.btn-primary  { background: var(--red);    color: #fff; font-size: 16px; padding: 13px 40px; }
+.btn-purple   { background: var(--purple); color: #fff; font-size: 15px; padding: 11px 40px; }
+.btn-dark     { background: var(--dark);   color: #fff; font-size: 15px; padding: 11px 40px; }
+.btn-blue     { background: var(--blue);   color: #fff; font-size: 15px; padding: 11px 40px; }
+.btn-green    { background: var(--green);  color: #fff; }
+.btn-gray     { background: var(--gray);   color: #fff; }
+.btn-sm       { font-size: 13px; padding: 8px 16px; }
+
+/* ── Home Screen ── */
+#home { align-items: center; justify-content: center; gap: 14px; }
+
+.logo-circle {
+  width: 100px; height: 100px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--dark-red), var(--red));
+  display: flex; align-items: center; justify-content: center;
+  font-size: 52px; box-shadow: 0 6px 24px rgba(192,57,43,.4);
+  margin-bottom: 4px;
+}
+
+.home-title {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 36px; font-weight: 900; color: var(--red); text-align: center;
+}
+.home-subtitle {
+  font-size: 15px; color: var(--gray); font-style: italic; text-align: center;
+  margin-bottom: 10px;
+}
+.home-btns { display: flex; flex-direction: column; gap: 10px; width: 100%; max-width: 300px; }
+.home-btns .btn { width: 100%; text-align: center; }
+
+.home-stats { font-size: 12px; color: var(--gray); text-align: center; margin-top: 10px; }
+
+/* ── Level Select ── */
+#levels { gap: 14px; }
+.back-row { display: flex; align-items: center; margin-bottom: 4px; }
+
+.screen-title {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 20px; font-weight: 700; color: var(--dark); text-align: center;
+}
+
+.count-frame {
+  background: white; border-radius: 10px; border: 1px solid #dee2e6;
+  padding: 12px; display: flex; flex-direction: column; gap: 8px;
+}
+.count-label { font-size: 12px; color: var(--gray); font-weight: 700; text-align: center; }
+.count-btns  { display: flex; gap: 8px; justify-content: center; }
+.count-btn {
+  background: var(--cream); color: var(--dark);
+  border: 2px solid #dee2e6; border-radius: 8px;
+  padding: 6px 20px; font-size: 16px; font-weight: 700;
+  cursor: pointer; font-family: 'Noto Serif SC', serif; transition: all .15s;
+}
+.count-btn.active { background: var(--red); color: white; border-color: var(--red); }
+.count-btn:hover  { border-color: var(--red); }
+
+.level-card {
+  background: white; border-radius: 12px;
+  border: 2px solid #dee2e655; border-left: 5px solid var(--blue);
+  padding: 14px 16px; display: flex; align-items: center;
+  cursor: pointer; transition: background .15s, transform .1s;
+  gap: 12px;
+}
+.level-card:hover { transform: translateX(3px); }
+
+.level-card-info { flex: 1; }
+.level-card-name { font-size: 15px; font-weight: 700; }
+.level-card-desc { font-size: 11px; color: var(--gray); margin-top: 2px; }
+.level-card-count { font-size: 22px; font-weight: 900; text-align: center; min-width: 44px; line-height: 1.2; }
+.level-card-count span { display: block; font-size: 11px; font-weight: 400; }
+
+/* ── Quiz Screen ── */
+#quiz { gap: 10px; }
+.quiz-top { display: flex; align-items: center; gap: 8px; }
+.level-badge {
+  font-size: 12px; color: white; background: var(--blue);
+  border-radius: 5px; padding: 3px 10px; font-weight: 700;
+}
+.score-label { font-size: 15px; color: var(--dark); font-weight: 700; margin-left: auto; }
+
+.progress-bar-wrap {
+  height: 8px; background: #dee2e6; border-radius: 4px; overflow: hidden;
+}
+.progress-bar-fill {
+  height: 100%; border-radius: 4px;
+  background: linear-gradient(90deg, var(--red), var(--gold));
+  transition: width .3s ease;
+  width: 0%;
+}
+.progress-lbl { font-size: 11px; color: var(--gray); text-align: center; }
+
+.char-card {
+  border-radius: 18px; padding: 16px 20px;
+  background: linear-gradient(135deg, var(--red), var(--dark-red));
+  display: flex; flex-direction: column; align-items: center; gap: 4px;
+}
+.card-badges { display: flex; gap: 6px; margin-bottom: 4px; }
+.badge {
+  font-size: 10px; color: white; border-radius: 4px; padding: 2px 8px; font-weight: 700;
+}
+.char-display {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 90px; font-weight: 900; color: var(--gold); line-height: 1;
+}
+.context-lbl { font-size: 13px; color: var(--cream); padding-bottom: 6px; text-align: center; }
+
+.hint-lbl { font-size: 11px; color: var(--orange); font-style: italic; text-align: center; min-height: 18px; }
+
+.options-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.opt-btn {
+  background: white; color: var(--dark); border: 2px solid #dee2e6;
+  border-radius: 10px; font-size: 17px; font-weight: 700; padding: 14px 8px;
+  cursor: pointer; font-family: var(--font-pinyin);
+  transition: background .15s, border-color .15s, transform .1s;
+}
+.opt-btn:hover:not(:disabled) { border-color: var(--red); background: #fff5f5; }
+.opt-btn:active:not(:disabled) { transform: scale(.97); }
+.opt-btn.correct { background: var(--green); color: white; border-color: var(--green); }
+.opt-btn.wrong   { background: var(--red);   color: white; border-color: var(--red); }
+.opt-btn:disabled { cursor: default; }
+
+.feedback-lbl { font-size: 13px; font-weight: 700; text-align: center; min-height: 42px; line-height: 1.4; font-family: var(--font-pinyin); }
+.streak-row { display: flex; justify-content: center; }
+.streak-lbl { font-size: 14px; color: var(--orange); font-weight: 700; }
+
+/* ── Browse Screen ── */
+#browse { gap: 10px; }
+.browse-top { display: flex; align-items: center; gap: 10px; }
+.browse-title { font-size: 18px; font-weight: 700; color: var(--red); margin: 0 auto; }
+
+.legend-row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.legend-item { font-size: 11px; }
+
+.filter-row { display: flex; gap: 6px; flex-wrap: wrap; }
+.filter-btn {
+  color: white; border-radius: 6px; padding: 5px 14px;
+  font-size: 11px; font-weight: 700; cursor: pointer;
+  border: 2px solid transparent; font-family: 'Noto Serif SC', serif;
+  transition: border-color .15s;
+}
+.filter-btn.active { border-color: var(--gold); }
+
+.browse-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
+  overflow-y: auto; flex: 1;
+}
+.browse-card {
+  background: white; border-radius: 10px;
+  border: 1px solid rgba(0,0,0,.07); border-top: 3px solid var(--green);
+  padding: 10px; display: flex; flex-direction: column; gap: 4px;
+}
+.browse-card-hdr { display: flex; align-items: center; justify-content: space-between; }
+.browse-char { font-family: 'Noto Serif SC', serif; font-size: 40px; color: var(--red); font-weight: 900; }
+.browse-diff-badge { font-size: 10px; color: white; border-radius: 4px; padding: 2px 6px; font-weight: 700; }
+.browse-reading { display: flex; align-items: flex-start; gap: 4px; margin-top: 2px; }
+.browse-pinyin  { font-size: 13px; color: var(--dark); font-weight: 700; min-width: 54px; font-family: var(--font-pinyin); }
+.browse-dot     { font-size: 10px; margin-top: 2px; }
+.browse-meaning { font-size: 11px; color: var(--gray); flex: 1; line-height: 1.3; }
+.browse-example { font-size: 11px; color: var(--orange); padding-left: 4px; }
+
+/* ── Stats Screen ── */
+#stats { gap: 12px; }
+.stats-top { display: flex; align-items: center; }
+.stats-title { font-size: 20px; font-weight: 700; color: var(--blue); margin: 0 auto; }
+
+.streak-card {
+  background: var(--dark); border-radius: 12px; padding: 16px;
+  display: flex; justify-content: space-around; align-items: center;
+}
+.streak-item { text-align: center; }
+.streak-num  { font-size: 30px; font-weight: 900; }
+.streak-sub  { font-size: 11px; color: var(--gray); margin-top: 2px; }
+
+.stats-table {
+  background: white; border-radius: 10px; border: 1px solid #dee2e6;
+  overflow: hidden;
+}
+.stats-table table { width: 100%; border-collapse: collapse; }
+.stats-table th { font-size: 11px; color: var(--gray); font-weight: 700; padding: 8px 10px; text-align: left; background: #f8f9fa; }
+.stats-table td { font-size: 12px; padding: 8px 10px; border-top: 1px solid #f0f0f0; }
+
+.recent-title { font-size: 13px; font-weight: 700; color: var(--dark); }
+.session-row {
+  background: white; border-radius: 8px; border: 1px solid #dee2e6;
+  padding: 8px 12px; display: flex; align-items: center; gap: 10px;
+}
+.session-pct  { font-size: 18px; font-weight: 900; min-width: 48px; }
+.session-info { flex: 1; font-size: 11px; color: var(--gray); }
+.session-score{ font-size: 13px; font-weight: 700; color: var(--dark); }
+
+/* ── Flashcard Screen ── */
+#flashcard { gap: 10px; }
+.fc-top { display: flex; align-items: center; }
+.fc-title    { font-size: 18px; font-weight: 700; color: var(--dark); margin: 0 auto; }
+.fc-progress { font-size: 13px; color: var(--gray); font-weight: 700; }
+
+.fc-filter { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
+.fc-shuffle { margin-left: auto; }
+
+/* Card container — fixed height, no 3D flip (we swap content instead) */
+.flashcard-wrap {
+  flex: 1; min-height: 360px; border-radius: 16px;
+  cursor: pointer; position: relative; overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+}
+
+/* ── FRONT face: solid red, small white inner card ── */
+.fc-face {
+  position: absolute; inset: 0; border-radius: 16px;
+  display: flex; align-items: center; justify-content: center;
+  transition: opacity .35s ease, transform .35s ease;
+}
+.fc-face-front {
+  background: var(--red);
+  opacity: 1; transform: scale(1);
+}
+.fc-face-front.hidden {
+  opacity: 0; transform: scale(.95); pointer-events: none;
+}
+.fc-inner-card {
+  background: white; border-radius: 14px;
+  padding: 20px 28px; display: flex; flex-direction: column;
+  align-items: center; gap: 8px;
+  box-shadow: 0 4px 24px rgba(0,0,0,.25);
+  min-width: 180px;
+}
+.fc-inner-badge {
+  font-size: 11px; color: white; border-radius: 5px;
+  padding: 3px 12px; font-weight: 700;
+}
+.fc-inner-char {
+  font-family: 'Noto Serif SC', serif; font-size: 86px;
+  font-weight: 900; color: var(--gold); line-height: 1;
+  /* inner card background for char is the red rounded square */
+  background: var(--red); border-radius: 14px;
+  padding: 8px 18px; margin: 4px 0;
+}
+.fc-inner-hint {
+  font-size: 11px; color: var(--orange); font-style: italic;
+}
+
+/* ── BACK face: cream bg, char + readings ── */
+.fc-face-back {
+  background: var(--cream); border: 2px solid var(--gold);
+  flex-direction: column; justify-content: flex-start;
+  padding: 20px 16px; gap: 10px;
+  opacity: 0; transform: scale(.95); pointer-events: none;
+  overflow-y: auto;
+}
+.fc-face-back.visible {
+  opacity: 1; transform: scale(1); pointer-events: auto;
+}
+.fc-back-char {
+  font-family: 'Noto Serif SC', serif; font-size: 46px;
+  font-weight: 900; color: var(--gold); text-align: center;
+  width: 100%; padding: 6px 0 4px;
+}
+
+/* Reading rows — bordered box like screenshot 2 */
+.fc-reading-row {
+  background: white; border-radius: 8px;
+  border: 1.5px solid var(--gold);
+  padding: 0; display: flex; align-items: stretch;
+  width: 100%; overflow: hidden;
+}
+.fc-pinyin-box {
+  background: white; border-right: 1.5px solid var(--gold);
+  padding: 8px 12px; display: flex; align-items: center; justify-content: center;
+  min-width: 72px;
+}
+.fc-pinyin { font-size: 17px; font-weight: 700; color: var(--red); font-family: var(--font-pinyin); }
+.fc-middle  { flex: 1; padding: 6px 10px; display: flex; flex-direction: column; gap: 2px; }
+.fc-meaning { font-size: 12px; color: var(--dark); }
+.fc-example { font-size: 11px; color: var(--orange); }
+.fc-freq-box {
+  background: var(--green); padding: 6px 10px;
+  display: flex; align-items: center; justify-content: center;
+  min-width: 52px;
+}
+.fc-freq { font-size: 10px; color: white; font-weight: 700; text-align: center; line-height: 1.2; }
+
+.fc-nav { display: flex; justify-content: space-between; align-items: center; }
+
+/* ── Result Screen ── */
+#result { align-items: center; justify-content: center; gap: 16px; }
+.result-emoji  { font-size: 56px; }
+.result-title  { font-size: 22px; font-weight: 700; color: var(--dark); text-align: center; }
+.result-circle {
+  width: 160px; height: 160px; border-radius: 80px;
+  background: var(--red); display: flex; flex-direction: column;
+  align-items: center; justify-content: center; box-shadow: 0 6px 28px rgba(0,0,0,.2);
+}
+.result-pct  { font-size: 38px; font-weight: 900; color: var(--gold); line-height: 1; }
+.result-det  { font-size: 15px; color: var(--cream); }
+.result-msg  { font-size: 16px; font-weight: 700; color: var(--dark); }
+.result-streak{ font-size: 13px; color: var(--orange); }
+.result-btns { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
+
+/* ── Utility ── */
+.spacer { flex: 1; }
+.center { text-align: center; }
+.sessions-list { display: flex; flex-direction: column; gap: 6px; overflow-y: auto; max-height: 220px; }
+</style>
+</head>
+<body>
+<div id="app">
+
+<!-- ══ HOME ══ -->
+<div id="home" class="screen active">
+  <div class="logo-circle">字</div>
+  <h1 class="home-title">多音字练习</h1>
+  <p class="home-subtitle">Polyphonic Chinese Characters</p>
+  <div class="home-btns">
+    <button class="btn btn-primary" onclick="goTo('levels')">开始测验 &nbsp;Start Quiz</button>
+    <button class="btn btn-purple" onclick="startFlashcard()">闪卡练习 &nbsp;Flashcards</button>
+    <button class="btn btn-dark"   onclick="goTo('browse')">浏览词库 &nbsp;Browse</button>
+    <button class="btn btn-blue"   onclick="goStats()">我的成绩 &nbsp;My Stats</button>
+  </div>
+  <p class="home-stats" id="home-stats"></p>
+</div>
+
+<!-- ══ LEVEL SELECT ══ -->
+<div id="levels" class="screen">
+  <div class="back-row">
+    <button class="btn btn-dark btn-sm" onclick="goTo('home')">← 返回 Back</button>
+  </div>
+  <p class="screen-title">选择难度 &nbsp;Choose Level</p>
+
+  <div class="count-frame">
+    <div class="count-label">每次题数 &nbsp;Questions per session</div>
+    <div class="count-btns">
+      <button class="count-btn active" data-n="10" onclick="setCount(this,10)">10</button>
+      <button class="count-btn"        data-n="20" onclick="setCount(this,20)">20</button>
+      <button class="count-btn"        data-n="30" onclick="setCount(this,30)">30</button>
+      <button class="count-btn"        data-n="0"  onclick="setCount(this,0)">∞</button>
+    </div>
+  </div>
+
+  <div id="level-cards"></div>
+</div>
+
+<!-- ══ QUIZ ══ -->
+<div id="quiz" class="screen">
+  <div class="quiz-top">
+    <button class="btn btn-dark btn-sm" onclick="quizBack()">← 返回 Back</button>
+    <span class="level-badge" id="quiz-level-badge">全部</span>
+    <span class="score-label" id="quiz-score">0 / 0</span>
+  </div>
+  <div class="progress-bar-wrap"><div class="progress-bar-fill" id="quiz-progress"></div></div>
+  <div class="progress-lbl" id="quiz-progress-lbl"></div>
+
+  <div class="char-card">
+    <div class="card-badges">
+      <span class="badge" id="quiz-diff-badge" style="background:var(--green)"></span>
+      <span class="badge" id="quiz-freq-badge" style="background:var(--blue)"></span>
+    </div>
+    <div class="char-display" id="quiz-char">字</div>
+    <div class="context-lbl" id="quiz-context"></div>
+  </div>
+
+  <div class="hint-lbl" id="quiz-hint"></div>
+
+  <div class="options-grid" id="quiz-options"></div>
+
+  <div class="feedback-lbl" id="quiz-feedback"></div>
+  <div class="streak-row"><span class="streak-lbl" id="quiz-streak">🔥 0</span></div>
+
+  <div style="text-align:center">
+    <button class="btn btn-primary" id="quiz-next" style="display:none" onclick="quizNext()">下一题 &nbsp;Next →</button>
+  </div>
+</div>
+
+<!-- ══ BROWSE ══ -->
+<div id="browse" class="screen">
+  <div class="browse-top">
+    <button class="btn btn-dark btn-sm" onclick="goTo('home')">← 返回 Back</button>
+    <span class="browse-title">词库浏览 &nbsp;Character Browser</span>
+  </div>
+  <div class="legend-row">
+    <span class="legend-item" style="color:var(--green)">● 常用 High</span>
+    <span class="legend-item" style="color:var(--orange)">● 偶用 Mid</span>
+    <span class="legend-item" style="color:var(--gray)">● 少用 Low</span>
+  </div>
+  <div class="filter-row" id="browse-filter-row"></div>
+  <div class="browse-grid" id="browse-grid"></div>
+</div>
+
+<!-- ══ STATS ══ -->
+<div id="stats" class="screen">
+  <div class="stats-top">
+    <button class="btn btn-dark btn-sm" onclick="goTo('home')">← 返回 Back</button>
+    <span class="stats-title">我的成绩 &nbsp;My Stats</span>
+    <button class="btn btn-gray btn-sm" style="margin-left:auto" onclick="resetStats()">重置 Reset</button>
+  </div>
+
+  <div class="streak-card">
+    <div class="streak-item">
+      <div class="streak-num" style="color:var(--orange)" id="stat-streak">🔥 0</div>
+      <div class="streak-sub">当前连对<br>Current Streak</div>
+    </div>
+    <div class="streak-item">
+      <div class="streak-num" style="color:var(--gold)" id="stat-best">🏆 0</div>
+      <div class="streak-sub">最高连对<br>Best Streak</div>
+    </div>
+  </div>
+
+  <div class="stats-table">
+    <table>
+      <thead>
+        <tr>
+          <th>难度 Level</th><th>已答</th><th>正确</th><th>正确率</th><th>最高</th>
+        </tr>
+      </thead>
+      <tbody id="stats-tbody"></tbody>
+    </table>
+  </div>
+
+  <div class="recent-title">最近记录 &nbsp;Recent Sessions</div>
+  <div class="sessions-list" id="sessions-list"></div>
+</div>
+
+<!-- ══ FLASHCARD ══ -->
+<div id="flashcard" class="screen">
+  <div class="fc-top">
+    <button class="btn btn-dark btn-sm" onclick="goTo('home')">← 返回 Back</button>
+    <span class="fc-title">闪卡 &nbsp;Flashcards</span>
+    <span class="fc-progress" id="fc-progress" style="margin-left:auto"></span>
+  </div>
+
+  <div class="fc-filter" id="fc-filter-row"></div>
+
+  <!-- Card area: two overlapping faces -->
+  <div class="flashcard-wrap" id="fc-wrap" onclick="fcFlip()">
+
+    <!-- FRONT: full red + small inner white card -->
+    <div class="fc-face fc-face-front" id="fc-face-front">
+      <div class="fc-inner-card">
+        <span class="fc-inner-badge" id="fc-diff-badge" style="background:var(--red)"></span>
+        <div class="fc-inner-char" id="fc-char">字</div>
+        <div class="fc-inner-hint">点击翻转 &nbsp;Click to flip</div>
+      </div>
+    </div>
+
+    <!-- BACK: cream + char + readings -->
+    <div class="fc-face fc-face-back" id="fc-face-back">
+      <div class="fc-back-char" id="fc-back-char"></div>
+      <div style="width:100%;display:flex;flex-direction:column;gap:8px" id="fc-readings"></div>
+    </div>
+
+  </div>
+
+  <div class="fc-nav">
+    <button class="btn btn-dark btn-sm" onclick="fcPrev()">◀ 上一张</button>
+    <button class="btn btn-primary btn-sm" onclick="fcNext()">下一张 ▶</button>
+  </div>
+</div>
+
+<!-- ══ RESULT ══ -->
+<div id="result" class="screen">
+  <div class="result-emoji" id="result-emoji">🎉</div>
+  <div class="result-title" id="result-title">本次结果</div>
+  <div class="result-circle" id="result-circle">
+    <div class="result-pct" id="result-pct">0%</div>
+    <div class="result-det" id="result-det">0 / 0</div>
+  </div>
+  <div class="result-msg"    id="result-msg"></div>
+  <div class="result-streak" id="result-streak"></div>
+  <div class="result-btns">
+    <button class="btn btn-primary" onclick="playAgain()">再来一次 &nbsp;Play Again</button>
+    <button class="btn btn-dark"    onclick="goTo('levels')">换难度 &nbsp;Change Level</button>
+    <button class="btn btn-blue"    onclick="goTo('home')">主页 &nbsp;Home</button>
+  </div>
+</div>
+
+</div><!-- #app -->
+
+<!-- ── Data layer (all 246 characters + enriched meanings) ── -->
+<script src="data.js"></script>
+
+<script>
+// ── Color maps — 7 levels matching data.js LEVEL_MAP ──────────
+// Gradient from green (easy) → red (hardest)
+const DIFF_COLORS = {
+  0:"#2980b9",   // All
+  1:"#27ae60",   // 一级
+  2:"#52b830",   // 二级
+  3:"#e8a020",   // 三级
+  4:"#e67e22",   // 四级
+  5:"#d45f1a",   // 五级
+  6:"#c0392b",   // 六级
+  7:"#8e1a1a",   // 七-九级
+};
+const DIFF_LABELS = {
+  0:"全部 All",
+  1:"一级", 2:"二级", 3:"三级", 4:"四级",
+  5:"五级", 6:"六级", 7:"七-九级",
+};
+// All unique difficulty levels present in loaded data
+const LEVELS_IN_USE = [...new Set(POLYPHONES.map(c=>c.difficulty))].sort((a,b)=>a-b);
+
+const FREQ_COLORS = {high:"#27ae60", medium:"#e67e22", low:"#6c757d"};
+const FREQ_LABELS = {high:"常用 High", medium:"偶用 Medium", low:"少用 Low"};
+
+// ── Helper: build filter button rows ─────────────────────────
+function buildFilterButtons(containerId, onClickFn, includeAll=true, includeShuffle=false) {
+  const row = document.getElementById(containerId);
+  row.innerHTML = '';
+  if (includeAll) {
+    const b = document.createElement('button');
+    b.className = 'filter-btn active';
+    b.style.background = DIFF_COLORS[0];
+    b.textContent = '全部';
+    b.onclick = () => onClickFn(b, 0);
+    row.appendChild(b);
+  }
+  LEVELS_IN_USE.forEach(d => {
+    const b = document.createElement('button');
+    b.className = 'filter-btn';
+    b.style.background = DIFF_COLORS[d];
+    b.textContent = DIFF_LABELS[d];
+    b.onclick = () => onClickFn(b, d);
+    row.appendChild(b);
+  });
+  if (includeShuffle) {
+    const s = document.createElement('button');
+    s.className = 'filter-btn btn';
+    s.style.cssText = 'background:var(--purple);margin-left:auto';
+    s.textContent = '🔀 随机 Shuffle';
+    s.onclick = fcShuffle;
+    row.appendChild(s);
+  }
+}
+
+// ══════════════════════════════════════════════════════════════
+// STATS (localStorage)
+// ══════════════════════════════════════════════════════════════
+function loadStats() {
+  try { return JSON.parse(localStorage.getItem('poly_stats')) || defaultStats(); }
+  catch { return defaultStats(); }
+}
+function saveStats(s) { localStorage.setItem('poly_stats', JSON.stringify(s)); }
+function defaultStats() {
+  return { streak:0, best_streak:0, per_level:{}, sessions:[] };
+}
+function updateStreak(correct) {
+  const s = loadStats();
+  if (correct) {
+    s.streak++; if (s.streak > s.best_streak) s.best_streak = s.streak;
+  } else { s.streak = 0; }
+  saveStats(s); return [s.streak, s.best_streak];
+}
+function recordSession(difficulty, score, total) {
+  const s = loadStats();
+  const key = String(difficulty);
+  if (!s.per_level[key]) s.per_level[key] = {total_answered:0,total_correct:0,best_pct:0};
+  const pl = s.per_level[key];
+  pl.total_answered += total; pl.total_correct += score;
+  const pct = total > 0 ? Math.round(score/total*100) : 0;
+  if (pct > pl.best_pct) pl.best_pct = pct;
+  // also aggregate into "0" (all)
+  if (!s.per_level["0"]) s.per_level["0"] = {total_answered:0,total_correct:0,best_pct:0};
+  const all = s.per_level["0"];
+  all.total_answered += total; all.total_correct += score;
+  if (pct > all.best_pct) all.best_pct = pct;
+  s.sessions.push({ difficulty, score, total, pct, ts: Date.now() });
+  saveStats(s);
+}
+function resetAllStats() {
+  saveStats(defaultStats());
+}
+
+// ══════════════════════════════════════════════════════════════
+// NAVIGATION
+// ══════════════════════════════════════════════════════════════
+function goTo(id) {
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo(0,0);
+}
+
+// ══════════════════════════════════════════════════════════════
+// HOME INIT
+// ══════════════════════════════════════════════════════════════
+function initHome() {
+  const total = POLYPHONES.length;
+  const counts = LEVELS_IN_USE.map(d => `${DIFF_LABELS[d]} ${POLYPHONES.filter(c=>c.difficulty===d).length}`).join('  ');
+  document.getElementById('home-stats').textContent = `词库 ${total} 字  ·  ${counts}`;
+}
+
+// ══════════════════════════════════════════════════════════════
+// LEVEL SELECT
+// ══════════════════════════════════════════════════════════════
+let selectedCount = 10;
+
+function setCount(btn, n) {
+  document.querySelectorAll('.count-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active'); selectedCount = n;
+}
+
+function initLevels() {
+  const container = document.getElementById('level-cards');
+  container.innerHTML = '';
+  // "All" card
+  const allCard = document.createElement('div');
+  allCard.className = 'level-card';
+  allCard.style.cssText = `border-left-color:${DIFF_COLORS[0]};margin-bottom:10px`;
+  allCard.innerHTML = `
+    <div class="level-card-info">
+      <div class="level-card-name" style="color:${DIFF_COLORS[0]}">全部 &nbsp;All Levels</div>
+      <div class="level-card-desc">混合所有难度 &nbsp;Mix of all levels</div>
+    </div>
+    <div class="level-card-count" style="color:${DIFF_COLORS[0]}">${POLYPHONES.length}<span>字</span></div>`;
+  allCard.onclick = () => startQuiz(0, selectedCount);
+  container.appendChild(allCard);
+  // Per-level cards
+  LEVELS_IN_USE.forEach(d => {
+    const count = POLYPHONES.filter(c=>c.difficulty===d).length;
+    const color = DIFF_COLORS[d];
+    const card = document.createElement('div');
+    card.className = 'level-card';
+    card.style.cssText = `border-left-color:${color};margin-bottom:10px`;
+    card.innerHTML = `
+      <div class="level-card-info">
+        <div class="level-card-name" style="color:${color}">${DIFF_LABELS[d]}</div>
+        <div class="level-card-desc">国际中文教育标准 ${DIFF_LABELS[d]}</div>
+      </div>
+      <div class="level-card-count" style="color:${color}">${count}<span>字</span></div>`;
+    card.onclick = () => startQuiz(d, selectedCount);
+    container.appendChild(card);
+  });
+}
+
+// ══════════════════════════════════════════════════════════════
+// QUIZ
+// ══════════════════════════════════════════════════════════════
+let quizState = {
+  difficulty:0, sessionLimit:10, score:0, total:0,
+  currentChar:null, correctPinyin:null, options:[], answered:false
+};
+let lastQuizDiff=0, lastQuizCount=10;
+
+function startQuiz(difficulty, count) {
+  lastQuizDiff = difficulty; lastQuizCount = count;
+  quizState = { difficulty, sessionLimit:count, score:0, total:0, currentChar:null, correctPinyin:null, options:[], answered:false };
+  const color = DIFF_COLORS[difficulty]||'#2980b9';
+  const badge = document.getElementById('quiz-level-badge');
+  badge.textContent = DIFF_LABELS[difficulty]||'全部';
+  badge.style.background = color;
+  document.getElementById('quiz-score').textContent = '0 / 0';
+  const s = loadStats();
+  document.getElementById('quiz-streak').textContent = `🔥 ${s.streak}`;
+  goTo('quiz');
+  loadQuestion();
+}
+
+function quizPool() {
+  if (quizState.difficulty===0) return POLYPHONES;
+  return POLYPHONES.filter(c=>c.difficulty===quizState.difficulty) || POLYPHONES;
+}
+
+function shuffle(arr) { for(let i=arr.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[arr[i],arr[j]]=[arr[j],arr[i]];} return arr; }
+
+function buildDistractors(correctPinyin, charEntry, n=3) {
+  const result=[]; const seen=new Set([correctPinyin]);
+  // 1. other readings of same char
+  for (const r of charEntry.readings) {
+    if (!seen.has(r.pinyin)) { result.push(r.pinyin); seen.add(r.pinyin); }
+  }
+  // 2. similar base syllable
+  function base(p) { return p.replace(/[āáǎà]/g,'a').replace(/[ēéěè]/g,'e').replace(/[īíǐì]/g,'i').replace(/[ōóǒò]/g,'o').replace(/[ūúǔù]/g,'u').replace(/[ǖǘǚǜ]/g,'u'); }
+  const cb = base(correctPinyin);
+  const similar = POLYPHONES.flatMap(p=>p.readings.map(r=>r.pinyin)).filter(p=>!seen.has(p)&&base(p)===cb);
+  shuffle(similar);
+  for (const p of similar) { if(result.length>=n) break; result.push(p); seen.add(p); }
+  // 3. random fill
+  if (result.length < n) {
+    const rest = shuffle(POLYPHONES.flatMap(p=>p.readings.map(r=>r.pinyin)).filter(p=>!seen.has(p)));
+    for (const p of rest) { if(result.length>=n) break; result.push(p); seen.add(p); }
+  }
+  return result.slice(0,n);
+}
+
+function loadQuestion() {
+  document.getElementById('quiz-feedback').textContent='';
+  document.getElementById('quiz-hint').textContent='';
+  const nextBtn = document.getElementById('quiz-next');
+  nextBtn.style.display='none';
+  nextBtn.textContent='下一题 Next →';
+  nextBtn.onclick = loadQuestion;
+  quizState.answered = false;
+
+  const pool = quizPool();
+  const char = pool[Math.floor(Math.random()*pool.length)];
+  quizState.currentChar = char;
+  const reading = char.readings[Math.floor(Math.random()*char.readings.length)];
+  quizState.correctPinyin = reading.pinyin;
+
+  const d = char.difficulty||1;
+  const freq = reading.frequency||'medium';
+  const db = document.getElementById('quiz-diff-badge');
+  db.textContent = DIFF_LABELS[d]||'';
+  db.style.background = DIFF_COLORS[d]||'#27ae60';
+  const fb = document.getElementById('quiz-freq-badge');
+  fb.textContent = FREQ_LABELS[freq]||'';
+  fb.style.background = FREQ_COLORS[freq]||'#2980b9';
+
+  document.getElementById('quiz-char').textContent = char.character;
+  const ctx = reading.meaning_zh
+    ? `含义: ${reading.meaning_zh}${reading.meaning_en ? '  /  ' + reading.meaning_en : ''}`
+    : '';
+  document.getElementById('quiz-context').textContent = ctx;
+
+  const distractors = buildDistractors(quizState.correctPinyin, char);
+  const sameCharReadings = new Set(char.readings.map(r=>r.pinyin));
+  sameCharReadings.delete(quizState.correctPinyin);
+  if (distractors.some(d=>sameCharReadings.has(d))) {
+    document.getElementById('quiz-hint').textContent = '⚠ 注意：选项中含有该字的其他读音 Watch out: other readings included';
+  }
+
+  quizState.options = shuffle([...distractors, quizState.correctPinyin]);
+  const grid = document.getElementById('quiz-options');
+  grid.innerHTML='';
+  quizState.options.forEach((opt,i)=>{
+    const btn = document.createElement('button');
+    btn.className='opt-btn'; btn.textContent=opt;
+    btn.onclick=()=>onAnswer(i);
+    grid.appendChild(btn);
+  });
+
+  updateProgress();
+}
+
+function updateProgress() {
+  const {total,sessionLimit,score}=quizState;
+  const fill = document.getElementById('quiz-progress');
+  const lbl  = document.getElementById('quiz-progress-lbl');
+  if (sessionLimit>0) {
+    fill.style.width = `${Math.min(total/sessionLimit*100,100)}%`;
+    lbl.textContent = `第 ${total} / ${sessionLimit} 题  Question ${total} of ${sessionLimit}`;
+  } else {
+    fill.style.width = `${Math.min(total*5,100)}%`;
+    lbl.textContent = `第 ${total} 题  Question ${total}`;
+  }
+  document.getElementById('quiz-score').textContent = `${score} / ${total}`;
+}
+
+function onAnswer(idx) {
+  if (quizState.answered) return;
+  quizState.answered = true;
+  const chosen = quizState.options[idx];
+  const correct = chosen===quizState.correctPinyin;
+  quizState.total++;
+  if(correct) quizState.score++;
+
+  const [streak,best] = updateStreak(correct);
+  const btns = document.querySelectorAll('.opt-btn');
+  btns.forEach(b=>b.disabled=true);
+  btns[idx].classList.add(correct?'correct':'wrong');
+  if (!correct) {
+    quizState.options.forEach((opt,i)=>{ if(opt===quizState.correctPinyin) btns[i].classList.add('correct'); });
+  }
+
+  const fbl = document.getElementById('quiz-feedback');
+  if (correct) {
+    const r = quizState.currentChar.readings.find(r=>r.pinyin===quizState.correctPinyin);
+    const ex = r.example_zh ? `  例: ${r.example_zh}${r.example_en ? ' — '+r.example_en : ''}` : '';
+    fbl.textContent = `✓ 正确 Correct!${ex}`;
+    fbl.style.color='#27ae60';
+  } else {
+    fbl.textContent = `✗ 错误 Wrong.  正确答案: ${quizState.correctPinyin}`;
+    fbl.style.color='#c0392b';
+  }
+
+  let streakTxt = `🔥 ${streak}`;
+  if (streak>=5) streakTxt += `  🏆 Best: ${best}`;
+  document.getElementById('quiz-streak').textContent = streakTxt;
+
+  updateProgress();
+
+  const nextBtn = document.getElementById('quiz-next');
+  if (quizState.sessionLimit>0 && quizState.total>=quizState.sessionLimit) {
+    nextBtn.textContent='查看结果 See Results →';
+    nextBtn.onclick = finishSession;
+  }
+  nextBtn.style.display='inline-block';
+}
+
+function finishSession() {
+  recordSession(quizState.difficulty, quizState.score, quizState.total);
+  showResult(quizState.score, quizState.total, quizState.difficulty);
+  quizState.total=0;
+}
+
+function quizBack() {
+  if (quizState.total>0) { recordSession(quizState.difficulty,quizState.score,quizState.total); quizState.total=0; }
+  goTo('levels');
+}
+
+function quizNext() { loadQuestion(); }
+
+// ══════════════════════════════════════════════════════════════
+// RESULT
+// ══════════════════════════════════════════════════════════════
+function showResult(score, total, difficulty) {
+  const pct = total>0 ? Math.round(score/total*100) : 0;
+  document.getElementById('result-pct').textContent = `${pct}%`;
+  document.getElementById('result-det').textContent = `${score} / ${total}`;
+  let color,emoji,msg;
+  if (pct>=80)      { color='#27ae60'; emoji='🏆'; msg='优秀！Excellent!'; }
+  else if (pct>=60) { color='#e67e22'; emoji='👍'; msg='不错！Good job!'; }
+  else              { color='#c0392b'; emoji='💪'; msg='继续加油！Keep practicing!'; }
+  document.getElementById('result-circle').style.background=color;
+  document.getElementById('result-emoji').textContent=emoji;
+  document.getElementById('result-msg').textContent=msg;
+  const s=loadStats();
+  document.getElementById('result-streak').textContent=`🔥 当前连对 Streak: ${s.streak}   🏆 最高 Best: ${s.best_streak}`;
+  document.getElementById('result-title').textContent=`本次结果  ${DIFF_LABELS[difficulty]||'全部'}`;
+  goTo('result');
+}
+
+function playAgain() {
+  startQuiz(lastQuizDiff, lastQuizCount);
+}
+
+// ══════════════════════════════════════════════════════════════
+// BROWSE
+// ══════════════════════════════════════════════════════════════
+function renderBrowse(pool) {
+  const grid = document.getElementById('browse-grid');
+  grid.innerHTML='';
+  pool.forEach(item=>{
+    const d=item.difficulty||1;
+    const bc=DIFF_COLORS[d]||'#6c757d';
+    const card=document.createElement('div');
+    card.className='browse-card';
+    card.style.borderTopColor=bc;
+    let html=`<div class="browse-card-hdr">
+      <div class="browse-char">${item.character}</div>
+      <span class="browse-diff-badge" style="background:${bc}">${DIFF_LABELS[d]||''}</span>
+    </div>`;
+    item.readings.forEach(r=>{
+      const fc=FREQ_COLORS[r.frequency||'medium']||'#6c757d';
+      const meaning = r.meaning_zh ? `${r.meaning_zh}${r.meaning_en ? ' / '+r.meaning_en : ''}` : '';
+      const example = r.example_zh ? `例: ${r.example_zh}${r.example_en ? ' — '+r.example_en : ''}` : '';
+      html+=`<div class="browse-reading">
+        <span class="browse-pinyin">${r.pinyin}</span>
+        <span class="browse-dot" style="color:${fc}">●</span>
+        <span class="browse-meaning">${meaning}</span>
+      </div>`;
+      if (example) html+=`<div class="browse-example">${example}</div>`;
+    });
+    card.innerHTML=html;
+    grid.appendChild(card);
+  });
+}
+
+function browseFilter(btn, d) {
+  document.querySelectorAll('#browse-filter-row .filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  const pool = d===0 ? POLYPHONES : POLYPHONES.filter(c=>c.difficulty===d);
+  renderBrowse(pool);
+}
+
+// ══════════════════════════════════════════════════════════════
+// STATS
+// ══════════════════════════════════════════════════════════════
+function goStats() {
+  renderStats();
+  goTo('stats');
+}
+
+function renderStats() {
+  const s=loadStats();
+  document.getElementById('stat-streak').textContent=`🔥 ${s.streak}`;
+  document.getElementById('stat-best').textContent=`🏆 ${s.best_streak}`;
+
+  const tbody=document.getElementById('stats-tbody');
+  tbody.innerHTML='';
+  // "All" row first, then each level
+  [{d:0,label:'全部 All',color:DIFF_COLORS[0]}, ...LEVELS_IN_USE.map(d=>({d,label:DIFF_LABELS[d],color:DIFF_COLORS[d]}))].forEach(({d,label,color})=>{
+    const pl=(s.per_level||{})[String(d)]||{};
+    const answered=pl.total_answered||0;
+    const correct=pl.total_correct||0;
+    const bestPct=pl.best_pct||0;
+    const acc=answered>0?`${Math.round(correct/answered*100)}%`:'—';
+    const accColor=answered>0?(correct/answered>=.7?'#27ae60':'#c0392b'):'#6c757d';
+    const tr=document.createElement('tr');
+    tr.innerHTML=`<td style="color:${color};font-weight:700">${label}</td>
+      <td>${answered}</td><td>${correct}</td>
+      <td style="color:${accColor};font-weight:700">${acc}</td>
+      <td style="color:${bestPct>=80?'#f5c518':'#6c757d'};font-weight:700">${bestPct}%</td>`;
+    tbody.appendChild(tr);
+  });
+
+  const list=document.getElementById('sessions-list');
+  list.innerHTML='';
+  const sessions=([...( s.sessions||[])]).reverse().slice(0,10);
+  if (sessions.length===0) { list.innerHTML='<div style="font-size:13px;color:#6c757d;text-align:center">暂无记录 No sessions yet</div>'; return; }
+  sessions.forEach(sess=>{
+    const pct=sess.pct||0;
+    const color=pct>=80?'#27ae60':pct>=60?'#e67e22':'#c0392b';
+    const row=document.createElement('div');
+    row.className='session-row';
+    const date=sess.ts?new Date(sess.ts).toLocaleDateString('zh-CN'):'';
+    row.innerHTML=`<div class="session-pct" style="color:${color}">${pct}%</div>
+      <div class="session-info">${DIFF_LABELS[sess.difficulty]||'全部'}<br>${date}</div>
+      <div class="session-score">${sess.score} / ${sess.total}</div>`;
+    list.appendChild(row);
+  });
+}
+
+function resetStats() {
+  if (confirm('确定要重置所有成绩吗？\nReset all stats?')) {
+    resetAllStats(); renderStats();
+  }
+}
+
+// ══════════════════════════════════════════════════════════════
+// FLASHCARD
+// ══════════════════════════════════════════════════════════════
+let fcState = { deck:[], idx:0, flipped:false, diff:0 };
+
+function startFlashcard() {
+  fcState.diff=0;
+  buildFilterButtons('fc-filter-row', fcFilter, true, true);
+  const pool=[...POLYPHONES]; shuffle(pool);
+  fcState.deck=pool; fcState.idx=0; fcState.flipped=false;
+  goTo('flashcard');
+  fcShowCard();
+}
+
+function fcFilter(btn, d) {
+  document.querySelectorAll('#fc-filter-row .filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  fcState.diff=d;
+  const pool=d===0?[...POLYPHONES]:POLYPHONES.filter(c=>c.difficulty===d);
+  shuffle(pool); fcState.deck=pool; fcState.idx=0; fcState.flipped=false;
+  fcShowCard();
+}
+
+function fcShuffle() { shuffle(fcState.deck); fcState.idx=0; fcState.flipped=false; fcShowCard(); }
+
+function fcShowCard() {
+  fcState.flipped=false;
+  // Reset faces
+  document.getElementById('fc-face-front').classList.remove('hidden');
+  const back = document.getElementById('fc-face-back');
+  back.classList.remove('visible');
+  back.style.display='flex';
+
+  if (!fcState.deck.length) return;
+  const item=fcState.deck[fcState.idx];
+  const d=item.difficulty||1;
+  document.getElementById('fc-char').textContent=item.character;
+  const db=document.getElementById('fc-diff-badge');
+  db.textContent=DIFF_LABELS[d]||'';
+  db.style.background=DIFF_COLORS[d]||'#27ae60';
+  document.getElementById('fc-progress').textContent=`${fcState.idx+1} / ${fcState.deck.length}`;
+  document.getElementById('fc-readings').innerHTML='';
+}
+
+function fcFlip() {
+  fcState.flipped=!fcState.flipped;
+  const front=document.getElementById('fc-face-front');
+  const back=document.getElementById('fc-face-back');
+  if (fcState.flipped) {
+    front.classList.add('hidden');
+    back.classList.add('visible');
+    // Populate back
+    if (fcState.deck.length) {
+      const item=fcState.deck[fcState.idx];
+      document.getElementById('fc-back-char').textContent=item.character;
+      const rdiv=document.getElementById('fc-readings');
+      rdiv.innerHTML='';
+      item.readings.forEach(r=>{
+        const freq=r.frequency||'medium';
+        const fc2=FREQ_COLORS[freq]||'#6c757d';
+        const fl=FREQ_LABELS[freq]||'';
+        const [zh,en]=(fl+' ').split(' ');
+        const meaning = r.meaning_zh
+          ? `<div class="fc-meaning">${r.meaning_zh}${r.meaning_en ? ' / '+r.meaning_en : ''}</div>`
+          : '';
+        const example = r.example_zh
+          ? `<div class="fc-example">例: ${r.example_zh}${r.example_en ? ' — '+r.example_en : ''}</div>`
+          : '';
+        const row=document.createElement('div');
+        row.className='fc-reading-row';
+        row.style.borderColor=fc2;
+        row.innerHTML=`
+          <div class="fc-pinyin-box" style="border-right-color:${fc2}">
+            <span class="fc-pinyin">${r.pinyin}</span>
+          </div>
+          <div class="fc-middle">${meaning}${example}</div>
+          <div class="fc-freq-box" style="background:${fc2}">
+            <span class="fc-freq">${zh}<br>${en||''}</span>
+          </div>`;
+        rdiv.appendChild(row);
+      });
+    }
+  } else {
+    front.classList.remove('hidden');
+    back.classList.remove('visible');
+  }
+}
+
+function fcPrev() { if(fcState.deck.length){fcState.idx=(fcState.idx-1+fcState.deck.length)%fcState.deck.length;fcShowCard();} }
+function fcNext() { if(fcState.deck.length){fcState.idx=(fcState.idx+1)%fcState.deck.length;fcShowCard();} }
+
+// ══════════════════════════════════════════════════════════════
+// INIT
+// ══════════════════════════════════════════════════════════════
+initHome();
+initLevels();
+buildFilterButtons('browse-filter-row', browseFilter, true, false);
+renderBrowse(POLYPHONES);
+</script>
+</body>
+</html>
