@@ -575,7 +575,7 @@ const ENRICHED = {
   }},
   "华": { readings: {
     "huá":  { meaning_zh:"繁华，华丽",       meaning_en:"splendid, flourishing",       example_zh:"华丽",   example_en:"gorgeous",           frequency:"high"   },
-    "huà":  { meaning_zh:"华山，中华",       meaning_en:"Hua Mountain, China",         example_zh:"中华",   example_en:"China",              frequency:"high"   },
+    "huà":  { meaning_zh:"华山，地名用字",   meaning_en:"used in place names (Hua Mt.)", example_zh:"华山",   example_en:"Hua Mountain",       frequency:"high"   },
   }},
   "晃": { readings: {
     "huǎng":{ meaning_zh:"晃眼，闪晃",       meaning_en:"to dazzle, to flash past",    example_zh:"晃眼",   example_en:"dazzling",           frequency:"medium" },
