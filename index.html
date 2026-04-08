@@ -260,6 +260,38 @@ body {
   border-radius: 0 3px 3px 0;
 }
 
+/* ── Browse Search ── */
+.browse-search-wrap {
+  display: flex; align-items: center; gap: 8px;
+  background: white; border: 2px solid #dee2e6; border-radius: 10px;
+  padding: 8px 12px; transition: border-color .2s;
+}
+.browse-search-wrap:focus-within { border-color: var(--red); }
+.browse-search-icon { font-size: 15px; flex-shrink: 0; color: var(--gray); }
+.browse-search-input {
+  flex: 1; border: none; outline: none; background: transparent;
+  font-size: 15px; font-family: 'Noto Serif SC', serif; color: var(--dark);
+}
+.browse-search-input::placeholder { color: #adb5bd; font-style: italic; }
+.browse-search-clear {
+  background: none; border: none; cursor: pointer; padding: 0 2px;
+  font-size: 16px; color: var(--gray); line-height: 1;
+  display: none;
+}
+.browse-search-clear.visible { display: block; }
+.browse-count-lbl {
+  font-size: 11px; color: var(--gray); text-align: right;
+  min-height: 16px; font-style: italic;
+}
+.browse-no-results {
+  grid-column: 1 / -1; text-align: center;
+  padding: 40px 0; color: var(--gray); font-size: 14px;
+}
+mark.search-hl {
+  background: #fff176; color: inherit; border-radius: 2px; padding: 0 1px;
+  font-weight: 700;
+}
+
 /* ── Stats Screen ── */
 #stats { gap: 12px; }
 .stats-top { display: flex; align-items: center; }
@@ -491,6 +523,17 @@ body {
     <span class="legend-item" style="color:var(--orange)">● 偶用 Mid</span>
     <span class="legend-item" style="color:var(--gray)">● 少用 Low</span>
   </div>
+
+  <!-- Search bar -->
+  <div class="browse-search-wrap">
+    <span class="browse-search-icon">🔍</span>
+    <input id="browse-search" class="browse-search-input"
+      type="text" placeholder="搜索汉字、拼音或含义… Search character, pinyin or meaning"
+      oninput="onBrowseSearch(this.value)" autocomplete="off" autocorrect="off" spellcheck="false"/>
+    <button class="browse-search-clear" id="browse-search-clear" onclick="clearBrowseSearch()" title="Clear">✕</button>
+  </div>
+  <div class="browse-count-lbl" id="browse-count"></div>
+
   <div class="filter-row" id="browse-filter-row"></div>
   <div class="browse-grid" id="browse-grid"></div>
 </div>
@@ -2398,29 +2441,69 @@ function playAgain() {
 // ══════════════════════════════════════════════════════════════
 // BROWSE
 // ══════════════════════════════════════════════════════════════
-function renderBrowse(pool) {
+let browseActiveDiff = 0;
+let browseQuery = '';
+
+function hl(text, query) {
+  if (!query || !text) return text;
+  const escaped = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  return text.replace(new RegExp(escaped, 'gi'), m => `<mark class="search-hl">${m}</mark>`);
+}
+
+function browseMatchesQuery(item, q) {
+  if (!q) return true;
+  const lower = q.toLowerCase();
+  if (item.character.includes(q)) return true;
+  return item.readings.some(r =>
+    r.pinyin.toLowerCase().includes(lower) ||
+    (r.meaning_zh && r.meaning_zh.includes(q)) ||
+    (r.meaning_en && r.meaning_en.toLowerCase().includes(lower)) ||
+    (r.example_zh && r.example_zh.includes(q)) ||
+    (r.example_en && r.example_en.toLowerCase().includes(lower))
+  );
+}
+
+function renderBrowse(pool, query) {
   const grid = document.getElementById('browse-grid');
+  const countLbl = document.getElementById('browse-count');
   grid.innerHTML='';
-  pool.forEach(item=>{
+  const q = (query||'').trim();
+  const filtered = q ? pool.filter(item => browseMatchesQuery(item, q)) : pool;
+
+  // Update count label
+  if (q) {
+    countLbl.textContent = filtered.length > 0
+      ? `找到 ${filtered.length} 个结果  Found ${filtered.length} result${filtered.length!==1?'s':''}`
+      : '';
+  } else {
+    countLbl.textContent = `共 ${pool.length} 个字  ${pool.length} characters`;
+  }
+
+  if (filtered.length === 0) {
+    grid.innerHTML = `<div class="browse-no-results">😕 没有找到"${q}"<br><span style="font-size:12px">Try searching in English or pinyin</span></div>`;
+    return;
+  }
+
+  filtered.forEach(item=>{
     const d=item.difficulty||1;
     const bc=DIFF_COLORS[d]||'#6c757d';
     const card=document.createElement('div');
     card.className='browse-card';
     card.style.borderTopColor=bc;
     let html=`<div class="browse-card-hdr">
-      <div class="browse-char">${item.character}</div>
+      <div class="browse-char">${hl(item.character, q)}</div>
       <span class="browse-diff-badge" style="background:${bc}">${DIFF_LABELS[d]||''}</span>
     </div>`;
     item.readings.forEach(r=>{
       const freq = r.frequency || 'medium';
       const fc = FREQ_COLORS[freq] || '#6c757d';
       const fl = FREQ_LABELS[freq] || freq;
-      const meaning = r.meaning_zh ? `${r.meaning_zh}${r.meaning_en ? ' / '+r.meaning_en : ''}` : '';
+      const meaning = r.meaning_zh ? `${hl(r.meaning_zh,q)}${r.meaning_en ? ' / '+hl(r.meaning_en,q) : ''}` : '';
       const exZh = r.example_zh || item.character;
       const exEn = r.example_en || '';
-      const example = `例: ${exZh}${exEn ? ' — '+exEn : ''}`;
+      const example = `例: ${hl(exZh,q)}${exEn ? ' — '+hl(exEn,q) : ''}`;
       html+=`<div class="browse-reading">
-        <span class="browse-pinyin">${r.pinyin}</span>
+        <span class="browse-pinyin">${hl(r.pinyin,q)}</span>
         <span class="browse-freq-badge" style="background:${fc}">${fl}</span>
       </div>`;
       if (meaning) html+=`<div class="browse-meaning">${meaning}</div>`;
@@ -2431,11 +2514,28 @@ function renderBrowse(pool) {
   });
 }
 
+function browseCurrentPool() {
+  return browseActiveDiff===0 ? POLYPHONES : POLYPHONES.filter(c=>c.difficulty===browseActiveDiff);
+}
+
+function onBrowseSearch(value) {
+  browseQuery = value;
+  const clearBtn = document.getElementById('browse-search-clear');
+  clearBtn.classList.toggle('visible', value.length > 0);
+  renderBrowse(browseCurrentPool(), browseQuery);
+}
+
+function clearBrowseSearch() {
+  document.getElementById('browse-search').value = '';
+  onBrowseSearch('');
+  document.getElementById('browse-search').focus();
+}
+
 function browseFilter(btn, d) {
   document.querySelectorAll('#browse-filter-row .filter-btn').forEach(b=>b.classList.remove('active'));
   btn.classList.add('active');
-  const pool = d===0 ? POLYPHONES : POLYPHONES.filter(c=>c.difficulty===d);
-  renderBrowse(pool);
+  browseActiveDiff = d;
+  renderBrowse(browseCurrentPool(), browseQuery);
 }
 
 // ══════════════════════════════════════════════════════════════
@@ -2589,7 +2689,7 @@ function fcNext() { if(fcState.deck.length){fcState.idx=(fcState.idx+1)%fcState.
 initHome();
 initLevels();
 buildFilterButtons('browse-filter-row', browseFilter, true, false);
-renderBrowse(POLYPHONES);
+renderBrowse(POLYPHONES, '');
 </script>
 </body>
 </html>
