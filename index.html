@@ -2195,13 +2195,22 @@ function initLevels() {
 // ══════════════════════════════════════════════════════════════
 let quizState = {
   difficulty:0, sessionLimit:10, score:0, total:0,
-  currentChar:null, correctPinyin:null, options:[], answered:false
+  currentChar:null, correctPinyin:null, options:[], answered:false,
+  queue:[], queueIdx:0
 };
 let lastQuizDiff=0, lastQuizCount=10;
 
+function buildQuestionQueue(difficulty) {
+  const pool = difficulty===0 ? POLYPHONES : POLYPHONES.filter(c=>c.difficulty===difficulty);
+  const pairs = [];
+  pool.forEach(char => char.readings.forEach(r => pairs.push({char, reading:r})));
+  return shuffle(pairs);
+}
+
 function startQuiz(difficulty, count) {
   lastQuizDiff = difficulty; lastQuizCount = count;
-  quizState = { difficulty, sessionLimit:count, score:0, total:0, currentChar:null, correctPinyin:null, options:[], answered:false };
+  const queue = buildQuestionQueue(difficulty);
+  quizState = { difficulty, sessionLimit:count, score:0, total:0, currentChar:null, correctPinyin:null, options:[], answered:false, queue, queueIdx:0 };
   const color = DIFF_COLORS[difficulty]||'#2980b9';
   const badge = document.getElementById('quiz-level-badge');
   badge.textContent = DIFF_LABELS[difficulty]||'全部';
@@ -2226,15 +2235,16 @@ function buildDistractors(correctPinyin, charEntry, n=3) {
   for (const r of charEntry.readings) {
     if (!seen.has(r.pinyin)) { result.push(r.pinyin); seen.add(r.pinyin); }
   }
-  // 2. similar base syllable
+  // 2. similar base syllable (deduplicated)
   function base(p) { return p.replace(/[āáǎà]/g,'a').replace(/[ēéěè]/g,'e').replace(/[īíǐì]/g,'i').replace(/[ōóǒò]/g,'o').replace(/[ūúǔù]/g,'u').replace(/[ǖǘǚǜ]/g,'u'); }
   const cb = base(correctPinyin);
-  const similar = POLYPHONES.flatMap(p=>p.readings.map(r=>r.pinyin)).filter(p=>!seen.has(p)&&base(p)===cb);
+  const allPinyin = [...new Set(POLYPHONES.flatMap(p=>p.readings.map(r=>r.pinyin)))];
+  const similar = allPinyin.filter(p=>!seen.has(p)&&base(p)===cb);
   shuffle(similar);
   for (const p of similar) { if(result.length>=n) break; result.push(p); seen.add(p); }
-  // 3. random fill
+  // 3. random fill (deduplicated)
   if (result.length < n) {
-    const rest = shuffle(POLYPHONES.flatMap(p=>p.readings.map(r=>r.pinyin)).filter(p=>!seen.has(p)));
+    const rest = shuffle(allPinyin.filter(p=>!seen.has(p)));
     for (const p of rest) { if(result.length>=n) break; result.push(p); seen.add(p); }
   }
   return result.slice(0,n);
@@ -2249,10 +2259,13 @@ function loadQuestion() {
   nextBtn.onclick = loadQuestion;
   quizState.answered = false;
 
-  const pool = quizPool();
-  const char = pool[Math.floor(Math.random()*pool.length)];
+  // Dequeue next question; reshuffle and restart when the queue is exhausted
+  if (quizState.queueIdx >= quizState.queue.length) {
+    quizState.queue = buildQuestionQueue(quizState.difficulty);
+    quizState.queueIdx = 0;
+  }
+  const {char, reading} = quizState.queue[quizState.queueIdx++];
   quizState.currentChar = char;
-  const reading = char.readings[Math.floor(Math.random()*char.readings.length)];
   quizState.correctPinyin = reading.pinyin;
 
   const d = char.difficulty||1;
