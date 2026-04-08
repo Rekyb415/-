@@ -2444,18 +2444,49 @@ function playAgain() {
 let browseActiveDiff = 0;
 let browseQuery = '';
 
+function normalizePinyin(s) {
+  // Strip all tone diacritics so "hao" matches "hǎo", "hào", etc.
+  return (s||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
+}
+
 function hl(text, query) {
   if (!query || !text) return text;
-  const escaped = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-  return text.replace(new RegExp(escaped, 'gi'), m => `<mark class="search-hl">${m}</mark>`);
+  // Try exact match first, then tone-stripped match
+  const escapedRaw = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const normText  = normalizePinyin(text);
+  const normQuery = normalizePinyin(query);
+  if (!normText.includes(normQuery)) return text;
+  // Rebuild text with <mark> tags by scanning char-by-char on the normalised version
+  const normEscaped = normQuery.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const re = new RegExp(normEscaped, 'gi');
+  // Map normalised indices back onto original string
+  // (safe because NFD decomposition keeps base char positions stable after stripping)
+  const origChars = [...text];
+  const normChars = [...normalizePinyin(text)];
+  let result = ''; let oi = 0; let ni = 0;
+  const normStr = normChars.join('');
+  let match;
+  let lastNi = 0;
+  while ((match = re.exec(normStr)) !== null) {
+    const startN = match.index, endN = match.index + match[0].length;
+    // copy chars before match
+    // we need to map norm indices → orig indices
+    // since NFD strips combiners, normStr[i] ↔ the i-th base char in origChars
+    result += origChars.slice(lastNi, startN).join('');
+    result += `<mark class="search-hl">${origChars.slice(startN, endN).join('')}</mark>`;
+    lastNi = endN;
+  }
+  result += origChars.slice(lastNi).join('');
+  return result;
 }
 
 function browseMatchesQuery(item, q) {
   if (!q) return true;
+  const nq = normalizePinyin(q);
   const lower = q.toLowerCase();
   if (item.character.includes(q)) return true;
   return item.readings.some(r =>
-    r.pinyin.toLowerCase().includes(lower) ||
+    normalizePinyin(r.pinyin).includes(nq) ||
     (r.meaning_zh && r.meaning_zh.includes(q)) ||
     (r.meaning_en && r.meaning_en.toLowerCase().includes(lower)) ||
     (r.example_zh && r.example_zh.includes(q)) ||
