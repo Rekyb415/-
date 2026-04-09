@@ -1372,7 +1372,7 @@ const ENRICHED = {
   }},
   "塔": { readings: {
     "tǎ":  { meaning_zh:"宝塔，铁塔",   meaning_en:"pagoda, tower",           example_zh:"宝塔",   example_en:"pagoda",             frequency:"high"   },
-    "dá":  { meaning_zh:"佛塔（梵音）", meaning_en:"stupa (Sanskrit origin)", example_zh:"宝刹",   example_en:"Buddhist stupa",     frequency:"low"    },
+    "dá":  { meaning_zh:"佛塔（梵音）", meaning_en:"stupa (Sanskrit origin)", example_zh:"",       example_en:"",                   frequency:"low"    },
   }},
   "同": { readings: {
     "tóng":{ meaning_zh:"相同，同学",   meaning_en:"same, classmate",         example_zh:"同学",   example_en:"classmate",          frequency:"high"   },
