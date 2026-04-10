@@ -452,6 +452,39 @@ mark.search-hl {
 .spacer { flex: 1; }
 .center { text-align: center; }
 .sessions-list { display: flex; flex-direction: column; gap: 6px; overflow-y: auto; max-height: 220px; }
+
+/* ── SRS ── */
+.srs-badge {
+  display: inline-flex; align-items: center; gap: 4px;
+  background: var(--purple); color: white;
+  border-radius: 6px; padding: 3px 10px;
+  font-size: 11px; font-weight: 700; font-family: 'Noto Serif SC', serif;
+}
+.srs-due-pill {
+  background: var(--gold); color: var(--dark);
+  border-radius: 10px; padding: 1px 7px;
+  font-size: 10px; font-weight: 900;
+}
+.srs-card-info {
+  background: linear-gradient(135deg,#f3e8ff,#ede0ff);
+  border: 1.5px solid var(--purple); border-radius: 10px;
+  padding: 8px 14px; display: flex; align-items: center; gap: 10px;
+  font-size: 12px; color: #5a1f8c;
+}
+.srs-card-info .srs-icon { font-size: 18px; flex-shrink: 0; }
+.srs-mastery-bar-wrap { height: 5px; background: #e0d0f0; border-radius: 3px; overflow:hidden; margin-top:4px; }
+.srs-mastery-bar-fill { height:100%; border-radius:3px; background: linear-gradient(90deg,var(--purple),var(--gold)); transition: width .4s; }
+
+.btn-srs { background: var(--purple); color: #fff; font-size: 15px; padding: 11px 40px; }
+
+.srs-stats-card {
+  background: white; border-radius: 10px;
+  border: 1px solid #dee2e6; border-top: 3px solid var(--purple);
+  padding: 12px 16px; display: flex; flex-direction: column; gap: 6px;
+}
+.srs-stats-title { font-size: 13px; font-weight: 700; color: var(--purple); }
+.srs-stats-row { display: flex; justify-content: space-between; font-size: 12px; color: var(--gray); }
+.srs-stats-val { font-weight: 700; color: var(--dark); }
 </style>
 </head>
 <body>
@@ -464,6 +497,7 @@ mark.search-hl {
   <p class="home-subtitle">Polyphonic Chinese Characters</p>
   <div class="home-btns">
     <button class="btn btn-primary" onclick="goTo('levels')">开始测验 &nbsp;Start Quiz</button>
+    <button class="btn btn-srs" onclick="startSrsSession()">🧠 智能复习 &nbsp;SRS Review</button>
     <button class="btn btn-purple" onclick="startFlashcard()">闪卡练习 &nbsp;Flashcards</button>
     <button class="btn btn-dark"   onclick="goTo('browse')">浏览词库 &nbsp;Browse</button>
     <button class="btn btn-blue"   onclick="goStats()">我的成绩 &nbsp;My Stats</button>
@@ -496,6 +530,7 @@ mark.search-hl {
   <div class="quiz-top">
     <button class="btn btn-dark btn-sm" onclick="quizBack()">← 返回 Back</button>
     <span class="level-badge" id="quiz-level-badge">全部</span>
+    <span id="quiz-srs-badge" style="display:none" class="srs-badge">🧠 SRS <span class="srs-due-pill" id="quiz-srs-due">0</span></span>
     <span class="score-label" id="quiz-score">0 / 0</span>
   </div>
   <div class="progress-bar-wrap"><div class="progress-bar-fill" id="quiz-progress"></div></div>
@@ -516,6 +551,14 @@ mark.search-hl {
       根据汉字的意思，猜猜它的发音<br>
       <em>Look at the meaning of the word to guess how to pronounce it</em>
     </span>
+  </div>
+
+  <div id="quiz-srs-info" style="display:none" class="srs-card-info">
+    <span class="srs-icon">🧠</span>
+    <div style="flex:1">
+      <div id="quiz-srs-status" style="font-weight:700;margin-bottom:3px"></div>
+      <div class="srs-mastery-bar-wrap"><div class="srs-mastery-bar-fill" id="quiz-srs-bar" style="width:0%"></div></div>
+    </div>
   </div>
 
   <div class="hint-lbl" id="quiz-hint"></div>
@@ -585,6 +628,9 @@ mark.search-hl {
       <tbody id="stats-tbody"></tbody>
     </table>
   </div>
+
+  <div class="recent-title">🧠 智能复习 &nbsp;SRS Stats</div>
+  <div class="srs-stats-card" id="srs-stats-card"></div>
 
   <div class="recent-title">最近记录 &nbsp;Recent Sessions</div>
   <div class="sessions-list" id="sessions-list"></div>
@@ -2890,6 +2936,161 @@ function resetAllStats() {
 }
 
 // ══════════════════════════════════════════════════════════════
+// SRS ENGINE  (SM-2 simplified)
+// ══════════════════════════════════════════════════════════════
+// Key: 'poly_srs'  →  { "字|pīn": { ef, interval, due, reps, lapses }, ... }
+// ef  = ease factor (1.3–2.5), interval = days until next review
+// due = unix ms timestamp
+// reps = consecutive correct reviews; lapses = times answered wrong
+
+const SRS_KEY = 'poly_srs';
+const SRS_MIN_EF = 1.3;
+const SRS_NEW_EF = 2.5;
+const DAY_MS = 86400000;
+
+function srsCardId(char, pinyin) { return `${char}|${pinyin}`; }
+
+function loadSrs() {
+  try { return JSON.parse(localStorage.getItem(SRS_KEY)) || {}; }
+  catch { return {}; }
+}
+function saveSrs(db) { localStorage.setItem(SRS_KEY, JSON.stringify(db)); }
+
+function getSrsCard(db, char, pinyin) {
+  const id = srsCardId(char, pinyin);
+  return db[id] || { ef: SRS_NEW_EF, interval: 0, due: 0, reps: 0, lapses: 0 };
+}
+
+function updateSrsCard(db, char, pinyin, correct) {
+  const id = srsCardId(char, pinyin);
+  const card = getSrsCard(db, char, pinyin);
+  const now = Date.now();
+
+  if (correct) {
+    card.reps++;
+    if (card.reps === 1)      card.interval = 1;
+    else if (card.reps === 2) card.interval = 4;
+    else                       card.interval = Math.round(card.interval * card.ef);
+    // quality 4 for correct (would be 5 if very fast — keep it simple)
+    card.ef = Math.max(SRS_MIN_EF, card.ef + 0.1 - (5-4)*(0.08+(5-4)*0.02));
+  } else {
+    card.lapses++;
+    card.reps = 0;
+    card.interval = 1;
+    card.ef = Math.max(SRS_MIN_EF, card.ef - 0.2);
+  }
+  card.due = now + card.interval * DAY_MS;
+  db[id] = card;
+  return card;
+}
+
+function srsDueCards(difficulty) {
+  const db = loadSrs();
+  const now = Date.now();
+  const pool = difficulty === 0 ? POLYPHONES : POLYPHONES.filter(c => c.difficulty === difficulty);
+  const due = [], newCards = [], later = [];
+
+  pool.forEach(char => {
+    char.readings.forEach(r => {
+      const card = getSrsCard(db, char.character, r.pinyin);
+      const entry = { char, reading: r, card };
+      if (card.reps === 0) newCards.push(entry);       // never seen
+      else if (card.due <= now) due.push(entry);        // overdue
+      else later.push(entry);                           // not yet due
+    });
+  });
+  // Sort overdue by most overdue first
+  due.sort((a,b) => a.card.due - b.card.due);
+  // New cards after overdue; later cards last (in case session is long)
+  return [...due, ...shuffle(newCards), ...later];
+}
+
+function srsStats() {
+  const db = loadSrs();
+  const now = Date.now();
+  let total=0, due=0, learning=0, mastered=0;
+  POLYPHONES.forEach(char => {
+    char.readings.forEach(r => {
+      total++;
+      const card = getSrsCard(db, char.character, r.pinyin);
+      if (card.reps === 0) { /* new */ }
+      else if (card.due <= now) due++;
+      else if (card.interval >= 21) mastered++;
+      else learning++;
+    });
+  });
+  const newCount = total - due - learning - mastered;
+  return { total, due, newCount, learning, mastered };
+}
+
+function resetSrs() {
+  localStorage.removeItem(SRS_KEY);
+}
+
+// ── SRS Quiz mode ─────────────────────────────────────────────
+let srsMode = false;
+let srsDueCount = 0;
+
+function startSrsSession() {
+  srsMode = true;
+  const allDue = srsDueCards(0);
+  srsDueCount = allDue.filter(e => e.card.due <= Date.now() || e.card.reps === 0).length;
+
+  // Build queue: up to 20 due+new cards, then fill rest
+  const queue = allDue.slice(0, Math.max(20, srsDueCount));
+  quizState = {
+    difficulty: 0, sessionLimit: queue.length,
+    score: 0, total: 0,
+    currentChar: null, correctPinyin: null, options: [], answered: false,
+    queue, queueIdx: 0,
+  };
+  lastQuizDiff = 0; lastQuizCount = 0;
+
+  const badge = document.getElementById('quiz-level-badge');
+  badge.textContent = '智能复习';
+  badge.style.background = '#8e44ad';
+
+  document.getElementById('quiz-srs-badge').style.display = 'inline-flex';
+  document.getElementById('quiz-srs-due').textContent = srsDueCount;
+  document.getElementById('quiz-srs-info').style.display = 'flex';
+  document.getElementById('quiz-score').textContent = '0 / 0';
+
+  const s = loadStats();
+  document.getElementById('quiz-streak').textContent = `🔥 ${s.streak}`;
+  goTo('quiz');
+  loadQuestion();
+}
+
+function updateSrsBadge() {
+  if (!srsMode) return;
+  const db = loadSrs();
+  const now = Date.now();
+  const remaining = quizState.queue.slice(quizState.queueIdx)
+    .filter(e => {
+      const card = getSrsCard(db, e.char.character, e.reading.pinyin);
+      return card.due <= now || card.reps === 0;
+    }).length;
+  document.getElementById('quiz-srs-due').textContent = remaining;
+
+  // Show mastery info for current card
+  const { currentChar, correctPinyin } = quizState;
+  if (currentChar && correctPinyin) {
+    const card = getSrsCard(db, currentChar.character, correctPinyin);
+    const intervalDays = card.interval || 0;
+    let statusText = '';
+    if (card.reps === 0) statusText = '新卡 New card — first time seeing this';
+    else if (card.lapses > 0 && card.interval <= 1) statusText = `复习中 Relearning · ${card.lapses} lapse${card.lapses>1?'s':''}`;
+    else statusText = `间隔 Interval: ${intervalDays}天 day${intervalDays>1?'s':''}  ·  复习 Reviews: ${card.reps}`;
+    document.getElementById('quiz-srs-status').textContent = statusText;
+
+    // Mastery bar: 0 = new, 100 = 21+ day interval
+    const pct = Math.min(100, Math.round((intervalDays / 21) * 100));
+    document.getElementById('quiz-srs-bar').style.width = pct + '%';
+  }
+}
+
+
+// ══════════════════════════════════════════════════════════════
 // NAVIGATION
 // ══════════════════════════════════════════════════════════════
 function goTo(id) {
@@ -2904,7 +3105,9 @@ function goTo(id) {
 function initHome() {
   const total = POLYPHONES.length;
   const counts = LEVELS_IN_USE.map(d => `${DIFF_LABELS[d]} ${POLYPHONES.filter(c=>c.difficulty===d).length}`).join('  ');
-  document.getElementById('home-stats').textContent = `词库 ${total} 字  ·  ${counts}`;
+  const ss = srsStats();
+  const dueStr = ss.due > 0 ? `  ·  🧠 ${ss.due} due` : ss.mastered > 0 ? `  ·  ✅ ${ss.mastered} mastered` : '';
+  document.getElementById('home-stats').textContent = `词库 ${total} 字  ·  ${counts}${dueStr}`;
 }
 
 // ══════════════════════════════════════════════════════════════
@@ -2968,6 +3171,7 @@ function buildQuestionQueue(difficulty) {
 }
 
 function startQuiz(difficulty, count) {
+  srsMode = false;
   lastQuizDiff = difficulty; lastQuizCount = count;
   const queue = buildQuestionQueue(difficulty);
   quizState = { difficulty, sessionLimit:count, score:0, total:0, currentChar:null, correctPinyin:null, options:[], answered:false, queue, queueIdx:0 };
@@ -2975,6 +3179,8 @@ function startQuiz(difficulty, count) {
   const badge = document.getElementById('quiz-level-badge');
   badge.textContent = DIFF_LABELS[difficulty]||'全部';
   badge.style.background = color;
+  document.getElementById('quiz-srs-badge').style.display = 'none';
+  document.getElementById('quiz-srs-info').style.display = 'none';
   document.getElementById('quiz-score').textContent = '0 / 0';
   const s = loadStats();
   document.getElementById('quiz-streak').textContent = `🔥 ${s.streak}`;
@@ -3019,8 +3225,9 @@ function loadQuestion() {
   nextBtn.onclick = loadQuestion;
   quizState.answered = false;
 
-  // Dequeue next question; reshuffle and restart when the queue is exhausted
+  // Dequeue next question; in SRS mode end session when queue exhausted; otherwise reshuffle
   if (quizState.queueIdx >= quizState.queue.length) {
+    if (srsMode) { finishSession(); return; }
     quizState.queue = buildQuestionQueue(quizState.difficulty);
     quizState.queueIdx = 0;
   }
@@ -3061,6 +3268,7 @@ function loadQuestion() {
   });
 
   updateProgress();
+  if (srsMode) updateSrsBadge();
 }
 
 function updateProgress() {
@@ -3084,6 +3292,14 @@ function onAnswer(idx) {
   const correct = chosen===quizState.correctPinyin;
   quizState.total++;
   if(correct) quizState.score++;
+
+  // Update SRS card
+  if (quizState.currentChar && quizState.correctPinyin) {
+    const db = loadSrs();
+    updateSrsCard(db, quizState.currentChar.character, quizState.correctPinyin, correct);
+    saveSrs(db);
+    if (srsMode) updateSrsBadge();
+  }
 
   const [streak,best] = updateStreak(correct);
   const btns = document.querySelectorAll('.opt-btn');
@@ -3120,7 +3336,8 @@ function onAnswer(idx) {
 
 function finishSession() {
   recordSession(quizState.difficulty, quizState.score, quizState.total);
-  showResult(quizState.score, quizState.total, quizState.difficulty);
+  const title = srsMode ? '智能复习完成 SRS Complete' : null;
+  showResult(quizState.score, quizState.total, quizState.difficulty, title);
   quizState.total=0;
 }
 
@@ -3134,7 +3351,7 @@ function quizNext() { loadQuestion(); }
 // ══════════════════════════════════════════════════════════════
 // RESULT
 // ══════════════════════════════════════════════════════════════
-function showResult(score, total, difficulty) {
+function showResult(score, total, difficulty, titleOverride) {
   const pct = total>0 ? Math.round(score/total*100) : 0;
   document.getElementById('result-pct').textContent = `${pct}%`;
   document.getElementById('result-det').textContent = `${score} / ${total}`;
@@ -3147,11 +3364,12 @@ function showResult(score, total, difficulty) {
   document.getElementById('result-msg').textContent=msg;
   const s=loadStats();
   document.getElementById('result-streak').textContent=`🔥 当前连对 Streak: ${s.streak}   🏆 最高 Best: ${s.best_streak}`;
-  document.getElementById('result-title').textContent=`本次结果  ${DIFF_LABELS[difficulty]||'全部'}`;
+  document.getElementById('result-title').textContent = titleOverride || `本次结果  ${DIFF_LABELS[difficulty]||'全部'}`;
   goTo('result');
 }
 
 function playAgain() {
+  if (srsMode) { startSrsSession(); return; }
   startQuiz(lastQuizDiff, lastQuizCount);
 }
 
@@ -3312,6 +3530,19 @@ function renderStats() {
   document.getElementById('stat-streak').textContent=`🔥 ${s.streak}`;
   document.getElementById('stat-best').textContent=`🏆 ${s.best_streak}`;
 
+  // SRS stats
+  const ss = srsStats();
+  const srsCard = document.getElementById('srs-stats-card');
+  srsCard.innerHTML = `
+    <div class="srs-stats-title">🧠 智能间隔复习 Spaced Repetition</div>
+    <div class="srs-stats-row"><span>📬 待复习 Due now</span><span class="srs-stats-val" style="color:${ss.due>0?'#c0392b':'#27ae60'}">${ss.due}</span></div>
+    <div class="srs-stats-row"><span>🆕 未学习 New</span><span class="srs-stats-val">${ss.newCount}</span></div>
+    <div class="srs-stats-row"><span>📖 学习中 Learning</span><span class="srs-stats-val" style="color:#e67e22">${ss.learning}</span></div>
+    <div class="srs-stats-row"><span>✅ 已掌握 Mastered</span><span class="srs-stats-val" style="color:#27ae60">${ss.mastered}</span></div>
+    <div class="srs-mastery-bar-wrap" style="margin-top:4px"><div class="srs-mastery-bar-fill" style="width:${ss.total>0?Math.round(ss.mastered/ss.total*100):0}%"></div></div>
+    <div style="font-size:10px;color:var(--gray);text-align:right">${ss.total>0?Math.round(ss.mastered/ss.total*100):0}% mastered</div>
+  `;
+
   const tbody=document.getElementById('stats-tbody');
   tbody.innerHTML='';
   // "All" row first, then each level
@@ -3348,8 +3579,8 @@ function renderStats() {
 }
 
 function resetStats() {
-  if (confirm('确定要重置所有成绩吗？\nReset all stats?')) {
-    resetAllStats(); renderStats();
+  if (confirm('确定要重置所有成绩吗？\nReset all stats and SRS data?')) {
+    resetAllStats(); resetSrs(); renderStats();
   }
 }
 
