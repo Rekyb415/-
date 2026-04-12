@@ -190,7 +190,7 @@ const RAW_DATA = [
   {hanzi:"勾",pinyin:"gōu/gòu",level:"七-九级"},
   {hanzi:"估",pinyin:"gū/gù",level:"五级"},
   {hanzi:"骨",pinyin:"gǔ/gū",level:"四级"},
-  {hanzi:"广",pinyin:"guǎng/ān",level:"二级"},
+  {hanzi:"广",pinyin:"guǎng/yǎn",level:"二级"},
   {hanzi:"龟",pinyin:"guī/jūn/qiū",level:"七-九级"},
   {hanzi:"过",pinyin:"guò/guō",level:"一级"},
   {hanzi:"哈",pinyin:"hā/hǎ/hà",level:"三级"},
@@ -281,7 +281,7 @@ const RAW_DATA = [
   // A
   {hanzi:"阿",pinyin:"ā/ē",level:"四级"},
   {hanzi:"艾",pinyin:"ài/yì",level:"七-九级"},
-  {hanzi:"熬",pinyin:"āo/áo",level:"七-九级"},
+  {hanzi:"熬",pinyin:"áo/āo",level:"七-九级"},
   // B
   {hanzi:"吧",pinyin:"bā/ba",level:"一级"},
   {hanzi:"把",pinyin:"bǎ/bà/bā",level:"一级"},
@@ -360,7 +360,7 @@ const RAW_DATA = [
   {hanzi:"么",pinyin:"me/ma",level:"一级"},
   {hanzi:"蒙",pinyin:"méng/mēng/měng",level:"七-九级"},
   {hanzi:"眯",pinyin:"mí/mī",level:"七-九级"},
-  {hanzi:"廛",pinyin:"mí/méi",level:"七-九级"},
+  {hanzi:"廛",pinyin:"chán",level:"七-九级"},
   {hanzi:"泌",pinyin:"mì/bì",level:"七-九级"},
   {hanzi:"秘",pinyin:"mì/bì",level:"四级"},
   {hanzi:"摩",pinyin:"mó/mā",level:"七-九级"},
@@ -449,11 +449,11 @@ const RAW_DATA = [
   {hanzi:"仔",pinyin:"zǐ/zǎi/zī",level:"七-九级"},
   {hanzi:"大",pinyin:"dà/dài",level:"一级"},
   {hanzi:"打",pinyin:"dǎ/dá",level:"一级"},
-  {hanzi:"出",pinyin:"chū/chù",level:"一级"},
+  {hanzi:"出",pinyin:"chū",level:"一级"},
   {hanzi:"下",pinyin:"xià/xia",level:"一级"},
   {hanzi:"车",pinyin:"chē/jū",level:"一级"},
   {hanzi:"画",pinyin:"huà/huā",level:"二级"},
-  {hanzi:"飞",pinyin:"fēi/fěi",level:"一级"},
+  {hanzi:"飞",pinyin:"fēi",level:"一级"},
   {hanzi:"鱼",pinyin:"yú/yǔ",level:"二级"},
   {hanzi:"带",pinyin:"dài/dǎi",level:"二级"},
   {hanzi:"断",pinyin:"duàn/duǎn",level:"五级"},
@@ -1165,7 +1165,7 @@ const ENRICHED = {
   }},
   "广": { readings: {
     "guǎng":{ meaning_zh:"广大，广泛",  meaning_en:"vast, wide, broad",       example_zh:"广泛",   example_en:"widespread",         frequency:"high"   },
-    "ān":  { meaning_zh:"广州（古称）", meaning_en:"archaic form in place names",example_zh:"广州", example_en:"Guangzhou",          frequency:"low"    },
+    "yǎn":  { meaning_zh:"广（通'庵'，建筑用）", meaning_en:"archaic form used in place names/architecture",example_zh:"广州", example_en:"Guangzhou",          frequency:"low"    },
   }},
   "龟": { readings: {
     "guī": { meaning_zh:"乌龟，龟甲",   meaning_en:"turtle, tortoise",        example_zh:"乌龟",   example_en:"turtle",             frequency:"high"   },
@@ -1316,7 +1316,7 @@ const ENRICHED = {
   }},
   "陆": { readings: {
     "lù":  { meaning_zh:"陆地，大陆",   meaning_en:"land, continent",         example_zh:"大陆",   example_en:"mainland",           frequency:"high"   },
-    "liù": { meaning_zh:"陆（数字六）", meaning_en:"six (formal/legal form)", example_zh:"陆续",   example_en:"one after another",  frequency:"medium" },
+    "liù": { meaning_zh:"陆（数字六的大写）", meaning_en:"six (formal/legal form)", example_zh:"壹贰叁陆",   example_en:"formal numeral six",  frequency:"medium" },
   }},
   "抹": { readings: {
     "mǒ":  { meaning_zh:"抹去，涂抹",   meaning_en:"to wipe, to spread",      example_zh:"抹去",   example_en:"to wipe away",       frequency:"high"   },
@@ -1520,8 +1520,8 @@ const ENRICHED = {
     "yì": { meaning_zh:"自怨自艾，悔恨",  meaning_en:"to repent, to reproach oneself", example_zh:"自怨自艾", example_en:"to blame oneself", frequency:"low" },
   }},
   "熬": { readings: {
-    "āo": { meaning_zh:"熬白菜，煮",  meaning_en:"to cook by boiling",  example_zh:"熬白菜", example_en:"stewed cabbage",  frequency:"high"   },
-    "áo": { meaning_zh:"熬夜，坚持",  meaning_en:"to endure, to stay up late", example_zh:"熬夜", example_en:"to stay up late", frequency:"high"   },
+    "áo": { meaning_zh:"熬夜，坚持，熬粥",  meaning_en:"to endure; to stay up; to simmer", example_zh:"熬夜", example_en:"to stay up late", frequency:"high"   },
+    "āo": { meaning_zh:"熬（方言，煮炖）",  meaning_en:"to boil/stew (dialectal)",  example_zh:"熬白菜", example_en:"stewed cabbage",  frequency:"low"   },
   }},
   "吧": { readings: {
     "bā": { meaning_zh:"酒吧，吧台",  meaning_en:"bar (establishment)",  example_zh:"酒吧", example_en:"bar",              frequency:"high"   },
@@ -2043,7 +2043,7 @@ const ENRICHED = {
   }},
   "旋": { readings: {
     "xuán":{ meaning_zh:"旋转，旋风",  meaning_en:"to revolve; whirlwind", example_zh:"旋转", example_en:"to revolve",     frequency:"high"   },
-    "xuàn":{ meaning_zh:"旋风，急旋",  meaning_en:"spinning fast",        example_zh:"旋风", example_en:"whirlwind (fast)", frequency:"medium" },
+    "xuàn":{ meaning_zh:"旋儿，旋涡状（口语）",  meaning_en:"swirl pattern; spinning (colloq.)",        example_zh:"旋儿",   example_en:"swirl/whorl",        frequency:"medium" },
   }},
   "呀": { readings: {
     "yā":  { meaning_zh:"叹词，哎呀",  meaning_en:"ah! (exclamation)",    example_zh:"哎呀", example_en:"oh dear!",        frequency:"high"   },
