@@ -447,6 +447,28 @@ const RAW_DATA = [
   {hanzi:"种",pinyin:"zhǒng/zhòng",level:"一级"},
   {hanzi:"椎",pinyin:"zhuī/chuí",level:"七-九级"},
   {hanzi:"仔",pinyin:"zǐ/zǎi/zī",level:"七-九级"},
+  {hanzi:"大",pinyin:"dà/dài",level:"一级"},
+  {hanzi:"打",pinyin:"dǎ/dá",level:"一级"},
+  {hanzi:"出",pinyin:"chū/chù",level:"一级"},
+  {hanzi:"下",pinyin:"xià/xia",level:"一级"},
+  {hanzi:"车",pinyin:"chē/jū",level:"二级"},
+  {hanzi:"画",pinyin:"huà/huā",level:"二级"},
+  {hanzi:"飞",pinyin:"fēi/fěi",level:"二级"},
+  {hanzi:"鱼",pinyin:"yú/yǔ",level:"二级"},
+  {hanzi:"带",pinyin:"dài/dǎi",level:"三级"},
+  {hanzi:"断",pinyin:"duàn/duǎn",level:"三级"},
+  {hanzi:"极",pinyin:"jí/jì",level:"三级"},
+  {hanzi:"近",pinyin:"jìn/jǐn",level:"三级"},
+  {hanzi:"苦",pinyin:"kǔ/gǔ",level:"三级"},
+  {hanzi:"木",pinyin:"mù/mò",level:"三级"},
+  {hanzi:"约",pinyin:"yuē/yāo",level:"三级"},
+  {hanzi:"装",pinyin:"zhuāng/zhuàng",level:"三级"},
+  {hanzi:"著",pinyin:"zhù/zhe/zháo/zhuó",level:"四级"},
+  {hanzi:"拨",pinyin:"bō/bǒ",level:"五级"},
+  {hanzi:"跌",pinyin:"diē/dié",level:"五级"},
+  {hanzi:"纯",pinyin:"chún/zhǔn",level:"五级"},
+  {hanzi:"颤",pinyin:"chàn/zhàn",level:"六级"},
+  {hanzi:"稿",pinyin:"gǎo/hào",level:"七-九级"},
 ];
 
 // ── Enriched meanings & examples (optional per-character) ────
@@ -2113,6 +2135,97 @@ const ENRICHED = {
 const LEVEL_MAP = {
   "一级": 1, "二级": 2, "三级": 3, "四级": 4,
   "五级": 5, "六级": 6, "七-九级": 7,
+  "大": { readings: {
+    "dà":  { meaning_zh:"大小，巨大", meaning_en:"big, large", example_zh:"大家", example_pinyin:"dà jiā", example_en:"everyone", frequency:"high" },
+    "dài": { meaning_zh:"大夫（医生）", meaning_en:"doctor (archaic/formal)", example_zh:"大夫", example_pinyin:"dài fu", example_en:"doctor", frequency:"medium" },
+  }},
+  "打": { readings: {
+    "dǎ":  { meaning_zh:"打击，打电话", meaning_en:"to hit, to make a call", example_zh:"打电话", example_pinyin:"dǎ diàn huà", example_en:"to make a phone call", frequency:"high" },
+    "dá":  { meaning_zh:"一打（十二个）", meaning_en:"a dozen", example_zh:"一打", example_pinyin:"yī dá", example_en:"a dozen", frequency:"medium" },
+  }},
+  "出": { readings: {
+    "chū": { meaning_zh:"出去，出来", meaning_en:"to go out, to come out", example_zh:"出门", example_pinyin:"chū mén", example_en:"to go out", frequency:"high" },
+    "chù": { meaning_zh:"出席（书面语）", meaning_en:"to attend (formal/classical)", example_zh:"出席", example_pinyin:"chū xí", example_en:"to attend", frequency:"low" },
+  }},
+  "下": { readings: {
+    "xià": { meaning_zh:"下面，下去", meaning_en:"below, to go down", example_zh:"下面", example_pinyin:"xià miàn", example_en:"below, underneath", frequency:"high" },
+    "xia": { meaning_zh:"下（轻声，动态助词）", meaning_en:"(light tone particle after verbs)", example_zh:"坐下", example_pinyin:"zuò xia", example_en:"sit down", frequency:"high" },
+  }},
+  "车": { readings: {
+    "chē": { meaning_zh:"汽车，车辆", meaning_en:"vehicle, car", example_zh:"汽车", example_pinyin:"qì chē", example_en:"car, automobile", frequency:"high" },
+    "jū":  { meaning_zh:"象棋中的车", meaning_en:"chariot (in Chinese chess)", example_zh:"车马", example_pinyin:"jū mǎ", example_en:"chariot and horse (chess)", frequency:"low" },
+  }},
+  "画": { readings: {
+    "huà": { meaning_zh:"画画，图画", meaning_en:"to draw, picture", example_zh:"画画", example_pinyin:"huà huà", example_en:"to draw a picture", frequency:"high" },
+    "huā": { meaning_zh:"画十字（古语）", meaning_en:"to make a cross mark (classical)", example_zh:"画十字", example_pinyin:"huā shí zì", example_en:"to make a cross", frequency:"low" },
+  }},
+  "飞": { readings: {
+    "fēi": { meaning_zh:"飞翔，飞机", meaning_en:"to fly, airplane", example_zh:"飞机", example_pinyin:"fēi jī", example_en:"airplane", frequency:"high" },
+    "fěi": { meaning_zh:"飞廉（古代神话）", meaning_en:"wind deity (classical/archaic)", example_zh:"飞廉", example_pinyin:"fěi lián", example_en:"wind god (mythology)", frequency:"low" },
+  }},
+  "鱼": { readings: {
+    "yú":  { meaning_zh:"鱼类，鱼肉", meaning_en:"fish", example_zh:"金鱼", example_pinyin:"jīn yú", example_en:"goldfish", frequency:"high" },
+    "yǔ":  { meaning_zh:"鱼鲁（形容写错字）", meaning_en:"error in writing characters (classical)", example_zh:"鱼鲁", example_pinyin:"yǔ lǔ", example_en:"writing mistakes (idiom)", frequency:"low" },
+  }},
+  "带": { readings: {
+    "dài": { meaning_zh:"带来，带走", meaning_en:"to bring, to take along", example_zh:"带来", example_pinyin:"dài lái", example_en:"to bring", frequency:"high" },
+    "dǎi": { meaning_zh:"带（方言，坏）", meaning_en:"bad (dialectal)", example_zh:"好带坏", example_pinyin:"hǎo dǎi huài", example_en:"good and bad", frequency:"low" },
+  }},
+  "断": { readings: {
+    "duàn": { meaning_zh:"断开，判断", meaning_en:"to break, to judge", example_zh:"断开", example_pinyin:"duàn kāi", example_en:"to disconnect, to break off", frequency:"high" },
+    "duǎn": { meaning_zh:"断（古音，通短）", meaning_en:"short (classical variant)", example_zh:"断章", example_pinyin:"duǎn zhāng", example_en:"excerpt (classical)", frequency:"low" },
+  }},
+  "极": { readings: {
+    "jí":  { meaning_zh:"极端，北极", meaning_en:"extreme, pole", example_zh:"北极", example_pinyin:"běi jí", example_en:"North Pole", frequency:"high" },
+    "jì":  { meaning_zh:"穷极（古语）", meaning_en:"to exhaust (classical)", example_zh:"极欲", example_pinyin:"jì yù", example_en:"extreme desire (classical)", frequency:"low" },
+  }},
+  "近": { readings: {
+    "jìn": { meaning_zh:"近距离，附近", meaning_en:"near, close", example_zh:"附近", example_pinyin:"fù jìn", example_en:"nearby", frequency:"high" },
+    "jǐn": { meaning_zh:"近（古音）", meaning_en:"near (classical pronunciation)", example_zh:"近来", example_pinyin:"jǐn lái", example_en:"recently (classical)", frequency:"low" },
+  }},
+  "苦": { readings: {
+    "kǔ":  { meaning_zh:"痛苦，苦味", meaning_en:"bitter, suffering", example_zh:"痛苦", example_pinyin:"tòng kǔ", example_en:"pain, suffering", frequency:"high" },
+    "gǔ":  { meaning_zh:"苦（古音，地名用）", meaning_en:"archaic reading in place names", example_zh:"苦县", example_pinyin:"gǔ xiàn", example_en:"Guxian (ancient place name)", frequency:"low" },
+  }},
+  "木": { readings: {
+    "mù":  { meaning_zh:"木头，木材", meaning_en:"wood, timber", example_zh:"木头", example_pinyin:"mù tou", example_en:"wood, blockhead", frequency:"high" },
+    "mò":  { meaning_zh:"木（古音，通"沐"）", meaning_en:"archaic variant reading", example_zh:"木兰", example_pinyin:"mò lán", example_en:"Mulan (classical reading)", frequency:"low" },
+  }},
+  "约": { readings: {
+    "yuē": { meaning_zh:"约定，大约", meaning_en:"approximately, to agree", example_zh:"约定", example_pinyin:"yuē dìng", example_en:"to agree upon, appointment", frequency:"high" },
+    "yāo": { meaning_zh:"约束，用秤称量", meaning_en:"to restrain, to weigh (classical)", example_zh:"约束", example_pinyin:"yāo shù", example_en:"to restrain (classical)", frequency:"low" },
+  }},
+  "装": { readings: {
+    "zhuāng": { meaning_zh:"装扮，衣装", meaning_en:"to dress up, clothing", example_zh:"服装", example_pinyin:"fú zhuāng", example_en:"clothing, costume", frequency:"high" },
+    "zhuàng": { meaning_zh:"装（方言/旧音）", meaning_en:"dialectal/archaic variant", example_zh:"行装", example_pinyin:"xíng zhuàng", example_en:"travel luggage (variant)", frequency:"low" },
+  }},
+  "著": { readings: {
+    "zhù":  { meaning_zh:"著作，著名", meaning_en:"to write, famous", example_zh:"著名", example_pinyin:"zhù míng", example_en:"famous, well-known", frequency:"high" },
+    "zhe":  { meaning_zh:"看着，走着", meaning_en:"(progressive/state particle)", example_zh:"看着", example_pinyin:"kàn zhe", example_en:"watching", frequency:"high" },
+    "zháo": { meaning_zh:"着火，着急", meaning_en:"to catch (fire/cold), anxious", example_zh:"着火", example_pinyin:"zháo huǒ", example_en:"to catch fire", frequency:"medium" },
+    "zhuó": { meaning_zh:"着手，着力", meaning_en:"to apply, to set about", example_zh:"着手", example_pinyin:"zhuó shǒu", example_en:"to set about doing", frequency:"medium" },
+  }},
+  "拨": { readings: {
+    "bō":  { meaning_zh:"拨打，拨动", meaning_en:"to dial, to stir", example_zh:"拨打", example_pinyin:"bō dǎ", example_en:"to dial (a number)", frequency:"high" },
+    "bǒ":  { meaning_zh:"拨（古音）", meaning_en:"archaic reading", example_zh:"拨乱", example_pinyin:"bǒ luàn", example_en:"to restore order from chaos (classical)", frequency:"low" },
+  }},
+  "跌": { readings: {
+    "diē": { meaning_zh:"跌倒，下跌", meaning_en:"to fall, to drop", example_zh:"跌倒", example_pinyin:"diē dǎo", example_en:"to fall down", frequency:"high" },
+    "dié": { meaning_zh:"跌（古音）", meaning_en:"archaic variant pronunciation", example_zh:"跌宕", example_pinyin:"dié dàng", example_en:"ups and downs (classical)", frequency:"low" },
+  }},
+  "纯": { readings: {
+    "chún": { meaning_zh:"纯粹，纯洁", meaning_en:"pure, genuine", example_zh:"纯洁", example_pinyin:"chún jié", example_en:"pure, clean", frequency:"high" },
+    "zhǔn": { meaning_zh:"纯（古音）", meaning_en:"archaic pronunciation variant", example_zh:"纯粹", example_pinyin:"zhǔn cuì", example_en:"pure, purely (classical)", frequency:"low" },
+  }},
+  "颤": { readings: {
+    "chàn": { meaning_zh:"颤抖，颤动", meaning_en:"to tremble, to shiver", example_zh:"颤抖", example_pinyin:"chàn dǒu", example_en:"to tremble, to shiver", frequency:"high" },
+    "zhàn": { meaning_zh:"颤（多用于"颤栗"）", meaning_en:"to shudder (used in 颤栗)", example_zh:"颤栗", example_pinyin:"zhàn lì", example_en:"to shudder with fear", frequency:"medium" },
+  }},
+  "稿": { readings: {
+    "gǎo": { meaning_zh:"稿件，草稿", meaning_en:"manuscript, draft", example_zh:"草稿", example_pinyin:"cǎo gǎo", example_en:"draft, rough copy", frequency:"high" },
+    "hào": { meaning_zh:"稿（古音，通"皓"白色）", meaning_en:"white, bright (classical variant)", example_zh:"稿素", example_pinyin:"hào sù", example_en:"plain white (classical)", frequency:"low" },
+  }},
+
 };
 
 // ── Level → UI label map ──────────────────────────────────────
