@@ -2135,6 +2135,10 @@ const ENRICHED = {
 const LEVEL_MAP = {
   "一级": 1, "二级": 2, "三级": 3, "四级": 4,
   "五级": 5, "六级": 6, "七-九级": 7,
+};
+
+// ── Late enrichment entries (appended) ───────────────────────
+Object.assign(ENRICHED, {
   "大": { readings: {
     "dà":  { meaning_zh:"大小，巨大", meaning_en:"big, large", example_zh:"大家", example_pinyin:"dà jiā", example_en:"everyone", frequency:"high" },
     "dài": { meaning_zh:"大夫（医生）", meaning_en:"doctor (archaic/formal)", example_zh:"大夫", example_pinyin:"dài fu", example_en:"doctor", frequency:"medium" },
@@ -2225,8 +2229,7 @@ const LEVEL_MAP = {
     "gǎo": { meaning_zh:"稿件，草稿", meaning_en:"manuscript, draft", example_zh:"草稿", example_pinyin:"cǎo gǎo", example_en:"draft, rough copy", frequency:"high" },
     "hào": { meaning_zh:"稿（古音，通皓，白色）", meaning_en:"white, bright (classical variant)", example_zh:"稿素", example_pinyin:"hào sù", example_en:"plain white (classical)", frequency:"low" },
   }},
-
-};
+});
 
 // ── Level → UI label map ──────────────────────────────────────
 const LEVEL_LABELS = {
