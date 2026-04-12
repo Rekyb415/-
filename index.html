@@ -563,6 +563,12 @@ mark.search-hl {
 
   <div class="hint-lbl" id="quiz-hint"></div>
 
+  <div id="quiz-sentence" style="display:none;background:white;border:1.5px solid #dee2e6;border-radius:10px;padding:10px 14px;font-size:15px;color:var(--dark);line-height:2;text-align:center;font-family:'Noto Serif SC',serif;">
+    <span id="quiz-sentence-text"></span>
+    <div id="quiz-sentence-pinyin" style="display:none;font-size:11px;color:var(--gray);margin-top:2px;font-family:var(--font-pinyin)"></div>
+    <div id="quiz-sentence-en" style="display:none;font-size:11px;color:var(--gray);font-style:italic;margin-top:1px"></div>
+  </div>
+
   <div class="options-grid" id="quiz-options"></div>
 
   <div class="feedback-lbl" id="quiz-feedback"></div>
@@ -3250,6 +3256,24 @@ function loadQuestion() {
     : '';
   document.getElementById('quiz-context').textContent = ctx;
 
+  // Context sentence: show example with character blanked out
+  const sentenceEl = document.getElementById('quiz-sentence');
+  const sentenceText = document.getElementById('quiz-sentence-text');
+  const sentencePinyin = document.getElementById('quiz-sentence-pinyin');
+  const sentenceEn = document.getElementById('quiz-sentence-en');
+  sentencePinyin.style.display = 'none';
+  sentenceEn.style.display = 'none';
+  if (reading.example_zh) {
+    // Replace the character with a blank underline
+    const blanked = reading.example_zh.replace(new RegExp(char.character, 'g'), '<span style="color:var(--gold);font-weight:900;border-bottom:2px solid var(--gold);padding:0 4px">＿</span>');
+    sentenceText.innerHTML = `例句: ${blanked}`;
+    sentencePinyin.textContent = reading.example_pinyin || '';
+    sentenceEn.textContent = reading.example_en || '';
+    sentenceEl.style.display = 'block';
+  } else {
+    sentenceEl.style.display = 'none';
+  }
+
   const distractors = buildDistractors(quizState.correctPinyin, char);
   const sameCharReadings = new Set(char.readings.map(r=>r.pinyin));
   sameCharReadings.delete(quizState.correctPinyin);
@@ -3310,14 +3334,26 @@ function onAnswer(idx) {
   }
 
   const fbl = document.getElementById('quiz-feedback');
+  const r = quizState.currentChar.readings.find(r=>r.pinyin===quizState.correctPinyin);
   if (correct) {
-    const r = quizState.currentChar.readings.find(r=>r.pinyin===quizState.correctPinyin);
-    const ex = r.example_zh ? `  例: ${r.example_zh}${r.example_en ? ' — '+r.example_en : ''}` : '';
-    fbl.textContent = `✓ 正确 Correct!${ex}`;
+    fbl.textContent = '✓ 正确 Correct!';
     fbl.style.color='#27ae60';
   } else {
     fbl.textContent = `✗ 错误 Wrong.  正确答案: ${quizState.correctPinyin}`;
     fbl.style.color='#c0392b';
+  }
+
+  // Reveal full sentence: replace blank with actual character + show pinyin & English
+  if (r && r.example_zh) {
+    const sentenceText = document.getElementById('quiz-sentence-text');
+    const sentencePinyin = document.getElementById('quiz-sentence-pinyin');
+    const sentenceEn = document.getElementById('quiz-sentence-en');
+    const revealColor = correct ? 'var(--green)' : 'var(--red)';
+    const revealed = r.example_zh.replace(new RegExp(quizState.currentChar.character, 'g'),
+      `<span style="color:${revealColor};font-weight:900;border-bottom:2px solid ${revealColor};padding:0 2px">${quizState.currentChar.character}</span>`);
+    sentenceText.innerHTML = `例句: ${revealed}`;
+    if (r.example_pinyin) { sentencePinyin.textContent = r.example_pinyin; sentencePinyin.style.display='block'; }
+    if (r.example_en)     { sentenceEn.textContent = r.example_en;         sentenceEn.style.display='block'; }
   }
 
   let streakTxt = `🔥 ${streak}`;
