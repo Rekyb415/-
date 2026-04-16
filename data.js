@@ -895,7 +895,7 @@ const ENRICHED = {
     "yìn":  { meaning_zh:"饮马，喂水",       meaning_en:"to water (an animal)",        example_zh:"饮马", example_pinyin:"yìn mǎ",   example_en:"to water a horse",   frequency:"low"    },
   }},
   "载": { readings: {
-    "zài":  { meaning_zh:"记载，载体",       meaning_en:"to record, carrier",          example_zh:"记载", example_pinyin:"jì zǎi",   example_en:"to record",          frequency:"high"   },
+    "zài":  { meaning_zh:"记载，载体",       meaning_en:"to record, carrier",          example_zh:"记载", example_pinyin:"jì zài",   example_en:"to record",          frequency:"high"   },
     "zǎi":  { meaning_zh:"一年半载，三年五载",meaning_en:"year(s) (in time expressions)",example_zh:"三年五载", example_pinyin:"sān nián wǔ zǎi",example_en:"several years",     frequency:"medium" },
   }},
   "扎": { readings: {
@@ -909,7 +909,7 @@ const ENRICHED = {
   }},
   "涨": { readings: {
     "zhǎng":{ meaning_zh:"涨潮，水涨",       meaning_en:"to rise (water), high tide",  example_zh:"涨潮", example_pinyin:"zhǎng cháo",   example_en:"high tide",          frequency:"high"   },
-    "zhàng":{ meaning_zh:"涨价，膨胀",       meaning_en:"price rise, to swell",        example_zh:"涨价", example_pinyin:"zhǎng jià",   example_en:"price increase",     frequency:"high"   },
+    "zhàng":{ meaning_zh:"涨价，膨胀",       meaning_en:"price rise, to swell",        example_zh:"涨价", example_pinyin:"zhàng jià",   example_en:"price increase",     frequency:"high"   },
   }},
   "钻": { readings: {
     "zuān": { meaning_zh:"钻研，钻探",       meaning_en:"to drill into, to study hard",example_zh:"钻研", example_pinyin:"zuān yán",   example_en:"to study diligently",frequency:"high"   },
@@ -1678,7 +1678,7 @@ const ENRICHED = {
   }},
   "核": { readings: {
     "hé":  { meaning_zh:"核心，核实",  meaning_en:"core; to verify",      example_zh:"核心", example_pinyin:"hé xīn", example_en:"core",             frequency:"high"   },
-    "hú":  { meaning_zh:"核儿，果核",  meaning_en:"pit, stone (of fruit)", example_zh:"核儿", example_pinyin:"húr", example_en:"pit/stone (of fruit)", frequency:"medium" },
+    "hú":  { meaning_zh:"核儿，果核",  meaning_en:"pit, stone (of fruit)", example_zh:"桃核", example_pinyin:"táo hé", example_en:"peach pit",       frequency:"medium" },
   }},
   "貉": { readings: {
     "hé":  { meaning_zh:"一丘之貉",    meaning_en:"birds of a feather",   example_zh:"一丘之貉", example_pinyin:"yī qiū zhī hé", example_en:"same ilk",     frequency:"medium" },
