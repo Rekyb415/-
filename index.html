@@ -1170,6 +1170,27 @@ const RAW_DATA = [
   {hanzi:"纯",pinyin:"chún/zhǔn",level:"四级"},
   {hanzi:"颤",pinyin:"chàn/zhàn",level:"六级"},
   {hanzi:"稿",pinyin:"gǎo/hào",level:"七-九级"},
+  // ── Newly added polyphones ────────────────────────────────────
+  {hanzi:"谁",pinyin:"shéi/shuí",level:"一级"},
+  {hanzi:"佛",pinyin:"fó/fú",level:"二级"},
+  {hanzi:"率",pinyin:"lǜ/shuài",level:"三级"},
+  {hanzi:"剥",pinyin:"bāo/bō",level:"四级"},
+  {hanzi:"削",pinyin:"xiāo/xuē",level:"四级"},
+  {hanzi:"炸",pinyin:"zhá/zhà",level:"三级"},
+  {hanzi:"蒙",pinyin:"mēng/méng/měng",level:"四级"},
+  {hanzi:"扇",pinyin:"shān/shàn",level:"三级"},
+  {hanzi:"校",pinyin:"xiào/jiào",level:"一级"},
+  {hanzi:"脉",pinyin:"mài/mò",level:"五级"},
+  {hanzi:"载",pinyin:"zǎi/zài",level:"四级"},
+  {hanzi:"抢",pinyin:"qiāng/qiǎng",level:"三级"},
+  {hanzi:"埋",pinyin:"mái/mán",level:"四级"},
+  {hanzi:"柏",pinyin:"bǎi/bó/bò",level:"五级"},
+  {hanzi:"茄",pinyin:"qié/jiā",level:"三级"},
+  {hanzi:"缩",pinyin:"suō/sù",level:"四级"},
+  {hanzi:"吓",pinyin:"xià/hè",level:"二级"},
+  {hanzi:"粘",pinyin:"nián/zhān",level:"四级"},
+  {hanzi:"畜",pinyin:"chù/xù",level:"五级"},
+  {hanzi:"芥",pinyin:"jiè/gài",level:"六级"},
 ];
 
 // ── Enriched meanings & examples (optional per-character) ────
@@ -2909,6 +2930,90 @@ const ENRICHED = {
   "稿": { readings: {
     "gǎo": { meaning_zh:"稿件，草稿", meaning_en:"manuscript, draft", example_zh:"草稿", example_pinyin:"cǎo gǎo", example_en:"draft, rough copy", frequency:"high" },
     "hào": { meaning_zh:"稿（古音，通皓，白色）", meaning_en:"white, bright (classical variant)", example_zh:"稿素", example_pinyin:"hào sù", example_en:"plain white (classical)", frequency:"low" },
+  }},
+
+  // ── Newly added polyphones (enriched) ───────────────────────
+  "谁": { readings: {
+    "shéi": { meaning_zh:"谁（口语常用）",     meaning_en:"who (colloquial)",            example_zh:"是谁？", example_pinyin:"shì shéi", example_en:"who is it?",            frequency:"high"   },
+    "shuí": { meaning_zh:"谁（书面语/正式）",   meaning_en:"who (formal/literary)",       example_zh:"舍我其谁", example_pinyin:"shě wǒ qí shuí", example_en:"who but me (idiom)", frequency:"medium" },
+  }},
+  "佛": { readings: {
+    "fó": { meaning_zh:"佛陀，佛教",           meaning_en:"Buddha; Buddhism",            example_zh:"佛教", example_pinyin:"fó jiào", example_en:"Buddhism",                frequency:"high"   },
+    "fú": { meaning_zh:"仿佛，似乎",           meaning_en:"seemingly (in 仿佛)",         example_zh:"仿佛", example_pinyin:"fǎng fú", example_en:"as if, seemingly",        frequency:"high"   },
+  }},
+  "率": { readings: {
+    "lǜ":    { meaning_zh:"比率，效率",       meaning_en:"rate, ratio",                 example_zh:"效率", example_pinyin:"xiào lǜ", example_en:"efficiency",              frequency:"high"   },
+    "shuài": { meaning_zh:"率领，坦率",       meaning_en:"to lead; frank",              example_zh:"率领", example_pinyin:"shuài lǐng", example_en:"to lead, to command", frequency:"high"   },
+  }},
+  "剥": { readings: {
+    "bāo": { meaning_zh:"剥（口语，剥皮）",    meaning_en:"to peel (colloquial)",        example_zh:"剥皮", example_pinyin:"bāo pí", example_en:"to peel (the skin)",       frequency:"high"   },
+    "bō":  { meaning_zh:"剥削，剥夺（书面）",  meaning_en:"to exploit, to deprive (formal)", example_zh:"剥削", example_pinyin:"bō xuē", example_en:"to exploit",            frequency:"high"   },
+  }},
+  "削": { readings: {
+    "xiāo": { meaning_zh:"削（口语，削皮）",   meaning_en:"to pare, to peel (colloquial)", example_zh:"削苹果", example_pinyin:"xiāo píng guǒ", example_en:"to peel an apple", frequency:"high" },
+    "xuē":  { meaning_zh:"削减，剥削（书面）", meaning_en:"to cut down; to exploit (formal)", example_zh:"削减", example_pinyin:"xuē jiǎn", example_en:"to reduce, to cut",  frequency:"high" },
+  }},
+  "炸": { readings: {
+    "zhá": { meaning_zh:"油炸（烹饪）",        meaning_en:"to deep-fry",                 example_zh:"炸鸡", example_pinyin:"zhá jī", example_en:"fried chicken",          frequency:"high"   },
+    "zhà": { meaning_zh:"爆炸，炸弹",          meaning_en:"to explode; bomb",            example_zh:"爆炸", example_pinyin:"bào zhà", example_en:"explosion",              frequency:"high"   },
+  }},
+  "蒙": { readings: {
+    "mēng": { meaning_zh:"蒙骗，蒙人",         meaning_en:"to cheat, to deceive",        example_zh:"蒙骗", example_pinyin:"mēng piàn", example_en:"to deceive",           frequency:"high"   },
+    "méng": { meaning_zh:"蒙受，蒙古",         meaning_en:"to cover; to suffer; Mongolia", example_zh:"蒙古", example_pinyin:"méng gǔ", example_en:"Mongolia",             frequency:"high"   },
+    "měng": { meaning_zh:"蒙古族（专用）",     meaning_en:"Mongolian (ethnic, specific reading)", example_zh:"蒙族", example_pinyin:"měng zú", example_en:"Mongolian ethnicity", frequency:"medium" },
+  }},
+  "扇": { readings: {
+    "shān": { meaning_zh:"扇（动作，煽动）",   meaning_en:"to fan (verb); to incite",    example_zh:"扇风", example_pinyin:"shān fēng", example_en:"to fan",               frequency:"high"   },
+    "shàn": { meaning_zh:"扇子（名词）",       meaning_en:"a fan (noun)",                example_zh:"扇子", example_pinyin:"shàn zi", example_en:"hand fan",               frequency:"high"   },
+  }},
+  "校": { readings: {
+    "xiào": { meaning_zh:"学校，校园",         meaning_en:"school",                      example_zh:"学校", example_pinyin:"xué xiào", example_en:"school",                frequency:"high"   },
+    "jiào": { meaning_zh:"校对，校正",         meaning_en:"to proofread, to check",      example_zh:"校对", example_pinyin:"jiào duì", example_en:"to proofread",          frequency:"medium" },
+  }},
+  "脉": { readings: {
+    "mài": { meaning_zh:"脉搏，山脉",          meaning_en:"pulse; vein; mountain range", example_zh:"脉搏", example_pinyin:"mài bó", example_en:"pulse (heartbeat)",      frequency:"high"   },
+    "mò":  { meaning_zh:"脉脉（含情）",        meaning_en:"in 脉脉 — expressing affection silently", example_zh:"脉脉含情", example_pinyin:"mò mò hán qíng", example_en:"full of silent affection", frequency:"medium" },
+  }},
+  "载": { readings: {
+    "zǎi": { meaning_zh:"年，记载",            meaning_en:"year; to record",             example_zh:"记载", example_pinyin:"jì zǎi", example_en:"to record, record",      frequency:"high"   },
+    "zài": { meaning_zh:"载货，装载",          meaning_en:"to carry, to load",           example_zh:"装载", example_pinyin:"zhuāng zài", example_en:"to load (cargo)",    frequency:"high"   },
+  }},
+  "抢": { readings: {
+    "qiāng": { meaning_zh:"抢（呛、撞，古/方言）", meaning_en:"to bump against (rare/classical)", example_zh:"呼天抢地", example_pinyin:"hū tiān qiāng dì", example_en:"to wail in grief (idiom)", frequency:"low" },
+    "qiǎng": { meaning_zh:"抢夺，抢救",        meaning_en:"to rob, to rush to",          example_zh:"抢救", example_pinyin:"qiǎng jiù", example_en:"to rescue",             frequency:"high"   },
+  }},
+  "埋": { readings: {
+    "mái": { meaning_zh:"埋藏，埋葬",          meaning_en:"to bury",                     example_zh:"埋葬", example_pinyin:"mái zàng", example_en:"to bury",               frequency:"high"   },
+    "mán": { meaning_zh:"埋怨（抱怨）",        meaning_en:"to complain (in 埋怨)",       example_zh:"埋怨", example_pinyin:"mán yuàn", example_en:"to complain, to blame", frequency:"high"   },
+  }},
+  "柏": { readings: {
+    "bǎi": { meaning_zh:"柏树，松柏",          meaning_en:"cypress tree",                example_zh:"松柏", example_pinyin:"sōng bǎi", example_en:"pine and cypress",      frequency:"high"   },
+    "bó":  { meaning_zh:"柏林（地名）",        meaning_en:"used in 柏林 (Berlin)",       example_zh:"柏林", example_pinyin:"bó lín", example_en:"Berlin",                  frequency:"medium" },
+    "bò":  { meaning_zh:"黄柏（中药）",        meaning_en:"Amur cork tree (herbal medicine)", example_zh:"黄柏", example_pinyin:"huáng bò", example_en:"Amur cork (TCM)",  frequency:"low"    },
+  }},
+  "茄": { readings: {
+    "qié": { meaning_zh:"茄子，番茄",          meaning_en:"eggplant; tomato",            example_zh:"茄子", example_pinyin:"qié zi", example_en:"eggplant",               frequency:"high"   },
+    "jiā": { meaning_zh:"雪茄（音译）",        meaning_en:"used in 雪茄 (cigar, loanword)", example_zh:"雪茄", example_pinyin:"xuě jiā", example_en:"cigar",                frequency:"medium" },
+  }},
+  "缩": { readings: {
+    "suō": { meaning_zh:"缩小，收缩",          meaning_en:"to shrink, to contract",      example_zh:"缩小", example_pinyin:"suō xiǎo", example_en:"to reduce, to shrink",  frequency:"high"   },
+    "sù":  { meaning_zh:"缩砂（中药名）",      meaning_en:"used in 缩砂 (medicinal herb)", example_zh:"缩砂", example_pinyin:"sù shā", example_en:"Amomum (TCM)",           frequency:"low"    },
+  }},
+  "吓": { readings: {
+    "xià": { meaning_zh:"吓唬，吓人",          meaning_en:"to scare, to frighten",       example_zh:"吓人", example_pinyin:"xià rén", example_en:"scary, frightening",     frequency:"high"   },
+    "hè":  { meaning_zh:"恐吓，威吓（书面）",  meaning_en:"to threaten (formal)",        example_zh:"恐吓", example_pinyin:"kǒng hè", example_en:"to intimidate, to threaten", frequency:"medium" },
+  }},
+  "粘": { readings: {
+    "nián": { meaning_zh:"粘稠，粘性（形容词）", meaning_en:"sticky, viscous (adj.)",    example_zh:"粘稠", example_pinyin:"nián chóu", example_en:"viscous, sticky",     frequency:"high"   },
+    "zhān": { meaning_zh:"粘贴，粘住（动词）",  meaning_en:"to stick, to paste (verb)",  example_zh:"粘贴", example_pinyin:"zhān tiē", example_en:"to paste, to stick",   frequency:"high"   },
+  }},
+  "畜": { readings: {
+    "chù": { meaning_zh:"家畜，牲畜（名词）",  meaning_en:"livestock, domestic animal (noun)", example_zh:"家畜", example_pinyin:"jiā chù", example_en:"livestock",         frequency:"high"   },
+    "xù":  { meaning_zh:"畜养，畜牧（动词）",  meaning_en:"to raise (animals); husbandry (verb)", example_zh:"畜牧", example_pinyin:"xù mù", example_en:"animal husbandry", frequency:"high"   },
+  }},
+  "芥": { readings: {
+    "jiè": { meaning_zh:"芥菜，芥末",          meaning_en:"mustard plant; mustard",      example_zh:"芥末", example_pinyin:"jiè mò", example_en:"mustard (condiment)",    frequency:"high"   },
+    "gài": { meaning_zh:"芥蓝（蔬菜）",        meaning_en:"used in 芥蓝 (Chinese kale)", example_zh:"芥蓝", example_pinyin:"gài lán", example_en:"Chinese kale",           frequency:"medium" },
   }},
 
 };
