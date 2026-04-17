@@ -1067,7 +1067,7 @@ const ENRICHED = {
   "堡": { readings: {
     "bǎo": { meaning_zh:"堡垒，城堡",   meaning_en:"fort, castle",            example_zh:"城堡", example_pinyin:"chéng bǎo",   example_en:"castle",             frequency:"high"   },
     "pù":  { meaning_zh:"十里堡（地名）",meaning_en:"Pu (in place names)",    example_zh:"十里堡", example_pinyin:"shí lǐ pù", example_en:"Shilipu",            frequency:"low"    },
-    "bǔ":  { meaning_zh:"瓦窑堡（地名）",meaning_en:"Bu (in place names)",    example_zh:"瓦窑堡", example_pinyin:"Wǎ yáo pù", example_en:"Wayaobu",            frequency:"low"    },
+    "bǔ":  { meaning_zh:"瓦窑堡（地名）",meaning_en:"Bu (in place names)",    example_zh:"瓦窑堡", example_pinyin:"Wǎ yáo bǔ", example_en:"Wayaobu",            frequency:"low"    },
   }},
   "背": { readings: {
     "bēi": { meaning_zh:"背负，背包",   meaning_en:"to carry on back",        example_zh:"背包", example_pinyin:"bēi bāo",   example_en:"backpack",           frequency:"high"   },
