@@ -1710,7 +1710,7 @@ const ENRICHED = {
   }},
   "核": { readings: {
     "hé":  { meaning_zh:"核心，核实",  meaning_en:"core; to verify",      example_zh:"核心", example_pinyin:"hé xīn", example_en:"core",             frequency:"high"   },
-    "hú":  { meaning_zh:"核儿，果核",  meaning_en:"pit, stone (of fruit)", example_zh:"桃核", example_pinyin:"táo hé", example_en:"peach pit",       frequency:"medium" },
+    "hú":  { meaning_zh:"核儿，果核",  meaning_en:"pit, stone (of fruit)", example_zh:"核儿", example_pinyin:"húr", example_en:"pit, stone (of fruit)", frequency:"medium" },
   }},
   "貉": { readings: {
     "hé":  { meaning_zh:"一丘之貉",    meaning_en:"birds of a feather",   example_zh:"一丘之貉", example_pinyin:"yī qiū zhī hé", example_en:"same ilk",     frequency:"medium" },
