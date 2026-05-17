@@ -108,7 +108,20 @@ body {
 .home-btns { display: flex; flex-direction: column; gap: 10px; width: 100%; max-width: 300px; }
 .home-btns .btn { width: 100%; text-align: center; }
 
-.home-stats { font-size: 12px; color: var(--gray); text-align: center; margin-top: 10px; }
+.home-stats { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 6px; margin-top: 14px; }
+.stat-pill { display: inline-flex; align-items: baseline; gap: 5px; background: var(--white); border: 1px solid rgba(0,0,0,0.06); border-radius: 999px; padding: 5px 12px; box-shadow: 0 1px 4px rgba(0,0,0,0.04); }
+.stat-pill .sp-num { font-family: var(--font-pinyin); font-size: 15px; font-weight: 800; line-height: 1; }
+.stat-pill .sp-lbl { font-size: 10px; color: var(--gray); font-weight: 600; text-transform: uppercase; letter-spacing: 0.3px; }
+.stat-pill.sp-total .sp-num { color: var(--red); }
+.stat-pill.sp-total { background: rgba(192,57,43,0.07); border-color: rgba(192,57,43,0.15); }
+.stat-pill.sp-srs   { background: rgba(142,68,173,0.08); border-color: rgba(142,68,173,0.18); }
+.stat-pill.sp-srs .sp-num { color: var(--purple); }
+.stat-pill.sp-done  { background: rgba(39,174,96,0.08); border-color: rgba(39,174,96,0.18); }
+.stat-pill.sp-done .sp-num { color: var(--green); }
+.stat-divider { width: 100%; height: 0; }
+.stat-lvls { display: flex; flex-wrap: wrap; justify-content: center; gap: 5px; }
+.lvl-chip { display: inline-flex; align-items: baseline; gap: 4px; font-size: 11px; color: var(--gray); background: rgba(0,0,0,0.035); border-radius: 6px; padding: 3px 8px; }
+.lvl-chip .lc-num { font-family: var(--font-pinyin); font-weight: 700; color: var(--dark); font-size: 12px; }
 
 /* ── Level Select ── */
 #levels { gap: 14px; }
@@ -854,6 +867,7 @@ const RAW_DATA = [
   {hanzi:"传",pinyin:"chuán/zhuàn",level:"三级"},
   {hanzi:"度",pinyin:"dù/duó",level:"二级"},
   {hanzi:"恶",pinyin:"è/wù/ě",level:"三级"},
+  {hanzi:"裂",pinyin:"liè/liě",level:"四级"},
   {hanzi:"薄",pinyin:"báo/bó/bò",level:"四级"},
   {hanzi:"折",pinyin:"zhē/zhé/shé",level:"四级"},
   {hanzi:"冲",pinyin:"chōng/chòng",level:"四级"},
@@ -991,7 +1005,6 @@ const RAW_DATA = [
   {hanzi:"勒",pinyin:"lè/lēi",level:"七-九级"},
   {hanzi:"棱",pinyin:"léng/lēng/líng",level:"七-九级"},
   {hanzi:"撩",pinyin:"liāo/liáo",level:"七-九级"},
-  {hanzi:"裂",pinyin:"liè/liě",level:"七-九级"},
   {hanzi:"淋",pinyin:"lín/lìn",level:"七-九级"},
   {hanzi:"溜",pinyin:"liū/liù",level:"七-九级"},
   {hanzi:"搂",pinyin:"lǒu/lōu",level:"七-九级"},
@@ -1023,7 +1036,6 @@ const RAW_DATA = [
   {hanzi:"耶",pinyin:"yē/yé",level:"七-九级"},
   {hanzi:"叶",pinyin:"yè/xié",level:"四级"},
   {hanzi:"遗",pinyin:"yí/wèi",level:"四级"},
-  {hanzi:"已",pinyin:"yǐ/yī",level:"二级"},
   {hanzi:"佣",pinyin:"yōng/yòng",level:"七-九级"},
   {hanzi:"有",pinyin:"yǒu/yòu",level:"一级"},
   {hanzi:"予",pinyin:"yú/yǔ",level:"七-九级"},
@@ -1202,16 +1214,10 @@ const RAW_DATA = [
   {hanzi:"下",pinyin:"xià/xia",level:"一级"},
   {hanzi:"车",pinyin:"chē/jū",level:"一级"},
   {hanzi:"画",pinyin:"huà/huā",level:"二级"},
-  {hanzi:"鱼",pinyin:"yú/yǔ",level:"二级"},
-  {hanzi:"带",pinyin:"dài/dǎi",level:"二级"},
-  {hanzi:"近",pinyin:"jìn/jǐn",level:"二级"},
   {hanzi:"苦",pinyin:"kǔ/gǔ",level:"四级"},
-  {hanzi:"木",pinyin:"mù/mò",level:"三级"},
   {hanzi:"约",pinyin:"yuē/yāo",level:"三级"},
   {hanzi:"装",pinyin:"zhuāng/zhuàng",level:"四级"},
   {hanzi:"著",pinyin:"zhù/zhe/zháo/zhuó",level:"四级"},
-  {hanzi:"跌",pinyin:"diē/dié",level:"五级"},
-  {hanzi:"纯",pinyin:"chún/zhǔn",level:"四级"},
   {hanzi:"颤",pinyin:"chàn/zhàn",level:"六级"},
   // ── Newly added polyphones ────────────────────────────────────
   {hanzi:"谁",pinyin:"shéi/shuí",level:"一级"},
@@ -1408,6 +1414,10 @@ const ENRICHED = {
     "dù": { meaning_zh:"度过，程度", meaning_en:"to spend (time), degree", example_zh:"程度", example_pinyin:"chéng dù", example_en:"degree / level", meaning_vi:"trải qua, mức độ", example_vi:"mức độ", frequency:"high" },
     "duó": { meaning_zh:"揣度，度量", meaning_en:"to measure, to estimate", example_zh:"揣度", example_pinyin:"chuǎi duó", example_en:"to conjecture", meaning_vi:"đo lường, ước lượng", example_vi:"suy đoán", frequency:"low" },
   }},
+  "裂": { readings: {
+    "liè": { meaning_zh:"分裂，破裂", meaning_en:"to split, to crack", example_zh:"分裂", example_pinyin:"fēn liè", example_en:"to split", meaning_vi:"phân chia, nứt vỡ", example_vi:"phân chia", frequency:"high" },
+    "liě": { meaning_zh:"裂着嘴（向两旁分开）", meaning_en:"to split apart (to the sides)", example_zh:"裂着嘴", example_pinyin:"liě zhe zuǐ", example_en:"grinning, mouth open", meaning_vi:"nhếch, há (sang hai bên)", example_vi:"nhếch miệng", frequency:"medium" },
+  }},
   "恶": { readings: {
     "è": { meaning_zh:"恶劣，邪恶", meaning_en:"evil, bad", example_zh:"恶劣", example_pinyin:"è liè", example_en:"terrible", meaning_vi:"ác, xấu xa", example_vi:"tồi tệ", frequency:"high" },
     "wù": { meaning_zh:"厌恶，憎恶", meaning_en:"to detest, to loathe", example_zh:"厌恶", example_pinyin:"yàn wù", example_en:"to detest", meaning_vi:"ghét, chán ghét", example_vi:"chán ghét", frequency:"high" },
@@ -1466,24 +1476,24 @@ const ENRICHED = {
     "xǐng": { meaning_zh:"反省，省悟", meaning_en:"to reflect, to come to", example_zh:"反省", example_pinyin:"fǎn xǐng", example_en:"to reflect", meaning_vi:"tự xét, tỉnh ngộ", example_vi:"tự kiểm điểm", frequency:"medium" },
   }},
   "泊": { readings: {
-    "bó": { meaning_zh:"停泊，漂泊", meaning_en:"to anchor, to drift", example_zh:"停泊", example_pinyin:"tíng bó", example_en:"to anchor", frequency:"medium" },
-    "pō": { meaning_zh:"湖泊，水泊", meaning_en:"lake, pond", example_zh:"湖泊", example_pinyin:"hú pō", example_en:"lake", frequency:"medium" },
+    "bó": { meaning_zh:"停泊，漂泊", meaning_en:"to anchor, to drift", example_zh:"停泊", example_pinyin:"tíng bó", example_en:"to anchor", meaning_vi:"đậu, neo (thuyền); phiêu bạt", example_vi:"neo đậu", frequency:"medium" },
+    "pō": { meaning_zh:"湖泊，水泊", meaning_en:"lake, pond", example_zh:"湖泊", example_pinyin:"hú pō", example_en:"lake", meaning_vi:"hồ, đầm nước", example_vi:"hồ nước", frequency:"medium" },
   }},
   "盛": { readings: {
     "shèng": { meaning_zh:"盛大，旺盛", meaning_en:"grand, flourishing", example_zh:"盛大", example_pinyin:"shèng dà", example_en:"grand", frequency:"high" },
     "chéng": { meaning_zh:"盛饭，盛水", meaning_en:"to fill (bowl/container)", example_zh:"盛饭", example_pinyin:"chéng fàn", example_en:"to serve rice", frequency:"high" },
   }},
   "乘": { readings: {
-    "chéng": { meaning_zh:"乘车，搭乘", meaning_en:"to ride, to take", example_zh:"乘车", example_pinyin:"chéng chē", example_en:"to take a vehicle", frequency:"high" },
-    "shèng": { meaning_zh:"史乘，记载", meaning_en:"historical records", example_zh:"史乘", example_pinyin:"shǐ shèng", example_en:"historical records", frequency:"low" },
+    "chéng": { meaning_zh:"乘车，搭乘", meaning_en:"to ride, to take", example_zh:"乘车", example_pinyin:"chéng chē", example_en:"to take a vehicle", meaning_vi:"đi (xe), cưỡi; nhân (toán)", example_vi:"đi xe", frequency:"high" },
+    "shèng": { meaning_zh:"史乘，记载", meaning_en:"historical records", example_zh:"史乘", example_pinyin:"shǐ shèng", example_en:"historical records", meaning_vi:"sử sách, ghi chép (cổ)", example_vi:"sử sách", frequency:"low" },
   }},
   "斗": { readings: {
-    "dǒu": { meaning_zh:"北斗，斗笠", meaning_en:"dipper (constellation), bamboo hat", example_zh:"北斗星", example_pinyin:"běi dǒu xīng", example_en:"Big Dipper", frequency:"medium" },
-    "dòu": { meaning_zh:"战斗，斗争", meaning_en:"to fight, to struggle", example_zh:"战斗", example_pinyin:"zhàn dòu", example_en:"to fight", frequency:"high" },
+    "dǒu": { meaning_zh:"北斗，斗笠", meaning_en:"dipper (constellation), bamboo hat", example_zh:"北斗星", example_pinyin:"běi dǒu xīng", example_en:"Big Dipper", meaning_vi:"đấu (đơn vị đong); chòm sao Bắc Đẩu", example_vi:"sao Bắc Đẩu", frequency:"medium" },
+    "dòu": { meaning_zh:"战斗，斗争", meaning_en:"to fight, to struggle", example_zh:"战斗", example_pinyin:"zhàn dòu", example_en:"to fight", meaning_vi:"đấu tranh, chiến đấu", example_vi:"chiến đấu", frequency:"high" },
   }},
   "杆": { readings: {
-    "gān": { meaning_zh:"旗杆，电线杆", meaning_en:"flagpole, utility pole", example_zh:"旗杆", example_pinyin:"qí gǎn", example_en:"flagpole", frequency:"medium" },
-    "gǎn": { meaning_zh:"笔杆，枪杆", meaning_en:"pen shaft, gun barrel", example_zh:"笔杆", example_pinyin:"bǐ gǎn", example_en:"pen shaft", frequency:"medium" },
+    "gān": { meaning_zh:"旗杆，电线杆", meaning_en:"flagpole, utility pole", example_zh:"旗杆", example_pinyin:"qí gǎn", example_en:"flagpole", meaning_vi:"cột, sào (dài)", example_vi:"cột cờ", frequency:"medium" },
+    "gǎn": { meaning_zh:"笔杆，枪杆", meaning_en:"pen shaft, gun barrel", example_zh:"笔杆", example_pinyin:"bǐ gǎn", example_en:"pen shaft", meaning_vi:"cán, thân (vật nhỏ dài)", example_vi:"cán bút", frequency:"medium" },
   }},
   "冠": { readings: {
     "guān": { meaning_zh:"帽子，皇冠", meaning_en:"hat, crown (noun)", example_zh:"皇冠", example_pinyin:"huáng guān", example_en:"royal crown", meaning_vi:"mũ, vương miện (danh từ)", example_vi:"vương miện", frequency:"high" },
@@ -1494,8 +1504,8 @@ const ENRICHED = {
     "huà": { meaning_zh:"计划，规划", meaning_en:"to plan, to delimit", example_zh:"计划", example_pinyin:"jì huà", example_en:"plan", meaning_vi:"kế hoạch, hoạch định", example_vi:"kế hoạch", frequency:"high" },
   }},
   "壳": { readings: {
-    "ké": { meaning_zh:"贝壳，蛋壳", meaning_en:"shell, eggshell", example_zh:"贝壳", example_pinyin:"bèi ké", example_en:"seashell", frequency:"high" },
-    "qiào": { meaning_zh:"地壳，甲壳", meaning_en:"earth's crust, carapace", example_zh:"地壳", example_pinyin:"dì qiào", example_en:"earth's crust", frequency:"high" },
+    "ké": { meaning_zh:"贝壳，蛋壳", meaning_en:"shell, eggshell", example_zh:"贝壳", example_pinyin:"bèi ké", example_en:"seashell", meaning_vi:"vỏ, mai (khẩu ngữ)", example_vi:"vỏ sò", frequency:"high" },
+    "qiào": { meaning_zh:"地壳，甲壳", meaning_en:"earth's crust, carapace", example_zh:"地壳", example_pinyin:"dì qiào", example_en:"earth's crust", meaning_vi:"vỏ cứng (văn viết)", example_vi:"vỏ Trái Đất", frequency:"high" },
   }},
   "露": { readings: {
     "lù": { meaning_zh:"露天，露出", meaning_en:"open air, to reveal", example_zh:"露出", example_pinyin:"lù chū", example_en:"to reveal", frequency:"high" },
@@ -1506,29 +1516,29 @@ const ENRICHED = {
     "mú": { meaning_zh:"模样，模具", meaning_en:"appearance, mold", example_zh:"模样", example_pinyin:"mú yàng", example_en:"appearance", meaning_vi:"dáng vẻ; khuôn (đúc)", example_vi:"dáng vẻ", frequency:"high" },
   }},
   "喷": { readings: {
-    "pēn": { meaning_zh:"喷水，喷气", meaning_en:"to spray, to jet", example_zh:"喷水", example_pinyin:"pēn shuǐ", example_en:"to spray water", frequency:"high" },
-    "pèn": { meaning_zh:"喷香（方言）", meaning_en:"fragrant (colloq.)", example_zh:"喷香", example_pinyin:"pèn xiāng", example_en:"fragrant", frequency:"medium" },
+    "pēn": { meaning_zh:"喷水，喷气", meaning_en:"to spray, to jet", example_zh:"喷水", example_pinyin:"pēn shuǐ", example_en:"to spray water", meaning_vi:"phun, phụt", example_vi:"phun nước", frequency:"high" },
+    "pèn": { meaning_zh:"喷香（方言）", meaning_en:"fragrant (colloq.)", example_zh:"喷香", example_pinyin:"pèn xiāng", example_en:"fragrant", meaning_vi:"thơm nức (phương ngữ); mùa rộ", example_vi:"thơm nức", frequency:"medium" },
   }},
   "屏": { readings: {
     "píng": { meaning_zh:"屏幕，屏风", meaning_en:"screen, folding screen", example_zh:"屏幕", example_pinyin:"píng mù", example_en:"screen", frequency:"high" },
     "bǐng": { meaning_zh:"屏息，屏气", meaning_en:"to hold breath", example_zh:"屏息", example_pinyin:"bǐng xī", example_en:"to hold one's breath", frequency:"medium" },
   }},
   "悄": { readings: {
-    "qiāo": { meaning_zh:"悄悄，悄然", meaning_en:"quietly, silently", example_zh:"悄悄", example_pinyin:"qiāo qiāo", example_en:"quietly", frequency:"high" },
-    "qiǎo": { meaning_zh:"悄怆（忧伤）", meaning_en:"sorrowful (literary)", example_zh:"悄怆幽邃", example_pinyin:"qiǎo chuàng yōu suì", example_en:"deep and sorrowful", frequency:"low" },
+    "qiāo": { meaning_zh:"悄悄，悄然", meaning_en:"quietly, silently", example_zh:"悄悄", example_pinyin:"qiāo qiāo", example_en:"quietly", meaning_vi:"lặng lẽ, khe khẽ", example_vi:"lặng lẽ", frequency:"high" },
+    "qiǎo": { meaning_zh:"悄怆（忧伤）", meaning_en:"sorrowful (literary)", example_zh:"悄怆幽邃", example_pinyin:"qiǎo chuàng yōu suì", example_en:"deep and sorrowful", meaning_vi:"buồn bã, ưu tư (văn cổ)", example_vi:"u sầu sâu lắng", frequency:"low" },
   }},
   "宿": { readings: {
-    "sù": { meaning_zh:"住宿，宿舍", meaning_en:"to stay overnight, dorm", example_zh:"宿舍", example_pinyin:"sù shè", example_en:"dormitory", frequency:"high" },
-    "xiǔ": { meaning_zh:"一宿（一夜）", meaning_en:"one night (measure word)", example_zh:"一宿", example_pinyin:"yī xiǔ", example_en:"one night", frequency:"medium" },
-    "xiù": { meaning_zh:"星宿，二十八宿", meaning_en:"constellation, lunar mansion", example_zh:"星宿", example_pinyin:"xīng xiù", example_en:"constellation", frequency:"low" },
+    "sù": { meaning_zh:"住宿，宿舍", meaning_en:"to stay overnight, dorm", example_zh:"宿舍", example_pinyin:"sù shè", example_en:"dormitory", meaning_vi:"ở trọ, ngủ lại; ký túc xá", example_vi:"ký túc xá", frequency:"high" },
+    "xiǔ": { meaning_zh:"一宿（一夜）", meaning_en:"one night (measure word)", example_zh:"一宿", example_pinyin:"yī xiǔ", example_en:"one night", meaning_vi:"đêm (lượng từ, khẩu ngữ)", example_vi:"một đêm", frequency:"medium" },
+    "xiù": { meaning_zh:"星宿，二十八宿", meaning_en:"constellation, lunar mansion", example_zh:"星宿", example_pinyin:"xīng xiù", example_en:"constellation", meaning_vi:"tinh tú, chòm sao (cổ)", example_vi:"tinh tú", frequency:"low" },
   }},
   "挑": { readings: {
     "tiāo": { meaning_zh:"挑选，挑剔", meaning_en:"to pick, to be picky", example_zh:"挑选", example_pinyin:"tiāo xuǎn", example_en:"to select", meaning_vi:"chọn lựa; kén chọn", example_vi:"lựa chọn", frequency:"high" },
     "tiǎo": { meaning_zh:"挑战，挑衅", meaning_en:"to challenge, to provoke", example_zh:"挑战", example_pinyin:"tiǎo zhàn", example_en:"to challenge", meaning_vi:"khiêu khích, thách thức", example_vi:"thách thức", frequency:"high" },
   }},
   "吐": { readings: {
-    "tǔ": { meaning_zh:"吐出，吐露", meaning_en:"to spit out, to reveal", example_zh:"吐露", example_pinyin:"tǔ lù", example_en:"to reveal", frequency:"high" },
-    "tù": { meaning_zh:"呕吐，吐血", meaning_en:"to vomit", example_zh:"呕吐", example_pinyin:"ǒu tù", example_en:"to vomit", frequency:"high" },
+    "tǔ": { meaning_zh:"吐出，吐露", meaning_en:"to spit out, to reveal", example_zh:"吐露", example_pinyin:"tǔ lù", example_en:"to reveal", meaning_vi:"nhổ ra; thổ lộ, bày tỏ", example_vi:"thổ lộ", frequency:"high" },
+    "tù": { meaning_zh:"呕吐，吐血", meaning_en:"to vomit", example_zh:"呕吐", example_pinyin:"ǒu tù", example_en:"to vomit", meaning_vi:"nôn, mửa", example_vi:"nôn mửa", frequency:"high" },
   }},
   "挨": { readings: {
     "āi": { meaning_zh:"挨着，紧挨", meaning_en:"close to, next to", example_zh:"挨着", example_pinyin:"āi zhe", example_en:"right next to", frequency:"high" },
@@ -1551,8 +1561,8 @@ const ENRICHED = {
     "bo": { meaning_zh:"萝卜（蔬菜）", meaning_en:"radish (in 萝卜)", example_zh:"萝卜", example_pinyin:"luó bo", example_en:"radish", frequency:"high" },
   }},
   "臭": { readings: {
-    "chòu": { meaning_zh:"臭味，臭气", meaning_en:"stinky, bad smell", example_zh:"臭味", example_pinyin:"chòu wèi", example_en:"bad smell", frequency:"high" },
-    "xiù": { meaning_zh:"无色无臭", meaning_en:"odorless (literary)", example_zh:"无臭", example_pinyin:"wú xiù", example_en:"odorless", frequency:"low" },
+    "chòu": { meaning_zh:"臭味，臭气", meaning_en:"stinky, bad smell", example_zh:"臭味", example_pinyin:"chòu wèi", example_en:"bad smell", meaning_vi:"hôi, thối; mùi khó chịu", example_vi:"mùi hôi", frequency:"high" },
+    "xiù": { meaning_zh:"无色无臭", meaning_en:"odorless (literary)", example_zh:"无臭", example_pinyin:"wú xiù", example_en:"odorless", meaning_vi:"mùi (trung tính, văn cổ)", example_vi:"không mùi", frequency:"low" },
   }},
   "答": { readings: {
     "dá": { meaning_zh:"回答，答案", meaning_en:"to answer, answer", example_zh:"回答", example_pinyin:"huí dá", example_en:"to answer", meaning_vi:"trả lời, đáp", example_vi:"trả lời", frequency:"high" },
@@ -1937,8 +1947,8 @@ const ENRICHED = {
     "gòu": { meaning_zh:"勾当，勾结", meaning_en:"shady dealings, to collude", example_zh:"勾结", example_pinyin:"gòu jié", example_en:"to collude", frequency:"medium" },
   }},
   "估": { readings: {
-    "gū": { meaning_zh:"估计，估价", meaning_en:"to estimate", example_zh:"估计", example_pinyin:"gū jì", example_en:"to estimate", frequency:"high" },
-    "gù": { meaning_zh:"估衣（旧衣）", meaning_en:"secondhand clothes", example_zh:"估衣", example_pinyin:"gù yi", example_en:"secondhand clothes", frequency:"low" },
+    "gū": { meaning_zh:"估计，估价", meaning_en:"to estimate", example_zh:"估计", example_pinyin:"gū jì", example_en:"to estimate", meaning_vi:"ước lượng, định giá", example_vi:"ước tính", frequency:"high" },
+    "gù": { meaning_zh:"估衣（旧衣）", meaning_en:"secondhand clothes", example_zh:"估衣", example_pinyin:"gù yi", example_en:"secondhand clothes", meaning_vi:"quần áo cũ (估衣)", example_vi:"quần áo cũ", frequency:"low" },
   }},
   "骨": { readings: {
     "gǔ": { meaning_zh:"骨头，骨骼", meaning_en:"bone, skeleton", example_zh:"骨头", example_pinyin:"gǔ tou", example_en:"bone", meaning_vi:"xương, bộ xương", example_vi:"khúc xương", frequency:"high" },
@@ -1959,8 +1969,8 @@ const ENRICHED = {
     "hà": { meaning_zh:"哈（方言惊叹）", meaning_en:"wow (dialect exclamation)", example_zh:"哈，真的", example_pinyin:"hà zhēn de", example_en:"wow, really?", meaning_vi:"ồ (cảm thán phương ngữ)", example_vi:"ồ, thật à", frequency:"low" },
   }},
   "汗": { readings: {
-    "hàn": { meaning_zh:"汗水，出汗", meaning_en:"sweat, perspiration", example_zh:"出汗", example_pinyin:"chū hàn", example_en:"to sweat", frequency:"high" },
-    "hán": { meaning_zh:"可汗，大汗", meaning_en:"Khan (ruler title)", example_zh:"可汗", example_pinyin:"kè hán", example_en:"Khan", frequency:"low" },
+    "hàn": { meaning_zh:"汗水，出汗", meaning_en:"sweat, perspiration", example_zh:"出汗", example_pinyin:"chū hàn", example_en:"to sweat", meaning_vi:"mồ hôi, ra mồ hôi", example_vi:"ra mồ hôi", frequency:"high" },
+    "hán": { meaning_zh:"可汗，大汗", meaning_en:"Khan (ruler title)", example_zh:"可汗", example_pinyin:"kè hán", example_en:"Khan", meaning_vi:"Hãn (tước hiệu vua du mục)", example_vi:"Khả Hãn", frequency:"low" },
   }},
   "号": { readings: {
     "hào": { meaning_zh:"号码，号令", meaning_en:"number, order", example_zh:"号码", example_pinyin:"hào mǎ", example_en:"number", meaning_vi:"số, hiệu, ngày", example_vi:"số (mã số)", frequency:"high" },
@@ -2076,10 +2086,6 @@ const ENRICHED = {
     "liāo": { meaning_zh:"撩起，撩开", meaning_en:"to lift up, to tease", example_zh:"撩起", example_pinyin:"liāo qǐ", example_en:"to lift up", frequency:"high" },
     "liáo": { meaning_zh:"撩拨，撩人", meaning_en:"to provoke, to flirt", example_zh:"撩拨", example_pinyin:"liáo bō", example_en:"to tease", frequency:"high" },
   }},
-  "裂": { readings: {
-    "liè": { meaning_zh:"裂开，分裂", meaning_en:"to split, to crack", example_zh:"分裂", example_pinyin:"fēn liè", example_en:"to split", frequency:"high" },
-    "liě": { meaning_zh:"咧嘴（方言）", meaning_en:"to grin (dialect usage)", example_zh:"裂嘴", example_pinyin:"liě zuǐ", example_en:"to grin wide", frequency:"low" },
-  }},
   "淋": { readings: {
     "lín": { meaning_zh:"淋雨，淋浴", meaning_en:"to get rained on, shower", example_zh:"淋雨", example_pinyin:"lín yǔ", example_en:"to get rained on", frequency:"high" },
     "lìn": { meaning_zh:"淋漓，淋病", meaning_en:"dripping, gonorrhea", example_zh:"淋漓", example_pinyin:"lín lí", example_en:"dripping wet", frequency:"medium" },
@@ -2171,8 +2177,8 @@ const ENRICHED = {
     "wà": { meaning_zh:"瓦刀（瓦工）", meaning_en:"trowel (masonry tool)", example_zh:"瓦刀", example_pinyin:"wǎ dāo", example_en:"trowel", frequency:"low" },
   }},
   "委": { readings: {
-    "wěi": { meaning_zh:"委托，委员", meaning_en:"to entrust, committee", example_zh:"委托", example_pinyin:"wěi tuō", example_en:"to entrust", frequency:"high" },
-    "wēi": { meaning_zh:"委蛇，敷衍", meaning_en:"to act perfunctorily", example_zh:"虚与委蛇", example_pinyin:"xū yǔ wēi yí", example_en:"to go through the motions", frequency:"low" },
+    "wěi": { meaning_zh:"委托，委员", meaning_en:"to entrust, committee", example_zh:"委托", example_pinyin:"wěi tuō", example_en:"to entrust", meaning_vi:"ủy thác, ủy ban; ủy viên", example_vi:"ủy thác", frequency:"high" },
+    "wēi": { meaning_zh:"委蛇，敷衍", meaning_en:"to act perfunctorily", example_zh:"虚与委蛇", example_pinyin:"xū yǔ wēi yí", example_en:"to go through the motions", meaning_vi:"qua loa, chiếu lệ (委蛇)", example_vi:"làm cho qua chuyện", frequency:"low" },
   }},
   "肖": { readings: {
     "xiāo": { meaning_zh:"不肖，无肖", meaning_en:"unworthy, unlike parent", example_zh:"不肖", example_pinyin:"bù xiào", example_en:"unworthy", frequency:"low" },
@@ -2201,10 +2207,6 @@ const ENRICHED = {
   "遗": { readings: {
     "yí": { meaning_zh:"遗留，遗产", meaning_en:"to leave behind, heritage", example_zh:"遗产", example_pinyin:"yí chǎn", example_en:"heritage", meaning_vi:"để lại, di sản", example_vi:"di sản", frequency:"high" },
     "wèi": { meaning_zh:"遗赠，馈赠", meaning_en:"to give as gift (literary)", example_zh:"遗赠", example_pinyin:"wèi zèng", example_en:"to bequeath, to bestow", meaning_vi:"tặng, biếu (văn viết)", example_vi:"di tặng", frequency:"low" },
-  }},
-  "已": { readings: {
-    "yǐ": { meaning_zh:"已经，已然", meaning_en:"already, past", example_zh:"已经", example_pinyin:"yǐ jīng", example_en:"already", meaning_vi:"đã, rồi", example_vi:"đã rồi", frequency:"high" },
-    "yī": { meaning_zh:"已（古音）", meaning_en:"archaic reading of 已", example_zh:"无已", example_pinyin:"wú yī", example_en:"endlessly (classical)", meaning_vi:"âm cổ của 已", example_vi:"bất đắc dĩ", frequency:"low" },
   }},
   "佣": { readings: {
     "yōng": { meaning_zh:"雇佣，佣人", meaning_en:"to hire, servant", example_zh:"佣人", example_pinyin:"yōng rén", example_en:"servant", frequency:"high" },
@@ -2415,8 +2417,8 @@ const ENRICHED = {
     "gě": { meaning_zh:"一升的十分之一", meaning_en:"gě (unit of volume, 1/10 sheng)", example_zh:"一合", example_pinyin:"yī gě", example_en:"one gě", meaning_vi:"cáp (đơn vị thể tích, 1/10 thăng)", example_vi:"một cáp", frequency:"low" },
   }},
   "核": { readings: {
-    "hé": { meaning_zh:"核心，核实", meaning_en:"core; to verify", example_zh:"核心", example_pinyin:"hé xīn", example_en:"core", frequency:"high" },
-    "hú": { meaning_zh:"核儿，果核", meaning_en:"pit, stone (of fruit)", example_zh:"核儿", example_pinyin:"húr", example_en:"pit, stone (of fruit)", frequency:"medium" },
+    "hé": { meaning_zh:"核心，核实", meaning_en:"core; to verify", example_zh:"核心", example_pinyin:"hé xīn", example_en:"core", meaning_vi:"hạt nhân, cốt lõi; thẩm tra", example_vi:"cốt lõi", frequency:"high" },
+    "hú": { meaning_zh:"核儿，果核", meaning_en:"pit, stone (of fruit)", example_zh:"核儿", example_pinyin:"húr", example_en:"pit, stone (of fruit)", meaning_vi:"hạt, hột (quả) — khẩu ngữ", example_vi:"hạt (quả)", frequency:"medium" },
   }},
   "貉": { readings: {
     "hé": { meaning_zh:"一丘之貉", meaning_en:"birds of a feather", example_zh:"一丘之貉", example_pinyin:"yī qiū zhī hé", example_en:"same ilk", frequency:"medium" },
@@ -2655,8 +2657,8 @@ const ENRICHED = {
     "shào": { meaning_zh:"稍息（军令）", meaning_en:"stand at ease (military)", example_zh:"稍息", example_pinyin:"shào xī", example_en:"stand at ease", frequency:"medium" },
   }},
   "蛇": { readings: {
-    "shé": { meaning_zh:"毒蛇，蛇类", meaning_en:"snake", example_zh:"毒蛇", example_pinyin:"dú shé", example_en:"venomous snake", frequency:"high" },
-    "yí": { meaning_zh:"委蛇，敷衍", meaning_en:"to act perfunctorily (literary)", example_zh:"委蛇", example_pinyin:"wēi yí", example_en:"evasive", frequency:"low" },
+    "shé": { meaning_zh:"毒蛇，蛇类", meaning_en:"snake", example_zh:"毒蛇", example_pinyin:"dú shé", example_en:"venomous snake", meaning_vi:"con rắn", example_vi:"rắn độc", frequency:"high" },
+    "yí": { meaning_zh:"委蛇，敷衍", meaning_en:"to act perfunctorily (literary)", example_zh:"委蛇", example_pinyin:"wēi yí", example_en:"evasive", meaning_vi:"uốn lượn; qua loa (委蛇)", example_vi:"ngoằn ngoèo", frequency:"low" },
   }},
   "食": { readings: {
     "shí": { meaning_zh:"食品，食物", meaning_en:"food, to eat", example_zh:"食品", example_pinyin:"shí pǐn", example_en:"food", meaning_vi:"ăn, thức ăn", example_vi:"thực phẩm", frequency:"high" },
@@ -2667,8 +2669,8 @@ const ENRICHED = {
     "zhī": { meaning_zh:"月氏（汉朝西域国名）", meaning_en:"Yuezhi (ancient people)", example_zh:"月氏", example_pinyin:"Yuè zhī", example_en:"Yuezhi", frequency:"low" },
   }},
   "属": { readings: {
-    "shǔ": { meaning_zh:"属于，归属", meaning_en:"to belong to", example_zh:"属于", example_pinyin:"shǔ yú", example_en:"to belong to", frequency:"high" },
-    "zhǔ": { meaning_zh:"属望，嘱托", meaning_en:"to entrust; to hope (classical)", example_zh:"属望", example_pinyin:"zhǔ wàng", example_en:"to pin hopes on", frequency:"low" },
+    "shǔ": { meaning_zh:"属于，归属", meaning_en:"to belong to", example_zh:"属于", example_pinyin:"shǔ yú", example_en:"to belong to", meaning_vi:"thuộc về, thuộc loại", example_vi:"thuộc về", frequency:"high" },
+    "zhǔ": { meaning_zh:"属望，嘱托", meaning_en:"to entrust; to hope (classical)", example_zh:"属望", example_pinyin:"zhǔ wàng", example_en:"to pin hopes on", meaning_vi:"gửi gắm, kỳ vọng (văn cổ)", example_vi:"đặt kỳ vọng", frequency:"low" },
   }},
   "术": { readings: {
     "shù": { meaning_zh:"技术，艺术", meaning_en:"technique, art", example_zh:"技术", example_pinyin:"jì shù", example_en:"technology", frequency:"high" },
@@ -2854,25 +2856,9 @@ const ENRICHED = {
     "huà": { meaning_zh:"画画，图画", meaning_en:"to draw, picture", example_zh:"画画", example_pinyin:"huà huà", example_en:"to draw a picture", meaning_vi:"vẽ, bức tranh", example_vi:"vẽ tranh", frequency:"high" },
     "huā": { meaning_zh:"画十字（古语）", meaning_en:"to make a cross mark (classical)", example_zh:"画十字", example_pinyin:"huā shí zì", example_en:"to make a cross", meaning_vi:"vẽ chữ thập (cổ)", example_vi:"vạch chữ thập", frequency:"low" },
   }},
-  "鱼": { readings: {
-    "yú": { meaning_zh:"鱼类，鱼肉", meaning_en:"fish", example_zh:"金鱼", example_pinyin:"jīn yú", example_en:"goldfish", meaning_vi:"cá, thịt cá", example_vi:"cá vàng", frequency:"high" },
-    "yǔ": { meaning_zh:"鱼鲁（形容写错字）", meaning_en:"error in writing characters (classical)", example_zh:"鱼鲁", example_pinyin:"yǔ lǔ", example_en:"writing mistakes (idiom)", meaning_vi:"lỗi chữ Lỗ - Ngư (chữ viết sai cổ)", example_vi:"viết sai chữ (lỗi Ngư-Lỗ)", frequency:"low" },
-  }},
-  "带": { readings: {
-    "dài": { meaning_zh:"带来，带走", meaning_en:"to bring, to take along", example_zh:"带来", example_pinyin:"dài lái", example_en:"to bring", meaning_vi:"mang theo, đem đi", example_vi:"mang đến", frequency:"high" },
-    "dǎi": { meaning_zh:"带（方言，坏）", meaning_en:"bad (dialectal)", example_zh:"好带坏", example_pinyin:"hǎo dǎi huài", example_en:"good and bad", meaning_vi:"xấu, hỏng (phương ngữ)", example_vi:"tốt thành xấu", frequency:"low" },
-  }},
-  "近": { readings: {
-    "jìn": { meaning_zh:"近距离，附近", meaning_en:"near, close", example_zh:"附近", example_pinyin:"fù jìn", example_en:"nearby", meaning_vi:"gần, ở cạnh", example_vi:"gần đây", frequency:"high" },
-    "jǐn": { meaning_zh:"近（古音）", meaning_en:"near (classical pronunciation)", example_zh:"近来", example_pinyin:"jǐn lái", example_en:"recently (classical)", meaning_vi:"gần (âm cổ)", example_vi:"gần đây (âm cổ)", frequency:"low" },
-  }},
   "苦": { readings: {
     "kǔ": { meaning_zh:"痛苦，苦味", meaning_en:"bitter, suffering", example_zh:"痛苦", example_pinyin:"tòng kǔ", example_en:"pain, suffering", meaning_vi:"đắng; khổ, đau khổ", example_vi:"đau khổ", frequency:"high" },
     "gǔ": { meaning_zh:"苦（古音，地名用）", meaning_en:"archaic reading in place names", example_zh:"苦县", example_pinyin:"gǔ xiàn", example_en:"Guxian (ancient place name)", meaning_vi:"âm cổ dùng trong địa danh", example_vi:"huyện Khổ (cổ)", frequency:"low" },
-  }},
-  "木": { readings: {
-    "mù": { meaning_zh:"木头，木材", meaning_en:"wood, timber", example_zh:"木头", example_pinyin:"mù tou", example_en:"wood, blockhead", meaning_vi:"gỗ, cây gỗ", example_vi:"khúc gỗ", frequency:"high" },
-    "mò": { meaning_zh:"木（古音，通沐）", meaning_en:"archaic variant reading", example_zh:"木兰", example_pinyin:"mò lán", example_en:"Mulan (classical reading)", meaning_vi:"âm cổ (trong 木兰 - Mộc Lan)", example_vi:"Mộc Lan", frequency:"low" },
   }},
   "约": { readings: {
     "yuē": { meaning_zh:"约定，大约", meaning_en:"approximately, to agree", example_zh:"约定", example_pinyin:"yuē dìng", example_en:"to agree upon, appointment", meaning_vi:"hẹn ước, khoảng chừng", example_vi:"hẹn ước", frequency:"high" },
@@ -2887,14 +2873,6 @@ const ENRICHED = {
     "zhe": { meaning_zh:"看着，走着", meaning_en:"(progressive/state particle)", example_zh:"看着", example_pinyin:"kàn zhe", example_en:"watching", meaning_vi:"trợ từ thể (đang/tiếp diễn)", example_vi:"đang nhìn", frequency:"high" },
     "zháo": { meaning_zh:"着火，着急", meaning_en:"to catch (fire/cold), anxious", example_zh:"着火", example_pinyin:"zháo huǒ", example_en:"to catch fire", meaning_vi:"bắt (lửa); sốt ruột", example_vi:"bắt lửa", frequency:"medium" },
     "zhuó": { meaning_zh:"着手，着力", meaning_en:"to apply, to set about", example_zh:"着手", example_pinyin:"zhuó shǒu", example_en:"to set about doing", meaning_vi:"bắt tay vào, dồn sức", example_vi:"bắt tay vào", frequency:"medium" },
-  }},
-  "跌": { readings: {
-    "diē": { meaning_zh:"跌倒，下跌", meaning_en:"to fall, to drop", example_zh:"跌倒", example_pinyin:"diē dǎo", example_en:"to fall down", frequency:"high" },
-    "dié": { meaning_zh:"跌（古音）", meaning_en:"archaic variant pronunciation", example_zh:"跌宕", example_pinyin:"dié dàng", example_en:"ups and downs (classical)", frequency:"low" },
-  }},
-  "纯": { readings: {
-    "chún": { meaning_zh:"纯粹，纯洁", meaning_en:"pure, genuine", example_zh:"纯洁", example_pinyin:"chún jié", example_en:"pure, clean", meaning_vi:"thuần khiết, trong sạch", example_vi:"thuần khiết", frequency:"high" },
-    "zhǔn": { meaning_zh:"纯（古音）", meaning_en:"archaic pronunciation variant", example_zh:"纯粹", example_pinyin:"zhǔn cuì", example_en:"pure, purely (classical)", meaning_vi:"biến thể âm cổ", example_vi:"thuần túy (âm cổ)", frequency:"low" },
   }},
   "颤": { readings: {
     "chàn": { meaning_zh:"颤抖，颤动", meaning_en:"to tremble, to shiver", example_zh:"颤抖", example_pinyin:"chàn dǒu", example_en:"to tremble, to shiver", frequency:"high" },
@@ -2940,8 +2918,8 @@ const ENRICHED = {
     "jiào": { meaning_zh:"校对，校正",         meaning_en:"to proofread, to check",      example_zh:"校对", example_pinyin:"jiào duì", example_en:"to proofread", meaning_vi:"đối chiếu, hiệu đính", example_vi:"hiệu đính", frequency:"medium" },
   }},
   "脉": { readings: {
-    "mài": { meaning_zh:"脉搏，山脉",          meaning_en:"pulse; vein; mountain range", example_zh:"脉搏", example_pinyin:"mài bó", example_en:"pulse (heartbeat)",      frequency:"high"   },
-    "mò":  { meaning_zh:"脉脉（含情）",        meaning_en:"in 脉脉 — expressing affection silently", example_zh:"脉脉含情", example_pinyin:"mò mò hán qíng", example_en:"full of silent affection", frequency:"medium" },
+    "mài": { meaning_zh:"脉搏，山脉",          meaning_en:"pulse; vein; mountain range", example_zh:"脉搏", example_pinyin:"mài bó", example_en:"pulse (heartbeat)", meaning_vi:"mạch (máu); mạch núi; nhịp đập", example_vi:"mạch đập", frequency:"high"   },
+    "mò":  { meaning_zh:"脉脉（含情）",        meaning_en:"in 脉脉 — expressing affection silently", example_zh:"脉脉含情", example_pinyin:"mò mò hán qíng", example_en:"full of silent affection", meaning_vi:"đắm đuối, trìu mến (脉脉)", example_vi:"đắm đuối tình cảm", frequency:"medium" },
   }},
   "载": { readings: {
     "zǎi": { meaning_zh:"年，记载",            meaning_en:"year; to record",             example_zh:"记载", example_pinyin:"jì zǎi", example_en:"to record, record", meaning_vi:"năm; ghi chép", example_vi:"ghi chép", frequency:"high"   },
@@ -2956,9 +2934,9 @@ const ENRICHED = {
     "mán": { meaning_zh:"埋怨（抱怨）",        meaning_en:"to complain (in 埋怨)",       example_zh:"埋怨", example_pinyin:"mán yuàn", example_en:"to complain, to blame", meaning_vi:"oán trách (trong 埋怨)", example_vi:"oán trách", frequency:"high"   },
   }},
   "柏": { readings: {
-    "bǎi": { meaning_zh:"柏树，松柏",          meaning_en:"cypress tree",                example_zh:"松柏", example_pinyin:"sōng bǎi", example_en:"pine and cypress",      frequency:"high"   },
-    "bó":  { meaning_zh:"柏林（地名）",        meaning_en:"used in 柏林 (Berlin)",       example_zh:"柏林", example_pinyin:"bó lín", example_en:"Berlin",                  frequency:"medium" },
-    "bò":  { meaning_zh:"黄柏（中药）",        meaning_en:"Amur cork tree (herbal medicine)", example_zh:"黄柏", example_pinyin:"huáng bò", example_en:"Amur cork (TCM)",  frequency:"low"    },
+    "bǎi": { meaning_zh:"柏树，松柏",          meaning_en:"cypress tree",                example_zh:"松柏", example_pinyin:"sōng bǎi", example_en:"pine and cypress", meaning_vi:"cây bách (tùng bách)", example_vi:"tùng bách", frequency:"high"   },
+    "bó":  { meaning_zh:"柏林（地名）",        meaning_en:"used in 柏林 (Berlin)",       example_zh:"柏林", example_pinyin:"bó lín", example_en:"Berlin", meaning_vi:"Béc (trong Béc-lin)", example_vi:"Béc-lin", frequency:"medium" },
+    "bò":  { meaning_zh:"黄柏（中药）",        meaning_en:"Amur cork tree (herbal medicine)", example_zh:"黄柏", example_pinyin:"huáng bò", example_en:"Amur cork (TCM)", meaning_vi:"hoàng bá (vị thuốc bắc)", example_vi:"hoàng bá (thuốc)", frequency:"low"    },
   }},
   "茄": { readings: {
     "qié": { meaning_zh:"茄子，番茄",          meaning_en:"eggplant; tomato",            example_zh:"茄子", example_pinyin:"qié zi", example_en:"eggplant", meaning_vi:"cà, cà chua", example_vi:"cà tím", frequency:"high"   },
@@ -2977,8 +2955,8 @@ const ENRICHED = {
     "zhān": { meaning_zh:"粘贴，粘住（动词）",  meaning_en:"to stick, to paste (verb)",  example_zh:"粘贴", example_pinyin:"zhān tiē", example_en:"to paste, to stick", meaning_vi:"dán, dính vào (động từ)", example_vi:"dán lên", frequency:"high"   },
   }},
   "畜": { readings: {
-    "chù": { meaning_zh:"家畜，牲畜（名词）",  meaning_en:"livestock, domestic animal (noun)", example_zh:"家畜", example_pinyin:"jiā chù", example_en:"livestock",         frequency:"high"   },
-    "xù":  { meaning_zh:"畜养，畜牧（动词）",  meaning_en:"to raise (animals); husbandry (verb)", example_zh:"畜牧", example_pinyin:"xù mù", example_en:"animal husbandry", frequency:"high"   },
+    "chù": { meaning_zh:"家畜，牲畜（名词）",  meaning_en:"livestock, domestic animal (noun)", example_zh:"家畜", example_pinyin:"jiā chù", example_en:"livestock", meaning_vi:"gia súc, vật nuôi (danh từ)", example_vi:"gia súc", frequency:"high"   },
+    "xù":  { meaning_zh:"畜养，畜牧（动词）",  meaning_en:"to raise (animals); husbandry (verb)", example_zh:"畜牧", example_pinyin:"xù mù", example_en:"animal husbandry", meaning_vi:"chăn nuôi (động từ)", example_vi:"chăn nuôi", frequency:"high"   },
   }},
   "芥": { readings: {
     "jiè": { meaning_zh:"芥菜，芥末",          meaning_en:"mustard plant; mustard",      example_zh:"芥末", example_pinyin:"jiè mò", example_en:"mustard (condiment)",    frequency:"high"   },
@@ -3734,10 +3712,26 @@ function goTo(id) {
 // ══════════════════════════════════════════════════════════════
 function initHome() {
   const total = POLYPHONES.length;
-  const counts = LEVELS_IN_USE.map(d => `${DIFF_LABELS[d]} ${POLYPHONES.filter(c=>c.difficulty===d).length}`).join('  ');
   const ss = srsStats();
-  const dueStr = ss.due > 0 ? `  ·  🧠 ${ss.due} ${t('due_word')}` : ss.mastered > 0 ? `  ·  ✅ ${ss.mastered} ${t('mastered_word')}` : '';
-  document.getElementById('home-stats').textContent = `${t('home_lib_prefix')} ${total} ${t('home_chars')}  ·  ${counts}${dueStr}`;
+
+  // Pill tổng số chữ
+  let html = `<span class="stat-pill sp-total"><span class="sp-num">${total}</span><span class="sp-lbl">${t('home_lib_prefix')}</span></span>`;
+
+  // Pill SRS (ưu tiên hiển thị "cần ôn", nếu không có thì "đã thuộc")
+  if (ss.due > 0) {
+    html += `<span class="stat-pill sp-srs"><span class="sp-num">${ss.due}</span><span class="sp-lbl">🧠 ${t('due_word')}</span></span>`;
+  } else if (ss.mastered > 0) {
+    html += `<span class="stat-pill sp-done"><span class="sp-num">${ss.mastered}</span><span class="sp-lbl">✅ ${t('mastered_word')}</span></span>`;
+  }
+
+  // Hàng riêng cho các cấp độ
+  html += `<span class="stat-divider"></span><span class="stat-lvls">`;
+  html += LEVELS_IN_USE.map(d =>
+    `<span class="lvl-chip">${DIFF_LABELS[d]}<span class="lc-num">${POLYPHONES.filter(c=>c.difficulty===d).length}</span></span>`
+  ).join('');
+  html += `</span>`;
+
+  document.getElementById('home-stats').innerHTML = html;
 }
 
 // ══════════════════════════════════════════════════════════════
