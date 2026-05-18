@@ -48,6 +48,15 @@ body {
   background: var(--cream);
   position: relative;
   overflow: hidden;
+  transition: max-width 0.2s ease;
+}
+/* Kho từ vựng trên máy tính: nới khung để xếp nhiều cột.
+   Ngưỡng 640px = laptop nhỏ trở lên đều được nhiều cột. */
+@media (min-width: 640px) {
+  body.browse-wide #app { max-width: 900px; }
+}
+@media (min-width: 1000px) {
+  body.browse-wide #app { max-width: 1200px; }
 }
 
 /* ── Screens ── */
@@ -284,8 +293,18 @@ body {
 .filter-btn.active { border-color: var(--gold); }
 
 .browse-grid {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 12px;
   overflow-y: auto; flex: 1;
+}
+/* Điện thoại: giữ 2 cột như cũ cho đẹp */
+@media (max-width: 560px) {
+  .browse-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+}
+/* Điện thoại rất hẹp: 1 cột để chữ không bị bóp */
+@media (max-width: 360px) {
+  .browse-grid { grid-template-columns: 1fr; }
 }
 .browse-card {
   background: white; border-radius: 10px;
@@ -3902,6 +3921,8 @@ function updateSrsBadge() {
 function goTo(id) {
   document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
   document.getElementById(id).classList.add('active');
+  // Chỉ màn Kho từ vựng được mở rộng khung trên máy tính
+  document.body.classList.toggle('browse-wide', id === 'browse');
   window.scrollTo(0,0);
 }
 
