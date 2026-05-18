@@ -132,6 +132,40 @@ body {
   font-size: 20px; font-weight: 700; color: var(--dark); text-align: center;
 }
 
+.info-wrap { width: 100%; max-width: 540px; margin: 0 auto; padding: 0 4px 30px; }
+.info-card {
+  background: var(--white); border-radius: 16px; padding: 22px 20px;
+  box-shadow: var(--shadow); margin-bottom: 14px; text-align: left;
+}
+.info-card h3 {
+  font-family: 'Noto Serif SC', serif; font-size: 16px; font-weight: 700;
+  color: var(--red); margin: 0 0 10px; display: flex; align-items: center; gap: 8px;
+}
+.info-card p { font-size: 14px; line-height: 1.7; color: var(--dark); margin: 0 0 10px; }
+.info-card p:last-child { margin-bottom: 0; }
+.info-card .info-label { color: var(--gray); font-weight: 600; }
+.info-feat { display: flex; gap: 12px; align-items: flex-start; padding: 11px 0; border-bottom: 1px solid rgba(0,0,0,0.06); }
+.info-feat:last-child { border-bottom: none; }
+.info-feat .if-icon {
+  flex-shrink: 0; width: 38px; height: 38px; border-radius: 10px;
+  display: flex; align-items: center; justify-content: center; font-size: 18px;
+  background: rgba(192,57,43,0.08);
+}
+.info-feat .if-body { flex: 1; }
+.info-feat .if-title { font-size: 14px; font-weight: 700; color: var(--dark); margin: 0 0 3px; }
+.info-feat .if-desc { font-size: 13px; line-height: 1.55; color: var(--gray); margin: 0; }
+.info-hero {
+  text-align: center; padding: 8px 0 18px;
+}
+.info-hero .ih-avatar {
+  width: 70px; height: 70px; border-radius: 50%; margin: 0 auto 12px;
+  background: linear-gradient(135deg, var(--red), var(--dark-red));
+  color: #fff; display: flex; align-items: center; justify-content: center;
+  font-family: 'Noto Serif SC', serif; font-size: 32px; font-weight: 700;
+}
+.info-hero .ih-name { font-size: 18px; font-weight: 700; color: var(--dark); margin: 0 0 4px; }
+.info-hero .ih-role { font-size: 13px; color: var(--gray); margin: 0; }
+
 .count-frame {
   background: white; border-radius: 10px; border: 1px solid #dee2e6;
   padding: 12px; display: flex; flex-direction: column; gap: 8px;
@@ -499,23 +533,33 @@ mark.search-hl {
 .srs-stats-row { display: flex; justify-content: space-between; font-size: 12px; color: var(--gray); }
 .srs-stats-val { font-weight: 700; color: var(--dark); }
 
-/* ── Language Switcher ─────────────────────────────────────── */
-.lang-switcher {
+/* ── Top Bar (Nav + Language) — responsive ─────────────────── */
+.topbar {
   position: fixed;
-  top: 12px;
-  right: 12px;
+  top: 0;
+  left: 0;
+  right: 0;
   z-index: 1000;
   display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  background: rgba(253,246,227,0.92);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: 0 1px 6px rgba(0,0,0,0.06);
+}
+.topbar-group {
+  display: flex;
   gap: 6px;
-  background: rgba(255,255,255,0.85);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
+  background: rgba(255,255,255,0.9);
   padding: 4px;
   border-radius: 24px;
   border: 1px solid #dee2e6;
   box-shadow: 0 2px 8px rgba(0,0,0,0.08);
 }
-.lang-btn {
+.tb-btn {
   border: none;
   background: transparent;
   color: var(--dark);
@@ -524,20 +568,43 @@ mark.search-hl {
   padding: 5px 12px;
   border-radius: 18px;
   cursor: pointer;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.3px;
   transition: all 0.15s ease;
-  min-width: 36px;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
 }
-.lang-btn:hover { background: rgba(0,0,0,0.06); }
+.tb-btn:hover { background: rgba(0,0,0,0.06); }
 .lang-btn.active {
   background: var(--blue, #2980b9);
   color: white;
   box-shadow: 0 1px 4px rgba(41,128,185,0.4);
 }
-@media (max-width: 480px) {
-  .lang-switcher { top: 8px; right: 8px; padding: 3px; }
-  .lang-btn { font-size: 11px; padding: 4px 9px; min-width: 32px; }
+.tb-btn .tb-icon { margin-right: 5px; font-size: 13px; }
+/* Push app content below the fixed top bar */
+#app { padding-top: 56px; }
+
+/* Tablet / small desktop */
+@media (max-width: 640px) {
+  .tb-btn { font-size: 11px; padding: 5px 10px; }
 }
+/* Phone: nav buttons show icon only, language stays compact */
+@media (max-width: 480px) {
+  .topbar { padding: 8px 8px; gap: 6px; }
+  .topbar-group { padding: 3px; gap: 3px; }
+  .tb-btn { font-size: 11px; padding: 5px 9px; }
+  .nav-group .tb-btn .tb-text { display: none; }
+  .nav-group .tb-btn .tb-icon { margin-right: 0; font-size: 16px; }
+  .nav-group .tb-btn { padding: 6px 10px; }
+  #app { padding-top: 52px; }
+}
+/* Very narrow phones */
+@media (max-width: 340px) {
+  .tb-btn { font-size: 10px; padding: 4px 7px; }
+  .lang-btn { padding: 4px 8px; }
+}
+
+
 
 /* ── i18n visibility classes ───────────────────────────────── */
 /* Default: show ZH, hide others */
@@ -590,11 +657,17 @@ body.lang-vi .i18n-vi-block { display: block; }
 </head>
 <body>
 
-<!-- ══ LANGUAGE SWITCHER ══ -->
-<div class="lang-switcher" id="lang-switcher">
-  <button class="lang-btn active" data-lang="zh" onclick="setLang('zh')">ZH</button>
-  <button class="lang-btn"        data-lang="en" onclick="setLang('en')">EN</button>
-  <button class="lang-btn"        data-lang="vi" onclick="setLang('vi')">VI</button>
+<!-- ══ TOP BAR (Nav + Language, responsive) ══ -->
+<div class="topbar" id="topbar">
+  <div class="topbar-group nav-group">
+    <button class="tb-btn" onclick="goTo('about')"><span class="tb-icon">👤</span><span class="tb-text"><span class="i18n-zh">关于我</span><span class="i18n-en">About me</span><span class="i18n-vi">Về tôi</span></span></button>
+    <button class="tb-btn" onclick="goTo('features')"><span class="tb-icon">✨</span><span class="tb-text"><span class="i18n-zh">功能介绍</span><span class="i18n-en">Features</span><span class="i18n-vi">Chức năng</span></span></button>
+  </div>
+  <div class="topbar-group lang-group" id="lang-switcher">
+    <button class="tb-btn lang-btn active" data-lang="zh" onclick="setLang('zh')">ZH</button>
+    <button class="tb-btn lang-btn"        data-lang="en" onclick="setLang('en')">EN</button>
+    <button class="tb-btn lang-btn"        data-lang="vi" onclick="setLang('vi')">VI</button>
+  </div>
 </div>
 
 <div id="app">
@@ -806,6 +879,103 @@ body.lang-vi .i18n-vi-block { display: block; }
     <button class="btn btn-primary" onclick="playAgain()"><span class="i18n-zh">再来一次</span><span class="i18n-en">Play Again</span><span class="i18n-vi">Chơi lại</span></button>
     <button class="btn btn-dark"    onclick="goTo('levels')"><span class="i18n-zh">换难度</span><span class="i18n-en">Change Level</span><span class="i18n-vi">Đổi cấp</span></button>
     <button class="btn btn-blue"    onclick="goTo('home')"><span class="i18n-zh">主页</span><span class="i18n-en">Home</span><span class="i18n-vi">Trang chủ</span></button>
+  </div>
+</div>
+
+<!-- ══ ABOUT (Về tác giả) ══ -->
+<div id="about" class="screen">
+  <div class="back-row">
+    <button class="btn btn-dark btn-sm" onclick="goTo('home')">← <span class="i18n-zh">返回</span><span class="i18n-en">Back</span><span class="i18n-vi">Quay lại</span></button>
+  </div>
+  <p class="screen-title"><span class="i18n-zh">关于我</span><span class="i18n-en">About me</span><span class="i18n-vi">Về tôi</span></p>
+  <div class="info-wrap">
+    <div class="info-hero">
+      <div class="ih-avatar">黄</div>
+      <p class="ih-name"><span class="i18n-zh">黄氏降生</span><span class="i18n-en">HOANG T GIANG SINH</span><span class="i18n-vi">Hoàng Thị Giáng Sinh</span></p>
+      <p class="ih-role"><span class="i18n-zh">汉语国际教育硕士研究生</span><span class="i18n-en">Master's student, Teaching Chinese as an International Language</span><span class="i18n-vi">Học viên cao học ngành Giáo dục Hán ngữ Quốc tế</span></p>
+    </div>
+    <div class="info-card">
+      <h3>👋 <span class="i18n-zh">简介</span><span class="i18n-en">Introduction</span><span class="i18n-vi">Giới thiệu</span></h3>
+      <p>
+        <span class="i18n-zh">我叫黄氏降生，2001 年出生，目前是汉语国际教育专业的硕士研究生。在学习与教学的过程中，我深刻体会到汉语多音字是中文学习者，尤其是越南学习者，普遍感到困难的一个环节。</span>
+        <span class="i18n-en">My name is Hoang Thi Giang Sinh. I was born in 2001 and am currently a master's student in Teaching Chinese as an International Language. Through my studies and teaching, I have come to realize that polyphonic Chinese characters are one of the most challenging areas for Chinese learners — especially for Vietnamese learners.</span>
+        <span class="i18n-vi">Tôi tên là Hoàng Thị Giáng Sinh, sinh năm 2001, hiện là học viên cao học ngành Giáo dục Hán ngữ Quốc tế. Trong quá trình học tập và giảng dạy, tôi nhận thấy chữ Hán đa âm là một trong những phần khó với người học tiếng Trung, đặc biệt là người học Việt Nam.</span>
+      </p>
+      <p>
+        <span class="i18n-zh">开发这个网页应用的目的，是希望帮助世界各地的学习者能够更加熟练地掌握和练习汉语多音字，让学习过程变得更高效、更有趣。</span>
+        <span class="i18n-en">The purpose of building this web app is to help learners around the world practice and master Chinese polyphonic characters more proficiently, making the learning process more efficient and enjoyable.</span>
+        <span class="i18n-vi">Mục đích tạo ra web app này là để giúp các bạn học sinh trên toàn thế giới có thể luyện tập và nắm vững chữ Hán đa âm một cách thành thạo hơn, giúp việc học hiệu quả và thú vị hơn.</span>
+      </p>
+    </div>
+    <div class="info-card">
+      <h3>🎯 <span class="i18n-zh">研究背景</span><span class="i18n-en">Background</span><span class="i18n-vi">Bối cảnh nghiên cứu</span></h3>
+      <p>
+        <span class="i18n-zh">本应用是配合硕士学位论文《维新大学中文系大三学生汉语多音字习得情况调查研究》开发的辅助学习工具，词库依据《现代汉语词典》及《常见的多音字》附录进行校订。</span>
+        <span class="i18n-en">This app is a supporting learning tool developed alongside the master's thesis "A Survey of Polyphonic Chinese Character Acquisition among Third-Year Chinese Majors at Duy Tan University." The character database has been verified against the Modern Chinese Dictionary and the standard polyphonic-character appendix.</span>
+        <span class="i18n-vi">Ứng dụng là công cụ hỗ trợ học tập được phát triển cùng luận văn thạc sĩ "Khảo sát tình hình tiếp thu chữ Hán đa âm của sinh viên năm ba khoa Trung văn, Đại học Duy Tân". Kho từ được hiệu đính theo 《现代汉语词典》 và phụ lục 《常见的多音字》.</span>
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- ══ FEATURES (Giới thiệu chức năng) ══ -->
+<div id="features" class="screen">
+  <div class="back-row">
+    <button class="btn btn-dark btn-sm" onclick="goTo('home')">← <span class="i18n-zh">返回</span><span class="i18n-en">Back</span><span class="i18n-vi">Quay lại</span></button>
+  </div>
+  <p class="screen-title"><span class="i18n-zh">功能介绍</span><span class="i18n-en">App Features</span><span class="i18n-vi">Giới thiệu chức năng</span></p>
+  <div class="info-wrap">
+    <div class="info-card">
+      <p>
+        <span class="i18n-zh">本应用收录 451 个常见多音字，每个读音均附中文释义、例词、拼音及越南语翻译。主要功能如下：</span>
+        <span class="i18n-en">This app includes 451 common polyphonic characters. Every reading has a Chinese definition, example word, pinyin, and Vietnamese translation. The main features are:</span>
+        <span class="i18n-vi">Ứng dụng gồm 451 chữ Hán đa âm thường gặp, mỗi âm đọc đều có nghĩa tiếng Trung, từ ví dụ, phiên âm và bản dịch tiếng Việt. Các chức năng chính:</span>
+      </p>
+    </div>
+    <div class="info-card">
+      <div class="info-feat">
+        <div class="if-icon">📝</div>
+        <div class="if-body">
+          <p class="if-title"><span class="i18n-zh">开始测验</span><span class="i18n-en">Quiz</span><span class="i18n-vi">Bắt đầu kiểm tra</span></p>
+          <p class="if-desc"><span class="i18n-zh">按等级（一级至七-九级）进行选择题测验，干扰项包含该字的其他读音，针对性强。</span><span class="i18n-en">Multiple-choice quiz by level (1 to 7–9). Distractor options include the character's other readings, targeting the core difficulty.</span><span class="i18n-vi">Kiểm tra trắc nghiệm theo cấp độ (1 đến 7–9). Đáp án nhiễu gồm các âm đọc khác của chính chữ đó, tập trung vào điểm khó cốt lõi.</span></p>
+        </div>
+      </div>
+      <div class="info-feat">
+        <div class="if-icon">🧠</div>
+        <div class="if-body">
+          <p class="if-title"><span class="i18n-zh">智能复习</span><span class="i18n-en">SRS Review</span><span class="i18n-vi">Ôn tập thông minh</span></p>
+          <p class="if-desc"><span class="i18n-zh">基于间隔重复算法（SRS），自动安排需要复习的字，提高记忆效率。</span><span class="i18n-en">Based on a spaced-repetition system (SRS) that automatically schedules characters for review to improve memory efficiency.</span><span class="i18n-vi">Dựa trên thuật toán lặp lại ngắt quãng (SRS), tự động sắp xếp các chữ cần ôn để tăng hiệu quả ghi nhớ.</span></p>
+        </div>
+      </div>
+      <div class="info-feat">
+        <div class="if-icon">🎴</div>
+        <div class="if-body">
+          <p class="if-title"><span class="i18n-zh">闪卡练习</span><span class="i18n-en">Flashcards</span><span class="i18n-vi">Thẻ ghi nhớ</span></p>
+          <p class="if-desc"><span class="i18n-zh">翻卡式记忆，正面为汉字，背面显示所有读音、释义与例词，适合自主记忆。</span><span class="i18n-en">Flip-card memorization: the character on the front, all readings, definitions, and examples on the back — ideal for self-study.</span><span class="i18n-vi">Học theo kiểu lật thẻ: mặt trước là chữ Hán, mặt sau hiện tất cả âm đọc, nghĩa và từ ví dụ — phù hợp tự ôn.</span></p>
+        </div>
+      </div>
+      <div class="info-feat">
+        <div class="if-icon">📚</div>
+        <div class="if-body">
+          <p class="if-title"><span class="i18n-zh">浏览词库</span><span class="i18n-en">Browse</span><span class="i18n-vi">Kho từ vựng</span></p>
+          <p class="if-desc"><span class="i18n-zh">查阅全部 451 个多音字，可按等级筛选，查看每个读音的完整信息。</span><span class="i18n-en">Browse all 451 polyphonic characters, filter by level, and view complete information for each reading.</span><span class="i18n-vi">Tra cứu toàn bộ 451 chữ đa âm, lọc theo cấp độ, xem đầy đủ thông tin từng âm đọc.</span></p>
+        </div>
+      </div>
+      <div class="info-feat">
+        <div class="if-icon">📊</div>
+        <div class="if-body">
+          <p class="if-title"><span class="i18n-zh">我的成绩</span><span class="i18n-en">My Stats</span><span class="i18n-vi">Thành tích</span></p>
+          <p class="if-desc"><span class="i18n-zh">记录练习历史、正确率与学习进度，帮助掌握自身学习情况。</span><span class="i18n-en">Tracks practice history, accuracy, and learning progress to help you understand your own performance.</span><span class="i18n-vi">Ghi lại lịch sử luyện tập, tỉ lệ đúng và tiến độ học, giúp bạn nắm được tình hình học tập của mình.</span></p>
+        </div>
+      </div>
+      <div class="info-feat">
+        <div class="if-icon">🌐</div>
+        <div class="if-body">
+          <p class="if-title"><span class="i18n-zh">三语界面</span><span class="i18n-en">Trilingual UI</span><span class="i18n-vi">Giao diện 3 ngôn ngữ</span></p>
+          <p class="if-desc"><span class="i18n-zh">支持中文、英语、越南语三种界面语言，右上角可随时切换。</span><span class="i18n-en">Supports Chinese, English, and Vietnamese interface languages — switch anytime via the top-right buttons.</span><span class="i18n-vi">Hỗ trợ 3 ngôn ngữ giao diện: Trung, Anh, Việt — chuyển đổi bất cứ lúc nào ở góc trên bên phải.</span></p>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 
