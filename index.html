@@ -45,12 +45,22 @@ body {
 #app {
   width: 100%;
   max-width: 520px;
-  min-height: 100vh;
+  height: 100vh;
   background: var(--cream);
   position: relative;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
   transition: max-width 0.2s ease;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(192,57,43,0.35) rgba(0,0,0,0.03);
 }
+#app::-webkit-scrollbar { width: 7px; }
+#app::-webkit-scrollbar-track { background: rgba(0,0,0,0.03); }
+#app::-webkit-scrollbar-thumb {
+  background: rgba(192,57,43,0.35);
+  border-radius: 4px;
+}
+#app::-webkit-scrollbar-thumb:hover { background: rgba(192,57,43,0.6); }
 /* Kho từ vựng trên máy tính: nới khung để xếp nhiều cột.
    Ngưỡng 640px = laptop nhỏ trở lên đều được nhiều cột. */
 @media (min-width: 640px) {
@@ -226,6 +236,43 @@ body {
 }
 .progress-lbl { font-size: 11px; color: var(--gray); text-align: center; }
 
+/* Hàng chấm tròn theo dõi từng câu */
+.quiz-dots {
+  display: flex; flex-wrap: wrap; justify-content: center;
+  gap: 6px; margin: 8px 0 4px; padding: 0 4px;
+}
+.qdot {
+  width: 24px; height: 24px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; font-weight: 700;
+  background: #e9ecef; color: #6c757d;
+  border: 2px solid transparent;
+  transition: all .15s ease;
+  cursor: default;
+  user-select: none;
+}
+.qdot.correct { background: var(--green); color: #fff; }
+.qdot.wrong   { background: var(--red);   color: #fff; }
+.qdot.current {
+  background: #fff; color: var(--red);
+  border-color: var(--red);
+  box-shadow: 0 0 0 3px rgba(192,57,43,0.15);
+}
+.qdot-legend {
+  font-size: 10px; color: var(--gray); text-align: center;
+  margin-top: 2px; line-height: 1.5;
+}
+.qdot-legend .ld {
+  display: inline-flex; align-items: center; gap: 3px; margin: 0 4px;
+}
+.qdot-legend .ld-sw {
+  width: 8px; height: 8px; border-radius: 50%; display: inline-block;
+}
+@media (max-width: 480px) {
+  .qdot { width: 20px; height: 20px; font-size: 10px; }
+  .quiz-dots { gap: 4px; }
+}
+
 .char-card {
   border-radius: 18px; padding: 16px 20px;
   background: linear-gradient(135deg, var(--red), var(--dark-red));
@@ -272,8 +319,8 @@ body {
 .opt-btn.wrong   { background: var(--red);   color: white; border-color: var(--red); }
 .opt-btn:disabled { cursor: default; }
 
-.feedback-lbl { font-size: 13px; font-weight: 700; text-align: center; min-height: 42px; line-height: 1.4; font-family: var(--font-pinyin); }
-.streak-row { display: flex; justify-content: center; }
+.feedback-lbl { font-size: 13px; font-weight: 700; text-align: center; min-height: 22px; line-height: 1.4; font-family: var(--font-pinyin); margin-top: 4px; }
+.streak-row { display: flex; justify-content: center; margin-top: 6px; }
 .streak-lbl { font-size: 14px; color: var(--orange); font-weight: 700; }
 
 /* ── Browse Screen ── */
@@ -737,6 +784,12 @@ body.lang-vi .i18n-vi-block { display: block; }
   </div>
   <div class="progress-bar-wrap"><div class="progress-bar-fill" id="quiz-progress"></div></div>
   <div class="progress-lbl" id="quiz-progress-lbl"></div>
+  <div class="quiz-dots" id="quiz-dots"></div>
+  <div class="qdot-legend" id="quiz-dots-legend">
+    <span class="i18n-zh"><span class="ld"><span class="ld-sw" style="background:#27ae60"></span>正确</span><span class="ld"><span class="ld-sw" style="background:#c0392b"></span>错误</span><span class="ld"><span class="ld-sw" style="background:#fff;border:2px solid #c0392b"></span>当前</span><span class="ld"><span class="ld-sw" style="background:#e9ecef"></span>未答</span></span>
+    <span class="i18n-en"><span class="ld"><span class="ld-sw" style="background:#27ae60"></span>correct</span><span class="ld"><span class="ld-sw" style="background:#c0392b"></span>wrong</span><span class="ld"><span class="ld-sw" style="background:#fff;border:2px solid #c0392b"></span>current</span><span class="ld"><span class="ld-sw" style="background:#e9ecef"></span>not done</span></span>
+    <span class="i18n-vi"><span class="ld"><span class="ld-sw" style="background:#27ae60"></span>đúng</span><span class="ld"><span class="ld-sw" style="background:#c0392b"></span>sai</span><span class="ld"><span class="ld-sw" style="background:#fff;border:2px solid #c0392b"></span>đang ở</span><span class="ld"><span class="ld-sw" style="background:#e9ecef"></span>chưa làm</span></span>
+  </div>
 
   <div class="char-card">
     <div class="card-badges">
@@ -777,7 +830,7 @@ body.lang-vi .i18n-vi-block { display: block; }
   <div class="feedback-lbl" id="quiz-feedback"></div>
   <div class="streak-row"><span class="streak-lbl" id="quiz-streak">🔥 0</span></div>
 
-  <div style="text-align:center">
+  <div style="text-align:center; margin-top: 10px;">
     <button class="btn btn-primary" id="quiz-next" style="display:none" onclick="quizNext()"><span class="i18n-zh">下一题</span><span class="i18n-en">Next</span><span class="i18n-vi">Câu tiếp</span> →</button>
   </div>
 </div>
@@ -3868,7 +3921,7 @@ function startSrsSession() {
     difficulty: 0, sessionLimit: queue.length,
     score: 0, total: 0,
     currentChar: null, correctPinyin: null, options: [], answered: false,
-    queue, queueIdx: 0,
+    queue, queueIdx: 0, history: [],
   };
   lastQuizDiff = 0; lastQuizCount = 0;
 
@@ -4003,7 +4056,7 @@ function initLevels() {
 let quizState = {
   difficulty:0, sessionLimit:10, score:0, total:0,
   currentChar:null, correctPinyin:null, options:[], answered:false,
-  queue:[], queueIdx:0
+  queue:[], queueIdx:0, history:[]
 };
 let lastQuizDiff=0, lastQuizCount=10;
 
@@ -4018,7 +4071,7 @@ function startQuiz(difficulty, count) {
   srsMode = false;
   lastQuizDiff = difficulty; lastQuizCount = count;
   const queue = buildQuestionQueue(difficulty);
-  quizState = { difficulty, sessionLimit:count, score:0, total:0, currentChar:null, correctPinyin:null, options:[], answered:false, queue, queueIdx:0 };
+  quizState = { difficulty, sessionLimit:count, score:0, total:0, currentChar:null, correctPinyin:null, options:[], answered:false, queue, queueIdx:0, history:[] };
   const color = DIFF_COLORS[difficulty]||'#2980b9';
   const badge = document.getElementById('quiz-level-badge');
   badge.textContent = DIFF_LABELS[difficulty] || t('all_levels');
@@ -4144,6 +4197,38 @@ function updateProgress() {
     lbl.textContent = t('question_single', {n: total});
   }
   document.getElementById('quiz-score').textContent = `${score} / ${total}`;
+  renderQuizDots();
+}
+
+function renderQuizDots() {
+  const wrap = document.getElementById('quiz-dots');
+  const legend = document.getElementById('quiz-dots-legend');
+  if (!wrap) return;
+  const limit = quizState.sessionLimit || 0;
+  const history = quizState.history || [];
+  // Ẩn dots khi không có sessionLimit (SRS chế độ vô hạn) hoặc khi limit quá lớn (>50)
+  if (limit <= 0 || limit > 50) {
+    wrap.style.display = 'none';
+    if (legend) legend.style.display = 'none';
+    return;
+  }
+  wrap.style.display = 'flex';
+  if (legend) legend.style.display = 'block';
+  let html = '';
+  for (let i = 0; i < limit; i++) {
+    let cls = 'qdot';
+    let label = (i+1);
+    if (i < history.length) {
+      if (history[i]) { cls += ' correct'; label = '✓'; }
+      else            { cls += ' wrong';   label = (i+1); }
+    } else if (i === history.length && !quizState.answered) {
+      cls += ' current';
+    } else if (i === history.length - 1 && quizState.answered) {
+      // Câu vừa trả xong vẫn highlight nhẹ — không cần
+    }
+    html += `<div class="${cls}">${label}</div>`;
+  }
+  wrap.innerHTML = html;
 }
 
 function onAnswer(idx) {
@@ -4153,6 +4238,9 @@ function onAnswer(idx) {
   const correct = chosen===quizState.correctPinyin;
   quizState.total++;
   if(correct) quizState.score++;
+  // Ghi vào history để hiển thị chấm tròn
+  if (!quizState.history) quizState.history = [];
+  quizState.history.push(correct);
 
   // Update SRS card
   if (quizState.currentChar && quizState.correctPinyin) {
