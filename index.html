@@ -40,28 +40,24 @@ body {
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  padding: 20px 0;
-  box-sizing: border-box;
 }
 
 #app {
   width: 100%;
   max-width: 520px;
-  height: calc(100vh - 40px);
+  min-height: 100vh;
   background: var(--cream);
   position: relative;
   overflow-x: hidden;
-  overflow-y: auto;
   transition: max-width 0.2s ease;
-  border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
 }
-/* Kho từ vựng trên máy tính: nới khung để xếp nhiều cột.
-   Ngưỡng 640px = laptop nhỏ trở lên đều được nhiều cột. */
+/* Tối ưu desktop: nới khung app cho các màn cần không gian (mọi màn trừ home dùng max-width chuẩn 520) */
 @media (min-width: 640px) {
+  #app { max-width: 720px; }
   body.browse-wide #app { max-width: 900px; }
 }
 @media (min-width: 1000px) {
+  #app { max-width: 760px; }
   body.browse-wide #app { max-width: 1200px; }
 }
 
@@ -122,6 +118,17 @@ body {
 }
 .home-btns { display: flex; flex-direction: column; gap: 10px; width: 100%; max-width: 300px; }
 .home-btns .btn { width: 100%; text-align: center; }
+/* Desktop: 5 nút xếp lưới 2 cột → giảm chiều cao trang Home */
+@media (min-width: 640px) {
+  .home-btns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    max-width: 480px;
+  }
+  /* Nút "Bắt đầu kiểm tra" (đầu tiên) chiếm 2 cột để nổi bật */
+  .home-btns .btn-primary { grid-column: 1 / -1; }
+}
 
 .home-stats { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 6px; margin-top: 14px; }
 .stat-pill { display: inline-flex; align-items: baseline; gap: 5px; background: var(--white); border: 1px solid rgba(0,0,0,0.06); border-radius: 999px; padding: 5px 12px; box-shadow: 0 1px 4px rgba(0,0,0,0.04); }
