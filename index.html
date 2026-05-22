@@ -40,27 +40,22 @@ body {
   display: flex;
   justify-content: center;
   align-items: flex-start;
+  padding: 20px 0;
+  box-sizing: border-box;
 }
 
 #app {
   width: 100%;
   max-width: 520px;
-  height: 100vh;
+  height: calc(100vh - 40px);
   background: var(--cream);
   position: relative;
   overflow-x: hidden;
   overflow-y: auto;
   transition: max-width 0.2s ease;
-  scrollbar-width: thin;
-  scrollbar-color: rgba(192,57,43,0.35) rgba(0,0,0,0.03);
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
 }
-#app::-webkit-scrollbar { width: 7px; }
-#app::-webkit-scrollbar-track { background: rgba(0,0,0,0.03); }
-#app::-webkit-scrollbar-thumb {
-  background: rgba(192,57,43,0.35);
-  border-radius: 4px;
-}
-#app::-webkit-scrollbar-thumb:hover { background: rgba(192,57,43,0.6); }
 /* Kho từ vựng trên máy tính: nới khung để xếp nhiều cột.
    Ngưỡng 640px = laptop nhỏ trở lên đều được nhiều cột. */
 @media (min-width: 640px) {
@@ -3934,8 +3929,11 @@ function startSrsSession() {
   document.getElementById('quiz-srs-info').style.display = 'flex';
   document.getElementById('quiz-score').textContent = '0 / 0';
 
+  // Reset streak khi bắt đầu phiên SRS mới
   const s = loadStats();
-  document.getElementById('quiz-streak').textContent = `🔥 ${s.streak}`;
+  s.streak = 0;
+  saveStats(s);
+  document.getElementById('quiz-streak').textContent = `🔥 0`;
   goTo('quiz');
   loadQuestion();
 }
@@ -4079,8 +4077,11 @@ function startQuiz(difficulty, count) {
   document.getElementById('quiz-srs-badge').style.display = 'none';
   document.getElementById('quiz-srs-info').style.display = 'none';
   document.getElementById('quiz-score').textContent = '0 / 0';
+  // Reset streak khi bắt đầu phiên mới (streak là chuỗi đúng liên tiếp trong phiên)
   const s = loadStats();
-  document.getElementById('quiz-streak').textContent = `🔥 ${s.streak}`;
+  s.streak = 0;
+  saveStats(s);
+  document.getElementById('quiz-streak').textContent = `🔥 0`;
   goTo('quiz');
   loadQuestion();
 }
