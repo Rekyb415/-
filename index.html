@@ -1092,7 +1092,7 @@ body.lang-vi .i18n-vi-block { display: block; }
 const RAW_DATA = [
   {hanzi:"得",pinyin:"dé/děi/de",level:"一级"},
   {hanzi:"地",pinyin:"dì/de",level:"一级"},
-  {hanzi:"着",pinyin:"zhe/zháo/zhuó",level:"一级"},
+  {hanzi:"着",pinyin:"zhāo/zháo/zhe/zhuó",level:"一级"},
   {hanzi:"了",pinyin:"le/liǎo",level:"一级"},
   {hanzi:"好",pinyin:"hǎo/hào",level:"一级"},
   {hanzi:"和",pinyin:"hé/hè/huó/huò/hú",level:"一级"},
@@ -1329,7 +1329,7 @@ const RAW_DATA = [
   {hanzi:"熬",pinyin:"áo/āo",level:"七-九级"},
   // B
   {hanzi:"吧",pinyin:"bā/ba",level:"一级"},
-  {hanzi:"把",pinyin:"bǎ/bà/ba",level:"一级"},
+  {hanzi:"把",pinyin:"bǎ/bà",level:"一级"},
   {hanzi:"耙",pinyin:"bà/pá",level:"七-九级"},
   {hanzi:"蚌",pinyin:"bàng/bèng",level:"七-九级"},
   {hanzi:"磅",pinyin:"bàng/páng",level:"七-九级"},
@@ -1404,7 +1404,7 @@ const RAW_DATA = [
   {hanzi:"秘",pinyin:"mì/bì",level:"四级"},
   {hanzi:"摩",pinyin:"mó/mā",level:"七-九级"},
   // N
-  {hanzi:"哪",pinyin:"nǎ/nèi/na/né",level:"一级"},
+  {hanzi:"哪",pinyin:"nǎ/něi/nǎi/na/né",level:"一级"},
   {hanzi:"那",pinyin:"nà/nèi/nā",level:"一级"},
   {hanzi:"娜",pinyin:"nà/nuó",level:"七-九级"},
   {hanzi:"囊",pinyin:"náng/nāng",level:"七-九级"},
@@ -1571,6 +1571,7 @@ const RAW_DATA = [
 const ENRICHED = {
 
   "着": { readings: {
+    "zhāo": { meaning_zh:"下棋时下一子或走一步", meaning_en:"a move in chess; a trick", example_zh:"着数", example_pinyin:"zhāo shù", example_en:"a chess move; trick", meaning_vi:"nước cờ; mánh khóe", example_vi:"nước cờ", frequency:"low" },
     "zhe": { meaning_zh:"动态助词（持续）", meaning_en:"aspect particle (ongoing)", example_zh:"穿着", example_pinyin:"chuān zhe", example_en:"wearing", meaning_vi:"trợ từ thể (đang/tiếp diễn)", example_vi:"mặc (quần áo)", frequency:"high" },
     "zháo": { meaning_zh:"接触到，达到", meaning_en:"to touch, to reach", example_zh:"着急", example_pinyin:"zháo jí", example_en:"anxious", meaning_vi:"chạm tới, gặp phải", example_vi:"sốt ruột", frequency:"high" },
     "zhuó": { meaning_zh:"穿着，附着", meaning_en:"to wear, to be attached to", example_zh:"着装", example_pinyin:"zhuó zhuāng", example_en:"attire", meaning_vi:"mặc, đính kèm", example_vi:"trang phục", frequency:"medium" },
@@ -2552,7 +2553,6 @@ const ENRICHED = {
   "把": { readings: {
     "bǎ": { meaning_zh:"把握，抓住", meaning_en:"to hold, to grasp", example_zh:"把握", example_pinyin:"bǎ wò", example_en:"to grasp", meaning_vi:"cầm, nắm, cái (lượng từ)", example_vi:"nắm chắc", frequency:"high" },
     "bà": { meaning_zh:"刀把儿，柄", meaning_en:"handle, grip", example_zh:"刀把", example_pinyin:"dāo bà", example_en:"knife handle", meaning_vi:"cán, tay nắm", example_vi:"cán dao", frequency:"high" },
-    "ba": { meaning_zh:"语气助词", meaning_en:"modal particle (informal)", example_zh:"把", example_pinyin:"ba", example_en:"modal particle", meaning_vi:"trợ từ ngữ khí (cuối câu)", example_vi:"trợ từ ngữ khí", frequency:"low" },
   }},
   "耙": { readings: {
     "bà": { meaning_zh:"耙地，翻土", meaning_en:"to rake (soil)", example_zh:"钉耙", example_pinyin:"dīng bà", example_en:"rake (tool)", meaning_vi:"cái bừa; bừa đất", example_vi:"cái cào (đinh ba)", frequency:"medium" },
@@ -2825,7 +2825,8 @@ const ENRICHED = {
   }},
   "哪": { readings: {
     "nǎ": { meaning_zh:"哪儿，哪里", meaning_en:"where, which", example_zh:"哪里", example_pinyin:"nǎ lǐ", example_en:"where", meaning_vi:"nào, ở đâu", example_vi:"ở đâu", frequency:"high" },
-    "nèi": { meaning_zh:"哪（一）年", meaning_en:"which year (spoken)", example_zh:"哪年", example_pinyin:"nèi nián", example_en:"which year", meaning_vi:"nào (= 哪一)", example_vi:"năm nào", frequency:"medium" },
+    "něi": { meaning_zh:"\"哪\"的口语音", meaning_en:"colloquial form of nǎ", example_zh:"哪年", example_pinyin:"něi nián", example_en:"which year", meaning_vi:"khẩu ngữ của nǎ", example_vi:"năm nào", frequency:"medium" },
+    "nǎi": { meaning_zh:"\"哪\"的口语音", meaning_en:"colloquial form of nǎ", example_zh:"哪儿", example_pinyin:"nǎi r", example_en:"where (colloquial)", meaning_vi:"khẩu ngữ của nǎ", example_vi:"chỗ nào", frequency:"low" },
     "na": { meaning_zh:"语气助词", meaning_en:"modal particle", example_zh:"好哪", example_pinyin:"hǎo na", example_en:"oh good (sentence particle)", meaning_vi:"trợ từ ngữ khí (cuối câu)", example_vi:"tốt nha", frequency:"medium" },
     "né": { meaning_zh:"哪吒（人名）", meaning_en:"Nezha (mythical figure)", example_zh:"哪吒", example_pinyin:"Né zhā", example_en:"Nezha", meaning_vi:"Na (trong 哪吒 — tên thần)", example_vi:"Na Tra", frequency:"low" },
   }},
