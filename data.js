@@ -687,7 +687,7 @@ const ENRICHED = {
   }},
   "冠": { readings: {
     "guān": { meaning_zh:"帽子，皇冠", meaning_en:"hat, crown (noun)", example_zh:"皇冠", example_pinyin:"huáng guān", example_en:"royal crown", meaning_vi:"mũ, vương miện (danh từ)", example_vi:"vương miện", frequency:"high" },
-    "guàn": { meaning_zh:"冠军，加冠", meaning_en:"champion; to crown (verb)", example_zh:"冠军", example_pinyin:"guàn jūn", example_en:"champion", meaning_vi:"quán quân; đứng đầu (động từ)", example_vi:"quán quân", frequency:"high" },
+    "guàn": { meaning_zh:"居第一位；冠军，冠名", meaning_en:"to be first; champion", example_zh:"冠军", example_pinyin:"guàn jūn", example_en:"champion", meaning_vi:"quán quân; đứng đầu (động từ)", example_vi:"quán quân", frequency:"high" },
   }},
   "划": { readings: {
     "huá": { meaning_zh:"划船，划算", meaning_en:"to row, worthwhile", example_zh:"划船", example_pinyin:"huá chuán", example_en:"to row a boat", meaning_vi:"chèo (thuyền), đáng giá", example_vi:"chèo thuyền", frequency:"high" },
@@ -1082,7 +1082,7 @@ const ENRICHED = {
     "shàn": { meaning_zh:"禅让，封禅", meaning_en:"abdication, imperial rite", example_zh:"禅让", example_pinyin:"shàn ràng", example_en:"abdication", meaning_vi:"nhường ngôi (thiện nhượng)", example_vi:"nhường ngôi", frequency:"low" },
   }},
   "匙": { readings: {
-    "chí": { meaning_zh:"汤匙，钥匙", meaning_en:"spoon, key", example_zh:"汤匙", example_pinyin:"tāng chí", example_en:"spoon", meaning_vi:"thìa, muỗng", example_vi:"thìa canh", frequency:"high" },
+    "chí": { meaning_zh:"汤匙，茶匙", meaning_en:"spoon", example_zh:"汤匙", example_pinyin:"tāng chí", example_en:"spoon", meaning_vi:"thìa, muỗng", example_vi:"thìa canh", frequency:"high" },
     "shi": { meaning_zh:"钥匙（口语）", meaning_en:"key (colloq., unstressed)", example_zh:"钥匙", example_pinyin:"yào shi", example_en:"key", meaning_vi:"chìa khóa (trong 钥匙)", example_vi:"chìa khóa", frequency:"high" },
   }},
   "揣": { readings: {
@@ -1796,7 +1796,7 @@ const ENRICHED = {
   }},
   "曝": { readings: {
     "pù": { meaning_zh:"一曝十寒", meaning_en:"to work in fits and starts", example_zh:"一曝十寒", example_pinyin:"yī pù shí hán", example_en:"inconsistent effort", meaning_vi:"phơi (一曝十寒, văn cổ)", example_vi:"bữa làm bữa nghỉ", frequency:"medium" },
-    "bào": { meaning_zh:"曝光，曝晒", meaning_en:"exposure (photo/sun)", example_zh:"曝光", example_pinyin:"bào guāng", example_en:"exposure", meaning_vi:"phơi sáng; phơi bày", example_vi:"phơi sáng", frequency:"high" },
+    "bào": { meaning_zh:"曝光（显露，使公开）", meaning_en:"to expose, to disclose", example_zh:"曝光", example_pinyin:"bào guāng", example_en:"exposure", meaning_vi:"phơi sáng; phơi bày", example_vi:"phơi sáng", frequency:"high" },
   }},
   "妻": { readings: {
     "qī": { meaning_zh:"妻子，妻儿", meaning_en:"wife", example_zh:"妻子", example_pinyin:"qī zi", example_en:"wife", meaning_vi:"vợ", example_vi:"vợ", frequency:"high" },
@@ -2032,7 +2032,7 @@ const ENRICHED = {
     "chuí": { meaning_zh:"铁椎，锤击", meaning_en:"mace; to hammer", example_zh:"铁椎", example_pinyin:"tiě chuí", example_en:"iron mace", meaning_vi:"búa, chùy sắt", example_vi:"chùy sắt", frequency:"medium" },
   }},
   "仔": { readings: {
-    "zǐ": { meaning_zh:"仔细，仔肩", meaning_en:"careful; to shoulder (responsibility)", example_zh:"仔细", example_pinyin:"zǐ xī", example_en:"careful", meaning_vi:"tỉ mỉ, kỹ lưỡng", example_vi:"tỉ mỉ", frequency:"high" },
+    "zǐ": { meaning_zh:"仔细；（牲畜）幼小的（仔猪）", meaning_en:"careful; young (of livestock)", example_zh:"仔细", example_pinyin:"zǐ xī", example_en:"careful", meaning_vi:"tỉ mỉ, kỹ lưỡng", example_vi:"tỉ mỉ", frequency:"high" },
     "zǎi": { meaning_zh:"牛仔，小崽", meaning_en:"calf; young (Cantonese-influenced)", example_zh:"牛仔", example_pinyin:"niú zǎi", example_en:"cowboy/calf", meaning_vi:"chàng (cao bồi); con (thú nhỏ)", example_vi:"cao bồi", frequency:"high" },
     "zī": { meaning_zh:"仔肩（担负）", meaning_en:"to shoulder (formal/classical)", example_zh:"仔肩", example_pinyin:"zī jiān", example_en:"to bear a burden", meaning_vi:"gánh vác (仔肩, văn cổ)", example_vi:"gánh vác trọng trách", frequency:"low" },
   }},
@@ -2233,7 +2233,7 @@ const ENRICHED = {
     "bù": { meaning_zh:"大埔（地名）", meaning_en:"Dabu (place name)", example_zh:"大埔", example_pinyin:"Dà bù", example_en:"Dabu", meaning_vi:"Đại Bộ (địa danh)", example_vi:"Đại Bộ", frequency:"medium" },
   }},
   "姥": { readings: {
-    "mǔ": { meaning_zh:"老妇（褓姆）", meaning_en:"old woman", example_zh:"姥姆", example_pinyin:"mǔ mǔ", example_en:"old woman", meaning_vi:"bà lão", example_vi:"bà lão", frequency:"medium" },
+    "mǔ": { meaning_zh:"年老的妇人（古）；用于“天姥”（山名）", meaning_en:"old woman (archaic); in 天姥 (a mountain)", example_zh:"天姥", example_pinyin:"Tiān mǔ", example_en:"Mount Tianmu", meaning_vi:"bà lão (cổ); dùng trong 天姥 (tên núi)", example_vi:"núi Thiên Mỗ", frequency:"medium" },
     "lǎo": { meaning_zh:"姥姥（外婆）", meaning_en:"maternal grandmother", example_zh:"姥姥", example_pinyin:"lǎo lao", example_en:"grandma (maternal)", meaning_vi:"bà ngoại", example_vi:"bà ngoại", frequency:"medium" },
   }},
   "尺": { readings: {
@@ -2242,7 +2242,7 @@ const ENRICHED = {
   }},
   "尿": { readings: {
     "niào": { meaning_zh:"撒尿，尿液", meaning_en:"urine, to urinate", example_zh:"撒尿", example_pinyin:"sā niào", example_en:"to urinate", meaning_vi:"đi tiểu, nước tiểu", example_vi:"đi tiểu", frequency:"medium" },
-    "suī": { meaning_zh:"尿脬（膀胱）", meaning_en:"bladder (colloquial)", example_zh:"尿脬", example_pinyin:"suī pao", example_en:"bladder", meaning_vi:"bàng quang (khẩu ngữ)", example_vi:"bàng quang", frequency:"medium" },
+    "suī": { meaning_zh:"小便（口语，多用于“尿脬”“尿泡”）", meaning_en:"urine (colloq.)", example_zh:"尿脬", example_pinyin:"suī pao", example_en:"bladder", meaning_vi:"nước tiểu (khẩu ngữ)", example_vi:"bàng quang", frequency:"medium" },
   }},
   "崎": { readings: {
     "qí": { meaning_zh:"崎岖（山路不平）", meaning_en:"rugged, rough", example_zh:"崎岖", example_pinyin:"qí qū", example_en:"rugged", meaning_vi:"gập ghềnh, khúc khuỷu", example_vi:"gập ghềnh", frequency:"medium" },
@@ -3965,7 +3965,7 @@ const POS_NOTE = {
   "唬|hǔ":["动词","唬人"],
   "唬|xià":["动词","唬一跳"],
   "姥|lǎo":["名词","姥姥"],
-  "姥|mǔ":["名词","姥姆"],
+  "姥|mǔ":["名词","天姥"],
   "尿|niào":["名词","撒尿"],
   "尿|suī":["名词","尿脬"],
   "敦|dūn":["形容词","敦厚"],
