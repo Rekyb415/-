@@ -836,7 +836,7 @@ const ENRICHED = {
   }},
   "落": { readings: {
     "luò": { meaning_zh:"落下，落地", meaning_en:"to fall, to land", example_zh:"落下", example_pinyin:"luò xià", example_en:"to fall", meaning_vi:"rơi, rớt xuống", example_vi:"rơi xuống", frequency:"high" },
-    "lào": { meaning_zh:"落枕，落炕", meaning_en:"stiff neck (colloq.)", example_zh:"落枕", example_pinyin:"lào zhěn", example_en:"stiff neck", meaning_vi:"vẹo (cổ), trật (khẩu ngữ)", example_vi:"vẹo cổ (do ngủ)", frequency:"medium" },
+    "lào": { meaning_zh:"落枕（睡觉姿势不当引起脖子疼痛），口语", meaning_en:"stiff neck from sleeping badly (colloq.)", example_zh:"落枕", example_pinyin:"lào zhěn", example_en:"stiff neck", meaning_vi:"sái cổ do ngủ sai tư thế (落枕); khẩu ngữ", example_vi:"sái cổ (khi ngủ dậy)", frequency:"medium" },
     "là": { meaning_zh:"丢落，落下（遗漏）", meaning_en:"to leave behind, to miss", example_zh:"丢三落四", example_pinyin:"diū sān là sì", example_en:"to be forgetful, to forget things", meaning_vi:"bỏ sót, để quên", example_vi:"đầu óc hay quên", frequency:"high" },
   }},
   "泡": { readings: {

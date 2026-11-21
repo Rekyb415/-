@@ -736,6 +736,23 @@ body.lang-vi .i18n-vi-block { display: block; }
 .nb-lbl { color:var(--gray); min-width:96px; }
 .nb-input { flex:1; min-width:0; border:1px solid #ddd; border-radius:6px; padding:4px 6px; font-size:14px; font-family:'Noto Serif SC',serif; }
 .nb-dates { justify-content:space-between; color:var(--gray); font-size:11px; }
+.nb-summary { display:flex; flex-wrap:wrap; gap:6px; justify-content:flex-end; margin:8px 0; font-size:12.5px; }
+.nb-summary span { padding:3px 10px; border-radius:999px; background:#f3ead2; color:#7d6608; }
+.nb-chip { font-size:11.5px; font-weight:700; padding:2px 8px; border-radius:999px; white-space:nowrap; }
+.nb-chip.need { background:#fdebd0; color:#b9770e; } .nb-chip.due { background:#fadbd8; color:#c0392b; }
+.nb-chip.wait { background:#d6eaf8; color:#2471a3; } .nb-chip.done { background:#d5f5e3; color:#1e8449; }
+.nb-hint { font-size:12px; margin:4px 0 0 104px; line-height:1.45; color:var(--gray); }
+.nb-hint.warn { color:#b9770e; } .nb-hint.ok { color:#1e8449; }
+.nb-dots { letter-spacing:2px; color:#27ae60; }
+.nb-mean { font-weight:600; color:var(--dark); }
+.nb-known-mean { display:block; font-size:12px; color:var(--gray); margin-top:1px; }
+.nb-row { align-items:flex-start; }
+.nb-row .nb-input { align-self:center; }
+.nb-card.mastered { opacity:.6; border-left-color:#27ae60; }
+.nb-due-pill { display:inline-block; min-width:18px; margin-left:6px; padding:0 6px; border-radius:999px; background:#fff; color:var(--red); font-size:12px; font-weight:800; line-height:18px; }
+.nb-due-pill:empty { display:none; }
+@media (max-width:480px) { .nb-hint { margin-left:0; } }
+html[data-theme="dark"] .nb-summary span { background:var(--surface-2); color:#f0c94a; }
 /* ── 输入拼音 / 声调提示 ── */
 .type-wrap { flex-direction:column; gap:6px; }
 .type-row { display:flex; gap:8px; }
@@ -1270,15 +1287,15 @@ html[data-theme="dark"] .wz-opt.sel { border-color:var(--red); background:rgba(2
 <div id="notebook" class="screen">
   <div class="back-row" style="display:flex;align-items:center;gap:8px">
     <button class="btn btn-dark btn-sm" onclick="goTo('home')">← <span class="i18n-zh">返回</span><span class="i18n-en">Back</span><span class="i18n-vi">Quay lại</span></button>
-    <button class="btn btn-primary btn-sm" style="margin-left:auto" onclick="nbReview()">🔁 <span class="i18n-zh">复习积累表</span><span class="i18n-en">Review notebook</span><span class="i18n-vi">Ôn sổ tích lũy</span></button>
+    <button class="btn btn-primary btn-sm" style="margin-left:auto" onclick="nbReview()">🔁 <span class="i18n-zh">复习积累表</span><span class="i18n-en">Review notebook</span><span class="i18n-vi">Ôn sổ tích lũy</span><span class="nb-due-pill" id="nb-due-pill"></span></button>
   </div>
   <p class="screen-title"><span class="i18n-zh">我的积累表</span><span class="i18n-en">My Notebook</span><span class="i18n-vi">Sổ tích lũy</span></p>
   <div class="quiz-instruction"><span class="quiz-instruction-icon">💡</span><span class="quiz-instruction-text">
-    <span class="i18n-zh">答错的读音会自动记到这里。把它和你熟悉的读音放在一起看，再自己造一个句子。</span>
-    <span class="i18n-en">Readings you get wrong are saved here automatically. Compare each with the reading you already know, then write your own sentence.</span>
-    <span class="i18n-vi">Âm bạn làm sai sẽ tự động được ghi vào đây. Đặt nó cạnh âm bạn đã quen, rồi tự đặt một câu.</span>
+    <span class="i18n-zh">答错的读音会自动记到这里。用这个读音造一个句子，复习时就用你自己的句子来考你。连续答对三次（间隔1天、3天、7天）就算掌握了。</span>
+    <span class="i18n-en">Readings you get wrong are saved here. Write a sentence with the reading: reviews will test you with your own sentence. Three correct reviews in a row (1, 3 and 7 days apart) and it counts as learned.</span>
+    <span class="i18n-vi">Âm bạn làm sai sẽ tự động vào đây. Hãy đặt một câu với âm đó: khi ôn, app sẽ dùng chính câu của bạn để kiểm tra. Trả lời đúng 3 lần liên tiếp (cách nhau 1, 3, 7 ngày) là tính đã thuộc.</span>
   </span></div>
-  <div class="browse-count-lbl" id="nb-count"></div>
+  <div class="nb-summary" id="nb-count"></div>
   <div id="nb-list"></div>
 </div>
 
@@ -2275,7 +2292,7 @@ const ENRICHED = {
   }},
   "落": { readings: {
     "luò": { meaning_zh:"落下，落地", meaning_en:"to fall, to land", example_zh:"落下", example_pinyin:"luò xià", example_en:"to fall", meaning_vi:"rơi, rớt xuống", example_vi:"rơi xuống", frequency:"high" },
-    "lào": { meaning_zh:"落枕，落炕", meaning_en:"stiff neck (colloq.)", example_zh:"落枕", example_pinyin:"lào zhěn", example_en:"stiff neck", meaning_vi:"vẹo (cổ), trật (khẩu ngữ)", example_vi:"vẹo cổ (do ngủ)", frequency:"medium" },
+    "lào": { meaning_zh:"落枕（睡觉姿势不当引起脖子疼痛），口语", meaning_en:"stiff neck from sleeping badly (colloq.)", example_zh:"落枕", example_pinyin:"lào zhěn", example_en:"stiff neck", meaning_vi:"sái cổ do ngủ sai tư thế (落枕); khẩu ngữ", example_vi:"sái cổ (khi ngủ dậy)", frequency:"medium" },
     "là": { meaning_zh:"丢落，落下（遗漏）", meaning_en:"to leave behind, to miss", example_zh:"丢三落四", example_pinyin:"diū sān là sì", example_en:"to be forgetful, to forget things", meaning_vi:"bỏ sót, để quên", example_vi:"đầu óc hay quên", frequency:"high" },
   }},
   "泡": { readings: {
@@ -3880,8 +3897,21 @@ const I18N_STRINGS = {
                       'Only the tone is wrong: here it is the {a} ({py}), but you gave the {b}.',
                       'Chỉ sai thanh điệu: ở đây đọc {a} ({py}), bạn đã đọc thành {b}.'],
   nb_count:          ['共 {n} 条',     '{n} entries',    '{n} mục'],
+  nb_s_need:         ['待造句', 'Needs a sentence', 'Cần đặt câu'],
+  nb_s_due:          ['今天该复习', 'Due today', 'Đến hạn ôn'],
+  nb_s_wait:         ['复习中', 'In review', 'Đang ôn'],
+  nb_s_done:         ['已掌握', 'Learned', 'Đã thuộc'],
+  nb_next:           ['下次复习', 'Next review', 'Ôn tiếp'],
+  nb_today:          ['今天', 'today', 'hôm nay'],
+  nb_hint_empty:     ['用 {py} 这个读音造一个句子，复习时会用这个句子来考你。', 'Write a sentence using {py}; reviews will use it to test you.', 'Đặt một câu dùng âm {py}; khi ôn, app sẽ dùng câu này để kiểm tra bạn.'],
+  nb_hint_model:     ['参考', 'Model', 'Câu mẫu'],
+  nb_hint_nochar:    ['句子里还没有“{c}”字。', 'Your sentence doesn\'t contain {c} yet.', 'Câu chưa có chữ “{c}”.'],
+  nb_hint_short:     ['句子有点短，写成一个完整的句子，复习时才会用上。', 'Too short: write a full sentence so it can be used in reviews.', 'Câu hơi ngắn, hãy viết thành câu hoàn chỉnh thì mới dùng để ôn được.'],
+  nb_hint_ok:        ['已保存。复习时会用这个句子（考第一个“{c}”字）。', 'Saved. Reviews will use this sentence (testing the first {c}).', 'Đã lưu. Khi ôn sẽ dùng câu này (kiểm tra chữ “{c}” đầu tiên).'],
+  nb_all_done:       ['全部都掌握了！', 'Everything is learned!', 'Đã thuộc hết rồi!'],
   nb_empty:          ['还没有记录。做练习时答错的读音会自动记到这里。', 'Nothing yet. Readings you get wrong will be saved here.', 'Chưa có gì. Âm làm sai khi luyện tập sẽ tự động được ghi vào đây.'],
   nb_known:          ['我熟悉的读音', 'Reading I know', 'Âm tôi quen'],
+  nb_meaning:        ['意思', 'Meaning', 'Nghĩa'],
   nb_mine:           ['自己造的句子', 'My own sentence', 'Câu tự đặt'],
   nb_mine_ph:        ['用这个读音造一个句子', 'Write a sentence using this reading', 'Đặt một câu với âm này'],
   nb_added:          ['记录', 'Added', 'Ghi'],
@@ -6517,7 +6547,8 @@ function loadQuestion() {
     quizState.queue = buildQuestionQueue(quizState.difficulty, quizState.cfg);
     quizState.queueIdx = 0;
   }
-  const {char, reading} = quizState.queue[quizState.queueIdx++];
+  const item = quizState.queue[quizState.queueIdx++];
+  const {char, reading} = item;
   quizState.currentChar = char;
   quizState.correctPinyin = reading.pinyin;
 
@@ -6525,14 +6556,16 @@ function loadQuestion() {
   const freq = reading.frequency||'medium';
   const qcfg = quizState.cfg || cfgFromDiff(quizState.difficulty);
   const typeMode = qcfg.answer === 'type';
-  const sentMode = qcfg.content === 'sent' && reading.sentences.length > 0;
+  const sentMode = qcfg.content === 'sent' && (reading.sentences.length > 0 || !!item.own);
   document.getElementById('quiz-options').style.display = typeMode ? 'none' : '';
   document.getElementById('quiz-type').style.display = typeMode ? 'flex' : 'none';
   const ti = document.getElementById('quiz-type-input');
   ti.value = ''; ti.disabled = false; ti.classList.remove('ok','bad');
   document.getElementById('quiz-type-btn').disabled = false;
   if (typeMode) setTimeout(() => { try { ti.focus(); } catch {} }, 50);
-  quizState.sentence = sentMode ? reading.sentences[Math.floor(Math.random()*reading.sentences.length)] : null;
+  quizState.sentence = !sentMode ? null
+    : item.own ? { zh: item.own, own: true }
+    : reading.sentences[Math.floor(Math.random()*reading.sentences.length)];
   document.querySelector('#quiz .quiz-instruction').classList.toggle('sent-mode', sentMode);
   // 例句模式先隐藏等级与频率标签（避免提示读音），作答后再显示
   document.querySelector('#quiz .card-badges').style.visibility = sentMode ? 'hidden' : 'visible';
@@ -6558,6 +6591,7 @@ function loadQuestion() {
   sentenceEn.style.display = 'none';
   if (sentMode) {
     sentenceText.innerHTML = renderSentence(quizState.sentence.zh, '', 'plain');
+    if (quizState.sentence.own) sentenceText.innerHTML = '✍️ ' + sentenceText.innerHTML;
     sentenceEl.style.display = 'block';
   } else if (reading.example_zh) {
     // Replace the character with a blank underline
@@ -6718,7 +6752,7 @@ function onAnswer(idx, typed) {
 
   // 积累表：答错自动加入；积累表复习时记录复习日期
   if (!correct) nbAdd(quizState.currentChar, quizState.correctPinyin, quizState.currentChar.readings.some(r=>r.pinyin===chosen) ? chosen : null);
-  if (quizState.notebook) nbMarkReviewed(quizState.currentChar.character, quizState.correctPinyin);
+  if (quizState.notebook) nbMarkReviewed(quizState.currentChar.character, quizState.correctPinyin, correct);
 
   // 作答后显示判断线索（答错时尤其需要）
   document.getElementById('quiz-cue').innerHTML = (correct ? '' : toneNoteHtml(chosen, quizState.correctPinyin)) + cueHtml(quizState.currentChar, quizState.correctPinyin);
@@ -6877,51 +6911,145 @@ function nbKnown(char, py, chosen) {
   }
   return k ? `${k}：${nbWord(char, k)}` : '';
 }
+// 复习间隔：连续答对1次后隔1天，2次后隔3天，3次即算掌握（之后隔7天再抽查）
+const NB_GAPS = [1, 3, 7];
+const DAY = 86400000;
+function nbKey(e) { return e.c + '|' + e.py; }
+function startOfDay(ts) { const d = new Date(ts); d.setHours(0,0,0,0); return d.getTime(); }
+function nbIsDue(e) { return !e.mastered && startOfDay(e.due || 0) <= startOfDay(Date.now()); }
+// 自己造的句子：含目标字、至少5个汉字才拿来复习
+function nbSentState(e) {
+  const m = (e.mine || '').trim();
+  if (!m) return 'empty';
+  if (!m.includes(e.c)) return 'nochar';
+  if ((m.match(/[一-鿿]/g) || []).length < 5) return 'short';
+  return 'ok';
+}
+function nbStatus(e) {
+  if (e.mastered) return 'done';
+  if (nbSentState(e) !== 'ok') return 'need';
+  return nbIsDue(e) ? 'due' : 'wait';
+}
 function nbAdd(char, py, chosen) {
   const nb = loadNb();
-  if (nb.some(e => e.c === char.character && e.py === py)) return;
-  nb.unshift({ c: char.character, py, word: nbWord(char, py), known: nbKnown(char, py, chosen), mine: '', added: Date.now(), reviewed: 0 });
+  const old = nb.find(e => e.c === char.character && e.py === py);
+  if (old) { old.streak = 0; old.mastered = false; old.due = Date.now(); saveNb(nb); return; }
+  nb.unshift({ c: char.character, py, word: nbWord(char, py), known: nbKnown(char, py, chosen), mine: '', added: Date.now(), reviewed: 0, streak: 0, due: Date.now(), mastered: false });
   saveNb(nb);
 }
 function openNotebook() { renderNotebook(); goTo('notebook'); }
+function nbModel(e) {
+  const char = POLYPHONES.find(c => c.character === e.c);
+  const r = char && char.readings.find(r => r.pinyin === e.py);
+  const sent = r && r.sentences && r.sentences[0];
+  return sent ? sent.zh.replace(/【(.)】/, '$1') : '';
+}
+function nbHintHtml(e) {
+  const st = nbSentState(e);
+  if (st === 'ok') return { cls:'ok', html:'✓ ' + t('nb_hint_ok', {c:e.c}) };
+  if (st === 'nochar') return { cls:'warn', html:'⚠ ' + t('nb_hint_nochar', {c:e.c}) };
+  if (st === 'short') return { cls:'warn', html:'💡 ' + t('nb_hint_short') };
+  const model = nbModel(e);
+  return { cls:'', html: t('nb_hint_empty', {py:e.py}) + (model ? `<br>${t('nb_hint_model')}：${model}` : '') };
+}
+function nbUpdatePill(nb) {
+  const n = (nb || loadNb()).filter(nbIsDue).length;
+  const pill = document.getElementById('nb-due-pill');
+  if (pill) pill.textContent = n ? String(n) : '';
+}
 function renderNotebook() {
   const nb = loadNb();
   const list = document.getElementById('nb-list');
-  document.getElementById('nb-count').textContent = t('nb_count', {n: nb.length});
+  // 统计可以重叠：“待造句”的条目到期了也照样要复习（用字库例句）
+  const cnt = {
+    due: nb.filter(nbIsDue).length,
+    need: nb.filter(e => !e.mastered && nbSentState(e) !== 'ok').length,
+    done: nb.filter(e => e.mastered).length,
+  };
+  document.getElementById('nb-count').innerHTML = nb.length
+    ? `<span>${t('nb_count', {n: nb.length})}</span>` + ['due','need','done'].filter(k => cnt[k]).map(k => `<span>${t('nb_s_'+k)} ${cnt[k]}</span>`).join('')
+    : '';
+  nbUpdatePill(nb);
   if (!nb.length) { list.innerHTML = `<div class="browse-no-results">${t('nb_empty')}</div>`; return; }
   const loc = {zh:'zh-CN', en:'en-US', vi:'vi-VN'}[getLang()] || 'en-US';
-  list.innerHTML = nb.map((e, i) => `
-    <div class="nb-card">
+  const order = {due:0, need:1, wait:2, done:3};
+  const sorted = nb.slice().sort((a, b) => order[nbStatus(a)] - order[nbStatus(b)] || (a.due||0) - (b.due||0));
+  const fmt = ts => startOfDay(ts) <= startOfDay(Date.now()) ? t('nb_today') : new Date(ts).toLocaleDateString(loc);
+  // 意思随界面语言显示（中文释义 / 越南语或英语）
+  const meaningOf = (c, py) => {
+    const ch = POLYPHONES.find(x => x.character === c);
+    return readingField(ch && ch.readings.find(r => r.pinyin === py), 'meaning');
+  };
+  list.innerHTML = sorted.map(e => {
+    const k = nbKey(e).replace(/'/g, "\\'");
+    const myMeaning = meaningOf(e.c, e.py);
+    const knownPy = (e.known || '').split('：')[0];
+    const knownMeaning = knownPy ? meaningOf(e.c, knownPy) : '';
+    const st = nbStatus(e);
+    const h = nbHintHtml(e);
+    const n = Math.min(e.streak || 0, 3);
+    return `
+    <div class="nb-card${e.mastered ? ' mastered' : ''}">
       <div class="nb-head">
         <span class="nb-char">${e.c}</span>
         <span class="nb-py">${e.py}</span>
         <span class="nb-word">${e.word}</span>
-        <button class="nb-del" title="✕" onclick="nbDelete(${i})">✕</button>
+        <span class="nb-chip ${st}" id="nb-chip-${nbKey(e)}">${t('nb_s_'+st)}</span>
+        <button class="nb-del" title="✕" onclick="nbDelete('${k}')">✕</button>
       </div>
-      <div class="nb-row"><span class="nb-lbl">${t('nb_known')}</span><span>${e.known || '—'}</span></div>
-      <div class="nb-row"><span class="nb-lbl">${t('nb_mine')}</span><input class="nb-input" value="${(e.mine||'').replace(/"/g,'&quot;')}" placeholder="${t('nb_mine_ph')}" onchange="nbEdit(${i}, this.value)"></div>
-      <div class="nb-row nb-dates"><span>${t('nb_added')}: ${new Date(e.added).toLocaleDateString(loc)}</span><span>${t('nb_reviewed')}: ${e.reviewed ? new Date(e.reviewed).toLocaleDateString(loc) : '—'}</span></div>
-    </div>`).join('');
+      ${myMeaning ? `<div class="nb-row"><span class="nb-lbl">${t('nb_meaning')}</span><span class="nb-mean">${myMeaning}</span></div>` : ''}
+      <div class="nb-row"><span class="nb-lbl">${t('nb_known')}</span><span>${e.known || '—'}${knownMeaning ? `<span class="nb-known-mean">${knownMeaning}</span>` : ''}</span></div>
+      <div class="nb-row"><span class="nb-lbl">${t('nb_mine')}</span><input class="nb-input" value="${(e.mine||'').replace(/"/g,'&quot;')}" placeholder="${t('nb_mine_ph')}" oninput="nbEdit('${k}', this)"></div>
+      <div class="nb-hint ${h.cls}">${h.html}</div>
+      <div class="nb-row nb-dates"><span>${t('nb_added')}: ${new Date(e.added).toLocaleDateString(loc)}</span><span class="nb-dots" title="${n}/3">${'●'.repeat(n)}${'○'.repeat(3-n)}</span><span>${e.mastered ? '✓ ' + t('nb_s_done') : t('nb_next') + ': ' + fmt(e.due || 0)}</span></div>
+    </div>`;
+  }).join('');
 }
-function nbEdit(i, v) { const nb = loadNb(); if (nb[i]) { nb[i].mine = v; saveNb(nb); } }
-function nbDelete(i) { const nb = loadNb(); nb.splice(i, 1); saveNb(nb); renderNotebook(); }
+// 输入时即时保存并更新提示，不重绘整张表（保持输入焦点）
+function nbEdit(key, input) {
+  const nb = loadNb(); const e = nb.find(x => nbKey(x) === key);
+  if (!e) return;
+  e.mine = input.value; saveNb(nb);
+  const h = nbHintHtml(e);
+  const hint = input.closest('.nb-card').querySelector('.nb-hint');
+  hint.className = 'nb-hint ' + h.cls; hint.innerHTML = h.html;
+  const st = nbStatus(e);
+  const chip = input.closest('.nb-card').querySelector('.nb-chip');
+  chip.className = 'nb-chip ' + st; chip.textContent = t('nb_s_'+st);
+}
+function nbDelete(key) { const nb = loadNb().filter(x => nbKey(x) !== key); saveNb(nb); renderNotebook(); }
+// 复习顺序：到期未掌握的 → 其余未掌握的 → 全部
 function nbReview() {
   const nb = loadNb();
-  const pairs = nb.map(e => {
+  let pick = nb.filter(nbIsDue);
+  if (!pick.length) pick = nb.filter(e => !e.mastered);
+  if (!pick.length) pick = nb;
+  const pairs = pick.map(e => {
     const char = POLYPHONES.find(c => c.character === e.c);
     const reading = char && char.readings.find(r => r.pinyin === e.py);
-    return reading ? { char, reading } : null;
+    if (!reading) return null;
+    // 有合格的自造句就用自造句（标出第一个目标字），否则用字库例句
+    const own = nbSentState(e) === 'ok' ? e.mine.trim().replace(e.c, '【' + e.c + '】') : null;
+    return { char, reading, own };
   }).filter(Boolean);
   if (!pairs.length) return;
   startQuiz(0, pairs.length);
+  quizState.cfg = { content:'sent', answer:'choice', scope:0 };
   quizState.queue = shuffle(pairs); quizState.queueIdx = 0; quizState.notebook = true; lastNbReview = true;
   const badge = document.getElementById('quiz-level-badge');
   badge.textContent = t('nb_badge'); badge.style.background = '#b7950b';
   loadQuestion();
 }
-function nbMarkReviewed(c, py) {
+function nbMarkReviewed(c, py, correct) {
   const nb = loadNb(); const e = nb.find(x => x.c === c && x.py === py);
-  if (e) { e.reviewed = Date.now(); saveNb(nb); }
+  if (!e) return;
+  e.reviewed = Date.now();
+  if (correct) {
+    e.streak = (e.streak || 0) + 1;
+    e.due = startOfDay(Date.now()) + NB_GAPS[Math.min(e.streak, NB_GAPS.length) - 1] * DAY;
+    if (e.streak >= 3) e.mastered = true;
+  } else { e.streak = 0; e.mastered = false; e.due = Date.now(); }
+  saveNb(nb);
 }
 
 // ══════════════════════════════════════════════════════════════
