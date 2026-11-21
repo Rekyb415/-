@@ -834,6 +834,8 @@ html[data-theme="dark"] .browse-search-wrap input { background:transparent; colo
 html[data-theme="dark"] .stats-table th { background:var(--surface-2); color:var(--gray); }
 html[data-theme="dark"] .stats-table td { color:var(--dark); border-color:var(--line); }
 html[data-theme="dark"] .count-btn { background:var(--surface-2); border-color:var(--line); color:var(--dark); }
+html[data-theme="dark"] .count-btn.active { background:var(--red); border-color:var(--red); color:#fff; }
+html[data-theme="dark"] .wz-chip { filter:brightness(1.35); }
 html[data-theme="dark"] .qdot { background:#2b2e44; color:var(--gray); }
 html[data-theme="dark"] .qdot.current { background:var(--surface); }
 html[data-theme="dark"] .quiz-instruction { background:linear-gradient(135deg,#2e2a1a,#332d17); border-color:#6b5a1d; color:#f0e3b3; }
@@ -899,11 +901,39 @@ html[data-theme="dark"] #bg-deco .g3 { background: radial-gradient(circle, rgba(
 .gd-go { border:1px solid var(--red); color:var(--red); background:transparent; border-radius:999px; padding:4px 12px; font-size:13px; cursor:pointer; font-family:inherit; }
 .gd-go:hover { background:var(--red); color:#fff; }
 .gd-ok { width:100%; }
+.gd-check { display:flex; align-items:center; gap:8px; font-size:13.5px; color:var(--gray); margin:0 0 12px 2px; cursor:pointer; user-select:none; }
+.gd-check input { width:17px; height:17px; accent-color:var(--red); cursor:pointer; }
 .gd-foot { text-align:center; font-size:12.5px; color:var(--gray); margin-top:10px; }
 @keyframes gdFade { from{opacity:0} to{opacity:1} }
 @keyframes gdPop { from{opacity:0; transform:translateY(12px) scale(.98)} to{opacity:1; transform:none} }
 @media (prefers-reduced-motion: reduce) { .gd-overlay, .gd-box { animation:none; } }
 @media (max-width:480px) { .gd-box { padding:22px 16px 14px; } .gd-title { font-size:20px; } }
+
+/* ── 测验向导 ── */
+.wz-step { background:var(--white); border:1px solid #e3dccd; border-radius:14px; padding:14px; margin-bottom:12px; animation:wzIn .25s ease; }
+.wz-head { display:flex; align-items:center; gap:8px; margin-bottom:10px; font-weight:700; font-size:15px; color:var(--dark); }
+.wz-num { width:24px; height:24px; border-radius:50%; background:var(--red); color:#fff; font:700 13px/24px var(--font-pinyin); text-align:center; flex:0 0 24px; }
+.wz-step.done .wz-num { background:#27ae60; }
+.wz-note { font-size:12.5px; color:var(--gray); margin:-4px 0 10px; }
+.wz-opts { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+.wz-opt { text-align:left; background:var(--cream); border:2px solid #e3dccd; border-radius:12px; padding:12px; cursor:pointer; font-family:inherit; color:var(--dark); transition:border-color .15s, background .15s; }
+.wz-opt:hover { border-color:var(--red); }
+.wz-opt.sel { border-color:var(--red); background:rgba(192,57,43,.08); }
+.wz-opt-t { font-weight:700; font-size:15px; margin-bottom:3px; }
+.wz-opt-d { font-size:12.5px; color:var(--gray); line-height:1.4; }
+.wz-chips { display:flex; flex-wrap:wrap; gap:8px; }
+.wz-chip { border:2px solid var(--c); color:var(--c); background:transparent; border-radius:999px; padding:6px 12px; font-size:14px; font-weight:700; cursor:pointer; font-family:inherit; }
+.wz-chip small { font-weight:400; opacity:.8; margin-left:4px; }
+.wz-chip.sel { background:var(--c); color:#fff; }
+.wz-chip:disabled { opacity:.35; cursor:not-allowed; }
+.wz-start { width:100%; margin-top:12px; font-size:16px; padding:12px; }
+.wz-tip { font-size:12.5px; color:#b9770e; margin-top:8px; }
+@keyframes wzIn { from{opacity:0; transform:translateY(8px)} to{opacity:1; transform:none} }
+@media (prefers-reduced-motion: reduce) { .wz-step { animation:none; } }
+@media (max-width:420px) { .wz-opts { grid-template-columns:1fr; } }
+html[data-theme="dark"] .wz-step { background:var(--surface); border-color:var(--line); }
+html[data-theme="dark"] .wz-opt { background:rgba(255,255,255,.03); border-color:var(--line); }
+html[data-theme="dark"] .wz-opt.sel { border-color:var(--red); background:rgba(231,76,60,.14); }
 </style>
 </head>
 <body>
@@ -970,7 +1000,7 @@ html[data-theme="dark"] #bg-deco .g3 { background: radial-gradient(circle, rgba(
       </div></li>
       <li class="gd-step"><span class="gd-num">4</span><div class="gd-body">
         <div class="gd-step-title">📖 <span class="i18n-zh">进阶：看句子定读音</span><span class="i18n-en">Next: decide from the sentence</span><span class="i18n-vi">Nâng cao: dựa vào câu để xác định âm</span></div>
-        <p class="gd-step-desc"><span class="i18n-zh">依次做“例句辨读”“输入拼音”和“语境练习”，从选读音过渡到自己写出读音。</span><span class="i18n-en">Try “Read in sentences”, then “Type the pinyin”, then “In Context”, moving from choosing a reading to producing it yourself.</span><span class="i18n-vi">Lần lượt làm “Đọc theo câu”, “Tự gõ pinyin” và “Luyện theo ngữ cảnh”, từ chọn âm đến tự viết ra âm.</span></p>
+        <p class="gd-step-desc"><span class="i18n-zh">在测验里依次选“例句”和“自己输入”，再做“语境练习”，从选读音过渡到自己写出读音。</span><span class="i18n-en">In the quiz, pick “Sentences”, then “Type it yourself”, then try “In Context”, moving from choosing a reading to producing it.</span><span class="i18n-vi">Trong phần kiểm tra, lần lượt chọn “Mẫu câu”, “Tự điền”, rồi làm “Luyện theo ngữ cảnh”, từ chọn âm đến tự viết ra âm.</span></p>
         <button class="gd-go" onclick="guideGo('levels')"><span class="i18n-zh">选择练习</span><span class="i18n-en">Choose a mode</span><span class="i18n-vi">Chọn chế độ</span> →</button>
       </div></li>
       <li class="gd-step"><span class="gd-num">5</span><div class="gd-body">
@@ -979,6 +1009,7 @@ html[data-theme="dark"] #bg-deco .g3 { background: radial-gradient(circle, rgba(
         <button class="gd-go" onclick="guideGo('srs')"><span class="i18n-zh">智能复习</span><span class="i18n-en">SRS Review</span><span class="i18n-vi">Ôn tập</span> →</button>
       </div></li>
     </ol>
+    <label class="gd-check"><input type="checkbox" id="gd-hide-today"> <span class="i18n-zh">今天不再显示</span><span class="i18n-en">Don't show again today</span><span class="i18n-vi">Không hiện lại thông báo này trong hôm nay</span></label>
     <button class="btn btn-primary gd-ok" onclick="closeGuide()"><span class="i18n-zh">知道了</span><span class="i18n-en">Got it</span><span class="i18n-vi">Đã hiểu</span></button>
     <p class="gd-foot"><span class="i18n-zh">以后可以点右上角的 ❔ 再次打开。</span><span class="i18n-en">You can reopen this from the ❔ button at the top right.</span><span class="i18n-vi">Có thể mở lại bằng nút ❔ ở góc trên bên phải.</span></p>
   </div>
@@ -1027,19 +1058,9 @@ html[data-theme="dark"] #bg-deco .g3 { background: radial-gradient(circle, rgba(
   <div class="back-row">
     <button class="btn btn-dark btn-sm" onclick="goTo('home')">← <span class="i18n-zh">返回</span><span class="i18n-en">Back</span><span class="i18n-vi">Quay lại</span></button>
   </div>
-  <p class="screen-title"><span class="i18n-zh">选择难度</span><span class="i18n-en">Choose Level</span><span class="i18n-vi">Chọn cấp độ</span></p>
+  <p class="screen-title"><span class="i18n-zh">开始测验</span><span class="i18n-en">Start a Quiz</span><span class="i18n-vi">Bắt đầu kiểm tra</span></p>
 
-  <div class="count-frame">
-    <div class="count-label"><span class="i18n-zh">每次题数</span><span class="i18n-en">Questions per session</span><span class="i18n-vi">Số câu mỗi lượt</span></div>
-    <div class="count-btns">
-      <button class="count-btn active" data-n="10" onclick="setCount(this,10)">10</button>
-      <button class="count-btn"        data-n="20" onclick="setCount(this,20)">20</button>
-      <button class="count-btn"        data-n="30" onclick="setCount(this,30)">30</button>
-      <button class="count-btn"        data-n="0"  onclick="setCount(this,0)">∞</button>
-    </div>
-  </div>
-
-  <div id="level-cards"></div>
+  <div id="qz-wizard"></div>
 </div>
 
 <!-- ══ QUIZ ══ -->
@@ -3873,6 +3894,21 @@ const I18N_STRINGS = {
   cue_register:      ['线索：看书面语还是口语。书面语的词多读xuè，单用或口语多读xiě',
                       'Clue: written or spoken? Written compounds usually use xuè; on its own or in speech, xiě',
                       'Manh mối: văn viết hay khẩu ngữ? Từ ghép văn viết thường đọc xuè, đứng riêng hoặc khẩu ngữ đọc xiě'],
+  wz_step1:          ['练习什么？', 'What to practise?', 'Luyện gì?'],
+  wz_word:           ['单字', 'Single characters', 'Chữ đơn'],
+  wz_word_desc:      ['看字和释义，判断读音', 'See the character and its meaning, then pick the reading', 'Xem chữ và nghĩa, xác định âm đọc'],
+  wz_sent:           ['例句', 'Sentences', 'Mẫu câu'],
+  wz_sent_desc:      ['不给释义，只根据句子判断读音', 'No meaning given: decide from the sentence', 'Không cho nghĩa, dựa vào câu để xác định âm'],
+  wz_step2:          ['怎么作答？', 'How to answer?', 'Trả lời thế nào?'],
+  wz_choice:         ['选择答案', 'Multiple choice', 'Chọn đáp án'],
+  wz_choice_desc:    ['从四个读音里选一个', 'Choose one of four readings', 'Chọn một trong bốn âm'],
+  wz_type:           ['自己输入', 'Type it yourself', 'Tự điền'],
+  wz_type_desc:      ['输入拼音，可以用数字标调，如 hao3', 'Type the pinyin; tone numbers are fine, e.g. hao3', 'Gõ pinyin, có thể dùng số thay dấu, ví dụ hao3'],
+  wz_step3:          ['练习范围', 'Which readings?', 'Phạm vi luyện'],
+  wz_step3_note:     ['建议从一级开始，再做重点读音', 'Start at Level 1, then try the focus readings', 'Nên bắt đầu từ cấp 1, sau đó luyện âm trọng điểm'],
+  wz_step4:          ['每次题数', 'Questions per session', 'Số câu mỗi lượt'],
+  wz_start:          ['开始测验', 'Start', 'Bắt đầu'],
+  wz_type_tip:       ['建议先做选择题，熟悉以后再自己输入', 'Tip: do multiple choice first, then switch to typing', 'Nên làm trắc nghiệm trước, quen rồi hãy tự điền'],
   focus_card:        ['重点多音字',    'Focus readings', 'Âm trọng điểm'],
   focus_desc:        ['最容易读错的读音（据维新大学学生测试结果）',
                       'The readings most often misread (based on a test of Duy Tan University students)',
@@ -5939,6 +5975,7 @@ function profileSummary(id) {
 }
 function enterProfile(id) {
   lsSet('poly_current', id);
+  wiz = null;
   updateProfileButton();
   initHome();
   goTo('home');
@@ -5948,11 +5985,20 @@ function enterProfile(id) {
 // 使用指南：每个档案第一次进入时自动弹出一次
 // ══════════════════════════════════════════════════════════════
 function openGuide() { document.getElementById('guide').hidden = false; }
+// 每次进入都弹出；勾选“今天不再显示”后，当天不再自动弹出
+function todayStr() { const d = new Date(); return d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate(); }
 function closeGuide() {
   document.getElementById('guide').hidden = true;
-  if (currentProfile()) lsSet(pkey('poly_guide_seen'), true);
+  const cb = document.getElementById('gd-hide-today');
+  if (currentProfile() && cb) lsSet(pkey('poly_guide_hide'), cb.checked ? todayStr() : '');
 }
-function maybeShowGuide() { if (currentProfile() && !lsGet(pkey('poly_guide_seen'), false)) openGuide(); }
+function maybeShowGuide() {
+  if (!currentProfile()) return;
+  const hidden = lsGet(pkey('poly_guide_hide'), '') === todayStr();
+  const cb = document.getElementById('gd-hide-today');
+  if (cb) cb.checked = hidden;
+  if (!hidden) openGuide();
+}
 function guideGo(action) {
   closeGuide();
   if (action === 'browse1') {
@@ -6248,6 +6294,7 @@ function goTo(id) {
   // Chỉ màn Kho từ vựng được mở rộng khung trên máy tính
   document.body.classList.toggle('browse-wide', id === 'browse');
   window.scrollTo(0,0);
+  if (id === 'levels') initLevels();
 }
 
 // ══════════════════════════════════════════════════════════════
@@ -6286,80 +6333,63 @@ function initHome() {
 let selectedCount = 10;
 
 function setCount(btn, n) {
-  document.querySelectorAll('.count-btn').forEach(b=>b.classList.remove('active'));
+  btn.parentElement.querySelectorAll('.count-btn').forEach(b=>b.classList.remove('active'));
   btn.classList.add('active'); selectedCount = n;
 }
 
+// 测验向导：练习内容 → 作答方式 → 范围 → 题数，按顺序一步步出现
+let wiz = null;
+function loadWiz() {
+  const w = lsGet(pkey('poly_quiz_cfg'), null);
+  return (w && typeof w === 'object') ? w : { content:null, answer:null, scope:null };
+}
+function wizSet(key, val) {
+  if (!wiz) wiz = loadWiz();
+  wiz[key] = val;
+  // 改了前面的选项后，范围若已无题可做，就清掉
+  if (key !== 'scope' && wiz.scope !== null && wiz.content && wiz.answer &&
+      !buildQuestionQueue(0, {content:wiz.content, answer:wiz.answer, scope:wiz.scope}).length) wiz.scope = null;
+  lsSet(pkey('poly_quiz_cfg'), wiz);
+  const before = document.querySelectorAll('#qz-wizard .wz-step').length;
+  initLevels();
+  const steps = document.querySelectorAll('#qz-wizard .wz-step');
+  if (steps.length > before) steps[steps.length-1].scrollIntoView({behavior:'smooth', block:'nearest'});
+}
+function wizStart() {
+  if (!wiz) wiz = loadWiz();
+  if (!wiz.content || !wiz.answer || wiz.scope === null) return;
+  startQuiz(null, selectedCount, {content:wiz.content, answer:wiz.answer, scope:wiz.scope});
+}
 function initLevels() {
-  const container = document.getElementById('level-cards');
-  container.innerHTML = '';
-  // "Focus" card — 重点音项
-  const fc = DIFF_COLORS[FOCUS_DIFF];
-  const focusCard = document.createElement('div');
-  focusCard.className = 'level-card';
-  focusCard.style.cssText = `border-left-color:${fc};margin-bottom:10px`;
-  focusCard.innerHTML = `
-    <div class="level-card-info">
-      <div class="level-card-name" style="color:${fc}">⭐ ${t('focus_card')}</div>
-      <div class="level-card-desc">${t('focus_desc')}</div>
-    </div>
-    <div class="level-card-count" style="color:${fc}">${FOCUS_PAIRS.length}<span>${t('readings_unit')}</span></div>`;
-  focusCard.onclick = () => startQuiz(FOCUS_DIFF, selectedCount);
-  container.appendChild(focusCard);
-  // "Sentence" card — 例句辨读：只看句子，不给释义
-  const sc = DIFF_COLORS[SENT_DIFF];
-  const sentCard = document.createElement('div');
-  sentCard.className = 'level-card';
-  sentCard.style.cssText = `border-left-color:${sc};margin-bottom:10px`;
-  sentCard.innerHTML = `
-    <div class="level-card-info">
-      <div class="level-card-name" style="color:${sc}">📝 ${t('sent_card')}</div>
-      <div class="level-card-desc">${t('sent_desc')}</div>
-    </div>
-    <div class="level-card-count" style="color:${sc}">${buildQuestionQueue(SENT_DIFF).length}<span>${t('sent_unit')}</span></div>`;
-  sentCard.onclick = () => startQuiz(SENT_DIFF, selectedCount);
-  container.appendChild(sentCard);
-  // "Typing" card — 输入拼音（填空层次）
-  const tc = DIFF_COLORS[TYPE_DIFF];
-  const typeCard = document.createElement('div');
-  typeCard.className = 'level-card';
-  typeCard.style.cssText = `border-left-color:${tc};margin-bottom:10px`;
-  typeCard.innerHTML = `
-    <div class="level-card-info">
-      <div class="level-card-name" style="color:${tc}">⌨️ ${t('type_card')}</div>
-      <div class="level-card-desc">${t('type_desc')}</div>
-    </div>
-    <div class="level-card-count" style="color:${tc}">${buildQuestionQueue(TYPE_DIFF).length}<span>${t('sent_unit')}</span></div>`;
-  typeCard.onclick = () => startQuiz(TYPE_DIFF, selectedCount);
-  container.appendChild(typeCard);
-  // "All" card
-  const allCard = document.createElement('div');
-  allCard.className = 'level-card';
-  allCard.style.cssText = `border-left-color:${DIFF_COLORS[0]};margin-bottom:10px`;
-  allCard.innerHTML = `
-    <div class="level-card-info">
-      <div class="level-card-name" style="color:${DIFF_COLORS[0]}">${t('all_levels_card')}</div>
-      <div class="level-card-desc">${t('all_levels_desc')}</div>
-    </div>
-    <div class="level-card-count" style="color:${DIFF_COLORS[0]}">${TOTAL_READINGS}<span>${t('readings_unit')}</span></div>`;
-  allCard.onclick = () => startQuiz(0, selectedCount);
-  container.appendChild(allCard);
-  // Per-level cards
-  LEVELS_IN_USE.forEach(d => {
-    const count = readingsAtLevel(d);
-    const color = DIFF_COLORS[d];
-    const card = document.createElement('div');
-    card.className = 'level-card';
-    card.style.cssText = `border-left-color:${color};margin-bottom:10px`;
-    card.innerHTML = `
-      <div class="level-card-info">
-        <div class="level-card-name" style="color:${color}">${DIFF_LABELS[d]}</div>
-        <div class="level-card-desc">${d===9 ? t('beyond_desc') : t('level_std_desc')+' '+DIFF_LABELS[d]}</div>
-      </div>
-      <div class="level-card-count" style="color:${color}">${count}<span>${t('readings_unit')}</span></div>`;
-    card.onclick = () => startQuiz(d, selectedCount);
-    container.appendChild(card);
-  });
+  const box = document.getElementById('qz-wizard');
+  if (!box) return;
+  if (!wiz) wiz = loadWiz();
+  const opt = (key, val, title, desc) =>
+    `<button class="wz-opt${wiz[key]===val?' sel':''}" onclick="wizSet('${key}','${val}')"><div class="wz-opt-t">${title}</div><div class="wz-opt-d">${desc}</div></button>`;
+  const step = (n, done, title, body) =>
+    `<div class="wz-step${done?' done':''}"><div class="wz-head"><span class="wz-num">${done?'✓':n}</span>${title}</div>${body}</div>`;
+  let html = step(1, !!wiz.content, t('wz_step1'),
+    `<div class="wz-opts">${opt('content','word','🔤 '+t('wz_word'),t('wz_word_desc'))}${opt('content','sent','📝 '+t('wz_sent'),t('wz_sent_desc'))}</div>`);
+  if (wiz.content) html += step(2, !!wiz.answer, t('wz_step2'),
+    `<div class="wz-opts">${opt('answer','choice','☑️ '+t('wz_choice'),t('wz_choice_desc'))}${opt('answer','type','⌨️ '+t('wz_type'),t('wz_type_desc'))}</div>` +
+    (wiz.answer==='type' ? `<div class="wz-tip">💡 ${t('wz_type_tip')}</div>` : ''));
+  if (wiz.content && wiz.answer) {
+    const chip = (d, label) => {
+      const n = buildQuestionQueue(0, {content:wiz.content, answer:wiz.answer, scope:d}).length;
+      const c = DIFF_COLORS[d] || '#2980b9';
+      return `<button class="wz-chip${wiz.scope===d?' sel':''}" style="--c:${c}" ${n?'':'disabled'} onclick="wizSet('scope',${d})">${label}<small>${n}</small></button>`;
+    };
+    html += step(3, wiz.scope!==null, t('wz_step3'),
+      `<div class="wz-note">${t('wz_step3_note')}</div><div class="wz-chips">` +
+      chip(FOCUS_DIFF, '⭐ '+DIFF_LABELS[FOCUS_DIFF]) + LEVELS_IN_USE.map(d => chip(d, DIFF_LABELS[d])).join('') + chip(0, t('all_levels_card')) +
+      `</div>`);
+  }
+  if (wiz.content && wiz.answer && wiz.scope !== null) {
+    html += step(4, false, t('wz_step4'),
+      `<div class="count-btns">${[10,20,30,0].map(n=>`<button class="count-btn${selectedCount===n?' active':''}" onclick="setCount(this,${n})">${n||'∞'}</button>`).join('')}</div>` +
+      `<button class="btn btn-primary wz-start" onclick="wizStart()">${t('wz_start')} →</button>`);
+  }
+  box.innerHTML = html;
 }
 
 // ══════════════════════════════════════════════════════════════
@@ -6372,32 +6402,47 @@ let quizState = {
 };
 // 口语变读（与常读音在句中都能成立），只用于展示，不进入例句辨读和输入拼音
 const SENT_NOQUIZ = new Set(['哦|ò','哦|ó','魄|bó','魄|tuò','菌|jùn','熟|shóu','尾|yǐ','那|nèi','这|zhèi','哪|něi','哪|nǎi','谁|shéi','谁|shuí']);
-let lastQuizDiff=0, lastQuizCount=10;
+let lastQuizDiff=0, lastQuizCount=10, lastQuizCfg=null;
 
-function buildQuestionQueue(difficulty) {
-  if (difficulty === FOCUS_DIFF) {
-    return shuffle(FOCUS_PAIRS.map(e => ({ char: e.char, reading: e.reading })));
+// 测验设置：content 单字/例句，answer 选择/输入，scope 范围（0 全部、等级、重点）
+function cfgFromDiff(d) {
+  if (d === SENT_DIFF) return { content:'sent', answer:'choice', scope:0 };
+  if (d === TYPE_DIFF) return { content:'sent', answer:'type', scope:0 };
+  return { content:'word', answer:'choice', scope:d||0 };
+}
+// 统计表沿用原来的分类：输入 → 输入，例句 → 例句，其余按范围
+function diffFromCfg(c) { return c.answer==='type' ? TYPE_DIFF : c.content==='sent' ? SENT_DIFF : c.scope; }
+function buildQuestionQueue(difficulty, cfg) {
+  cfg = cfg || cfgFromDiff(difficulty);
+  let pairs;
+  if (cfg.scope === FOCUS_DIFF) pairs = FOCUS_PAIRS.map(e => ({ char: e.char, reading: e.reading }));
+  else {
+    pairs = [];
+    POLYPHONES.forEach(char => char.readings.forEach(r => {
+      if (cfg.scope===0 || r.level===cfg.scope) pairs.push({char, reading:r});
+    }));
   }
-  if (difficulty === SENT_DIFF || difficulty === TYPE_DIFF) {
-    const pairs = [];
-    POLYPHONES.forEach(char => char.readings.forEach(r => { if (r.sentences.length && !SENT_NOQUIZ.has(char.character+'|'+r.pinyin)) pairs.push({char, reading:r}); }));
-    return shuffle(pairs);
-  }
-  const pairs = [];
-  POLYPHONES.forEach(char => char.readings.forEach(r => {
-    if (difficulty===0 || r.level===difficulty) pairs.push({char, reading:r});
-  }));
+  if (cfg.content === 'sent')
+    pairs = pairs.filter(({char, reading:r}) => r.sentences.length && !SENT_NOQUIZ.has(char.character+'|'+r.pinyin));
   return shuffle(pairs);
 }
+function cfgLabel(c) {
+  let s = DIFF_LABELS[c.scope] || t('all_levels');
+  if (c.content === 'sent') s += ' · ' + DIFF_LABELS[SENT_DIFF];
+  if (c.answer === 'type') s += ' · ' + DIFF_LABELS[TYPE_DIFF];
+  return s;
+}
 
-function startQuiz(difficulty, count) {
+function startQuiz(difficulty, count, cfg) {
   srsMode = false; lastCtxType = null; lastNbReview = false;
-  lastQuizDiff = difficulty; lastQuizCount = count;
-  const queue = buildQuestionQueue(difficulty);
-  quizState = { difficulty, sessionLimit:count, score:0, total:0, currentChar:null, correctPinyin:null, options:[], answered:false, queue, queueIdx:0, history:[] };
-  const color = DIFF_COLORS[difficulty]||'#2980b9';
+  cfg = cfg || cfgFromDiff(difficulty);
+  difficulty = diffFromCfg(cfg);
+  lastQuizDiff = difficulty; lastQuizCount = count; lastQuizCfg = cfg;
+  const queue = buildQuestionQueue(difficulty, cfg);
+  quizState = { difficulty, cfg, sessionLimit:count, score:0, total:0, currentChar:null, correctPinyin:null, options:[], answered:false, queue, queueIdx:0, history:[] };
+  const color = DIFF_COLORS[cfg.scope]||'#2980b9';
   const badge = document.getElementById('quiz-level-badge');
-  badge.textContent = DIFF_LABELS[difficulty] || t('all_levels');
+  badge.textContent = cfgLabel(cfg);
   badge.style.background = color;
   document.getElementById('quiz-srs-badge').style.display = 'none';
   document.getElementById('quiz-srs-info').style.display = 'none';
@@ -6412,6 +6457,7 @@ function startQuiz(difficulty, count) {
 }
 
 function quizPool() {
+  if (quizState.cfg) return [...new Set(buildQuestionQueue(0, quizState.cfg).map(p=>p.char))];
   if (quizState.difficulty===0) return POLYPHONES;
   if (quizState.difficulty===FOCUS_DIFF) return [...new Set(FOCUS_PAIRS.map(e=>e.char))];
   return POLYPHONES.filter(c=>c.difficulty===quizState.difficulty) || POLYPHONES;
@@ -6453,7 +6499,7 @@ function loadQuestion() {
   // Dequeue next question; in SRS mode end session when queue exhausted; otherwise reshuffle
   if (quizState.queueIdx >= quizState.queue.length) {
     if (srsMode) { finishSession(); return; }
-    quizState.queue = buildQuestionQueue(quizState.difficulty);
+    quizState.queue = buildQuestionQueue(quizState.difficulty, quizState.cfg);
     quizState.queueIdx = 0;
   }
   const {char, reading} = quizState.queue[quizState.queueIdx++];
@@ -6462,8 +6508,9 @@ function loadQuestion() {
 
   const d = reading.level||char.difficulty||1;
   const freq = reading.frequency||'medium';
-  const typeMode = quizState.difficulty === TYPE_DIFF;
-  const sentMode = (quizState.difficulty === SENT_DIFF || typeMode) && reading.sentences.length > 0;
+  const qcfg = quizState.cfg || cfgFromDiff(quizState.difficulty);
+  const typeMode = qcfg.answer === 'type';
+  const sentMode = qcfg.content === 'sent' && reading.sentences.length > 0;
   document.getElementById('quiz-options').style.display = typeMode ? 'none' : '';
   document.getElementById('quiz-type').style.display = typeMode ? 'flex' : 'none';
   const ti = document.getElementById('quiz-type-input');
@@ -6886,7 +6933,7 @@ function playAgain() {
   if (lastCtxType) { startContext(lastCtxType); return; }
   if (lastNbReview) { nbReview(); return; }
   if (srsMode) { startSrsSession(); return; }
-  startQuiz(lastQuizDiff, lastQuizCount);
+  startQuiz(lastQuizDiff, lastQuizCount, lastQuizCfg);
 }
 
 // ══════════════════════════════════════════════════════════════
