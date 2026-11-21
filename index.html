@@ -857,9 +857,51 @@ html[data-theme="dark"] .opt-btn:disabled:not(.correct):not(.wrong) { opacity:.7
 .logo-circle { color:var(--gold); text-shadow:0 2px 6px rgba(0,0,0,.25); font-family:'Noto Serif SC',serif; }
 html { transition: background-color .25s ease; }
 body, #app, .level-card, .opt-btn, .browse-card, .info-card, .ctx-card, .nb-card { transition: background-color .25s ease, border-color .25s ease, color .25s ease; }
+
+/* ── 背景装饰 BACKGROUND ── */
+#app { background: transparent !important; position: relative; z-index: 1; }
+#bg-deco { position: fixed; inset: 0; z-index: 0; overflow: hidden; pointer-events: none;
+  background-image:
+    linear-gradient(rgba(192,57,43,.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(192,57,43,.045) 1px, transparent 1px);
+  background-size: 44px 44px; }
+#bg-deco .bg-glow { position: absolute; border-radius: 50%; filter: blur(60px); opacity: .55; }
+#bg-deco .g1 { width: 520px; height: 520px; left: -160px; top: -140px; background: radial-gradient(circle, rgba(192,57,43,.28), transparent 70%); }
+#bg-deco .g2 { width: 560px; height: 560px; right: -180px; bottom: -200px; background: radial-gradient(circle, rgba(245,197,24,.32), transparent 70%); }
+#bg-deco .g3 { width: 380px; height: 380px; right: 8%; top: 18%; background: radial-gradient(circle, rgba(230,126,34,.16), transparent 70%); }
+#bg-deco span { position: absolute; font-family: 'Noto Serif SC', serif; font-weight: 900; line-height: 1; font-size: calc(var(--s) * 1px);
+  color: var(--red); opacity: .07; transform: rotate(var(--r));
+  animation: bgFloat 18s ease-in-out infinite; user-select: none; }
+@keyframes bgFloat { 0%,100% { transform: translateY(0) rotate(var(--r)); } 50% { transform: translateY(-14px) rotate(calc(var(--r) + 3deg)); } }
+@media (max-width: 640px) { #bg-deco span { opacity: .05; font-size: calc(var(--s) * .55px); } #bg-deco { background-size: 32px 32px; } }
+@media (prefers-reduced-motion: reduce) { #bg-deco span { animation: none; } }
+html[data-theme="dark"] #bg-deco { background-image:
+    linear-gradient(rgba(245,197,24,.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(245,197,24,.035) 1px, transparent 1px); }
+html[data-theme="dark"] #bg-deco span { color: var(--gold); opacity: .06; }
+html[data-theme="dark"] #bg-deco .g1 { background: radial-gradient(circle, rgba(229,87,74,.22), transparent 70%); }
+html[data-theme="dark"] #bg-deco .g2 { background: radial-gradient(circle, rgba(245,197,24,.14), transparent 70%); }
+html[data-theme="dark"] #bg-deco .g3 { background: radial-gradient(circle, rgba(142,108,214,.14), transparent 70%); }
 </style>
 </head>
 <body>
+<div id="bg-deco" aria-hidden="true">
+  <div class="bg-glow g1"></div><div class="bg-glow g2"></div><div class="bg-glow g3"></div>
+  <span style="left:4%;top:8%;--s:190;--r:-12deg;animation-delay:-0s">多</span>
+  <span style="left:80%;top:6%;--s:150;--r:10deg;animation-delay:-6s">音</span>
+  <span style="left:88%;top:62%;--s:210;--r:-8deg;animation-delay:-12s">字</span>
+  <span style="left:6%;top:58%;--s:130;--r:14deg;animation-delay:-3s">行</span>
+  <span style="left:46%;top:90%;--s:120;--r:-6deg;animation-delay:-9s">长</span>
+  <span style="left:70%;top:30%;--s:90;--r:8deg;animation-delay:-15s">乐</span>
+  <span style="left:20%;top:30%;--s:80;--r:-15deg;animation-delay:-6s">重</span>
+  <span style="left:58%;top:12%;--s:70;--r:12deg;animation-delay:-12s">好</span>
+  <span style="left:30%;top:76%;--s:100;--r:6deg;animation-delay:-3s">中</span>
+  <span style="left:94%;top:36%;--s:80;--r:-10deg;animation-delay:-9s">和</span>
+  <span style="left:12%;top:92%;--s:70;--r:9deg;animation-delay:-15s">还</span>
+  <span style="left:62%;top:72%;--s:110;--r:-4deg;animation-delay:-0s">当</span>
+  <span style="left:38%;top:4%;--s:60;--r:15deg;animation-delay:-6s">着</span>
+  <span style="left:2%;top:34%;--s:60;--r:-6deg;animation-delay:-12s">为</span>
+</div>
 
 <!-- ══ TOP BAR (Nav + Language, responsive) ══ -->
 <div class="topbar" id="topbar">
