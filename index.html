@@ -1102,7 +1102,7 @@ html[data-theme="dark"] .wz-opt.sel { border-color:var(--red); background:rgba(2
   <div class="char-card">
     <div class="card-badges">
       <span class="badge" id="quiz-diff-badge" style="background:var(--green)"></span>
-      <span class="badge" id="quiz-freq-badge" style="background:var(--blue)"></span>
+      <span class="badge" id="quiz-freq-badge" style="display:none"></span>
     </div>
     <div class="char-display" id="quiz-char">字</div>
     <div class="context-lbl" id="quiz-context"></div>
@@ -1156,11 +1156,6 @@ html[data-theme="dark"] .wz-opt.sel { border-color:var(--red); background:rgba(2
   <div class="browse-top">
     <button class="btn btn-dark btn-sm" onclick="goTo('home')">← <span class="i18n-zh">返回</span><span class="i18n-en">Back</span><span class="i18n-vi">Quay lại</span></button>
     <span class="browse-title"><span class="i18n-zh">词库浏览</span><span class="i18n-en">Character Browser</span><span class="i18n-vi">Kho từ vựng</span></span>
-  </div>
-  <div class="legend-row">
-    <span class="legend-item" style="color:var(--green)">● <span class="i18n-zh">常用</span><span class="i18n-en">High</span><span class="i18n-vi">Thường dùng</span></span>
-    <span class="legend-item" style="color:var(--orange)">● <span class="i18n-zh">偶用</span><span class="i18n-en">Mid</span><span class="i18n-vi">Ít dùng</span></span>
-    <span class="legend-item" style="color:var(--gray)">● <span class="i18n-zh">少用</span><span class="i18n-en">Low</span><span class="i18n-vi">Hiếm dùng</span></span>
   </div>
 
   <!-- Search bar -->
@@ -7198,7 +7193,6 @@ function renderBrowse(pool, query) {
       html+=`<div class="browse-reading">
         <span class="browse-pinyin">${hl(r.pinyin,q)}</span>
         <span class="browse-freq-badge" style="background:${DIFF_COLORS[r.level]}">${DIFF_LABELS[r.level]}</span>
-        <span class="browse-freq-badge" style="background:${fc}">${fl}</span>
       </div>`;
       if (meaning) html+=`<div class="browse-meaning">${meaning}</div>`;
       html+=`<div class="browse-example">${example}</div>`;
@@ -7363,10 +7357,11 @@ function fcFlip() {
       rdiv.innerHTML='';
       item.readings.forEach(r=>{
         const freq=r.frequency||'medium';
-        const fc2=FREQ_COLORS[freq]||'#6c757d';
+        // 不显示常用程度（来源无法说明），改显示《标准》等级
+        const fc2=DIFF_COLORS[r.level]||'#6c757d';
         // Localized freq label
         const freqKey = freq==='high'?'freq_high':freq==='low'?'freq_low':'freq_mid';
-        const fl = t(freqKey);
+        const fl = DIFF_LABELS[r.level]||'';
         // Localized meaning + example
         const localMeaning = readingField(r, 'meaning');
         const localExTrans = translationOnly(r, 'example');
