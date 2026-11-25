@@ -6266,9 +6266,8 @@ let srsDueCount = 0;
 function startSrsSession() {
   srsMode = true; lastCtxType = null; lastNbReview = false;
   const allDue = srsDueCards(0);
-  srsDueCount = allDue.filter(e => e.card.due <= Date.now() || e.card.reps === 0).length;
-
-  // Build queue: up to 20 due+new cards, then fill rest
+  // 到期（已学过且到了复习时间）的全部复习；不足20题时用新音项补足，重点音项优先
+  srsDueCount = allDue.filter(e => e.card.reps > 0 && e.card.due <= Date.now()).length;
   const queue = allDue.slice(0, Math.max(20, srsDueCount));
   quizState = {
     difficulty: 0, sessionLimit: queue.length,
@@ -6591,7 +6590,7 @@ function loadQuestion() {
   } else if (reading.example_zh) {
     // Replace the character with a blank underline
     const blanked = reading.example_zh.replace(new RegExp(char.character, 'g'), '<span style="color:var(--gold);font-weight:900;border-bottom:2px solid var(--gold);padding:0 4px">＿</span>');
-    sentenceText.innerHTML = `${t('sentence_prefix')}: ${blanked}`;
+    sentenceText.innerHTML = `${t('example_prefix')}: ${blanked}`;
     sentencePinyin.textContent = reading.example_pinyin || '';
     sentenceEn.textContent = translationOnly(reading, 'example');
     sentenceEl.style.display = 'block';
@@ -6739,7 +6738,7 @@ function onAnswer(idx, typed) {
     const revealColor = correct ? 'var(--green)' : 'var(--red)';
     const revealed = r.example_zh.replace(new RegExp(quizState.currentChar.character, 'g'),
       `<span style="color:${revealColor};font-weight:900;border-bottom:2px solid ${revealColor};padding:0 2px">${quizState.currentChar.character}</span>`);
-    sentenceText.innerHTML = `${t('sentence_prefix')}: ${revealed}`;
+    sentenceText.innerHTML = `${t('example_prefix')}: ${revealed}`;
     if (r.example_pinyin) { sentencePinyin.textContent = r.example_pinyin; sentencePinyin.style.display='block'; }
     const exTranslation = translationOnly(r, 'example');
     if (exTranslation)    { sentenceEn.textContent = exTranslation;         sentenceEn.style.display='block'; }
