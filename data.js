@@ -752,7 +752,7 @@ const ENRICHED = {
   }},
   "臭": { readings: {
     "chòu": { meaning_zh:"臭味，臭气", meaning_en:"stinky, bad smell", example_zh:"臭味", example_pinyin:"chòu wèi", example_en:"bad smell", meaning_vi:"hôi, thối; mùi khó chịu", example_vi:"mùi hôi", frequency:"high" },
-    "xiù": { meaning_zh:"无色无臭", meaning_en:"odorless (literary)", example_zh:"无臭", example_pinyin:"wú xiù", example_en:"odorless", meaning_vi:"mùi (trung tính, văn cổ)", example_vi:"không mùi", frequency:"low" },
+    "xiù": { meaning_zh:"气味（书面语）", meaning_en:"smell, odour (literary)", example_zh:"无臭", example_pinyin:"wú xiù", example_en:"odorless", meaning_vi:"mùi (trung tính, văn cổ)", example_vi:"không mùi", frequency:"low" },
   }},
   "答": { readings: {
     "dá": { meaning_zh:"回答，答案", meaning_en:"to answer, answer", example_zh:"回答", example_pinyin:"huí dá", example_en:"to answer", meaning_vi:"trả lời, đáp", example_vi:"trả lời", frequency:"high" },
