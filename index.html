@@ -6951,9 +6951,7 @@ function nbUpdatePill(nb) {
   const pill = document.getElementById('nb-due-pill');
   if (pill) pill.textContent = n ? String(n) : '';
 }
-function renderNotebook() {
-  const nb = loadNb();
-  const list = document.getElementById('nb-list');
+function nbRenderSummary(nb) {
   // 统计可以重叠：“待造句”的条目到期了也照样要复习（用字库例句）
   const cnt = {
     due: nb.filter(nbIsDue).length,
@@ -6963,6 +6961,11 @@ function renderNotebook() {
   document.getElementById('nb-count').innerHTML = nb.length
     ? `<span>${t('nb_count', {n: nb.length})}</span>` + ['due','need','done'].filter(k => cnt[k]).map(k => `<span>${t('nb_s_'+k)} ${cnt[k]}</span>`).join('')
     : '';
+}
+function renderNotebook() {
+  const nb = loadNb();
+  const list = document.getElementById('nb-list');
+  nbRenderSummary(nb);
   nbUpdatePill(nb);
   if (!nb.length) { list.innerHTML = `<div class="browse-no-results">${t('nb_empty')}</div>`; return; }
   const loc = {zh:'zh-CN', en:'en-US', vi:'vi-VN'}[getLang()] || 'en-US';
@@ -7010,6 +7013,7 @@ function nbEdit(key, input) {
   const st = nbStatus(e);
   const chip = input.closest('.nb-card').querySelector('.nb-chip');
   chip.className = 'nb-chip ' + st; chip.textContent = t('nb_s_'+st);
+  nbRenderSummary(nb);
 }
 function nbDelete(key) { const nb = loadNb().filter(x => nbKey(x) !== key); saveNb(nb); renderNotebook(); }
 // 复习顺序：到期未掌握的 → 其余未掌握的 → 全部
